@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mylike.mapper.SubscribeMapper" >
+  <resultMap id="BaseResultMap" type="com.mylike.entity.Subscribe" >
+    <id column="s_id" property="sId" jdbcType="INTEGER" />
+    <result column="d_id" property="dId" jdbcType="INTEGER" />
+    <result column="s_name" property="sName" jdbcType="VARCHAR" />
+    <result column="s_phone" property="sPhone" jdbcType="VARCHAR" />
+    <result column="s_date" property="sDate" jdbcType="VARCHAR" />
+    <result column="s_time" property="sTime" jdbcType="VARCHAR" />
+    <result column="s_addTime" property="sAddtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from subscribe
+    where s_id = #{sId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mylike.entity.Subscribe" useGeneratedKeys="true" keyProperty="sId">
+    insert into subscribe (s_id, d_id, s_name, 
+      s_phone, s_date, s_time, 
+      s_addTime)
+    values (#{sId,jdbcType=INTEGER}, #{dId,jdbcType=INTEGER}, #{sName,jdbcType=VARCHAR}, 
+      #{sPhone,jdbcType=VARCHAR}, #{sDate,jdbcType=VARCHAR}, #{sTime,jdbcType=VARCHAR}, 
+      #{sAddtime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Subscribe" >
+    update subscribe
+    set d_id = #{dId,jdbcType=INTEGER},
+      s_name = #{sName,jdbcType=VARCHAR},
+      s_phone = #{sPhone,jdbcType=VARCHAR},
+      s_date = #{sDate,jdbcType=VARCHAR},
+      s_time = #{sTime,jdbcType=VARCHAR},
+      s_addTime = #{sAddtime,jdbcType=TIMESTAMP}
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select s_id, d_id, s_name, s_phone, s_date, s_time, s_addTime
+    from subscribe
+    where s_id = #{sId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select s_id, d_id, s_name, s_phone, s_date, s_time, s_addTime
+    from subscribe
+  </select>
+</mapper>

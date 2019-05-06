@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mylike.mapper.DoctorMapper" >
+  <resultMap id="BaseResultMap" type="com.mylike.entity.Doctor" >
+    <id column="d_id" property="dId" jdbcType="INTEGER" />
+    <result column="d_headPic" property="dHeadpic" jdbcType="VARCHAR" />
+    <result column="d_name" property="dName" jdbcType="VARCHAR" />
+    <result column="d_duty" property="dDuty" jdbcType="VARCHAR" />
+    <result column="d_adept" property="dAdept" jdbcType="VARCHAR" />
+    <result column="d_intro" property="dIntro" jdbcType="VARCHAR" />
+    <result column="d_number" property="dNumber" jdbcType="INTEGER" />
+    <result column="d_good" property="dGood" jdbcType="INTEGER" />
+    <result column="d_fans" property="dFans" jdbcType="INTEGER" />
+    <result column="d_consult" property="dConsult" jdbcType="INTEGER" />
+    <result column="d_subscribe" property="dSubscribe" jdbcType="INTEGER" />
+    <result column="d_weibo" property="dWeibo" jdbcType="VARCHAR" />
+    <result column="d_attestation" property="dAttestation" jdbcType="VARCHAR" />
+    <result column="d_addTime" property="dAddtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from doctor
+    where d_id = #{dId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mylike.entity.Doctor" useGeneratedKeys="true" keyProperty="dId">
+    insert into doctor (d_id, d_headPic, d_name, 
+      d_duty, d_adept, d_intro, 
+      d_number, d_good, d_fans, 
+      d_consult, d_subscribe, d_weibo, 
+      d_attestation, d_addTime)
+    values (#{dId,jdbcType=INTEGER}, #{dHeadpic,jdbcType=VARCHAR}, #{dName,jdbcType=VARCHAR}, 
+      #{dDuty,jdbcType=VARCHAR}, #{dAdept,jdbcType=VARCHAR}, #{dIntro,jdbcType=VARCHAR}, 
+      #{dNumber,jdbcType=INTEGER}, #{dGood,jdbcType=INTEGER}, #{dFans,jdbcType=INTEGER}, 
+      #{dConsult,jdbcType=INTEGER}, #{dSubscribe,jdbcType=INTEGER}, #{dWeibo,jdbcType=VARCHAR}, 
+      #{dAttestation,jdbcType=VARCHAR}, #{dAddtime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Doctor" >
+    update doctor
+    set d_headPic = #{dHeadpic,jdbcType=VARCHAR},
+      d_name = #{dName,jdbcType=VARCHAR},
+      d_duty = #{dDuty,jdbcType=VARCHAR},
+      d_adept = #{dAdept,jdbcType=VARCHAR},
+      d_intro = #{dIntro,jdbcType=VARCHAR},
+      d_number = #{dNumber,jdbcType=INTEGER},
+      d_good = #{dGood,jdbcType=INTEGER},
+      d_fans = #{dFans,jdbcType=INTEGER},
+      d_consult = #{dConsult,jdbcType=INTEGER},
+      d_subscribe = #{dSubscribe,jdbcType=INTEGER},
+      d_weibo = #{dWeibo,jdbcType=VARCHAR},
+      d_attestation = #{dAttestation,jdbcType=VARCHAR},
+      d_addTime = #{dAddtime,jdbcType=TIMESTAMP}
+    where d_id = #{dId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select d_id, d_headPic, d_name, d_duty, d_adept, d_intro, d_number, d_good, d_fans, 
+    d_consult, d_subscribe, d_weibo, d_attestation, d_addTime
+    from doctor
+    where d_id = #{dId,jdbcType=INTEGER}
+  </select>
+  <select id="selectother" resultMap="BaseResultMap" >
+    select d_id, d_headPic, d_name, d_intro
+    from doctor
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select d_id, d_headPic, d_name, d_duty, d_adept, d_intro, d_number, d_good, d_fans,
+    d_consult, d_subscribe, d_weibo, d_attestation, d_addTime
+    from doctor
+  </select>
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mylike.mapper.ClassifyMapper" >
+  <resultMap id="BaseResultMap" type="com.mylike.entity.Classify" >
+    <id column="c_id" property="cId" jdbcType="INTEGER" />
+    <result column="c_name" property="cName" jdbcType="VARCHAR" />
+    <result column="c_img" property="cImg" jdbcType="VARCHAR" />
+    <result column="c_url" property="cUrl" jdbcType="VARCHAR" />
+    <result column="c_rank" property="cRank" jdbcType="VARCHAR" />
+    <result column="c_status" property="cStatus" jdbcType="VARCHAR" />
+    <result column="c_AddTime" property="cAddtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from classify
+    where c_id = #{cId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mylike.entity.Classify" >
+    insert into classify (c_id, c_name, c_img, 
+      c_url, c_rank, c_status, 
+      c_AddTime)
+    values (#{cId,jdbcType=INTEGER}, #{cName,jdbcType=VARCHAR}, #{cImg,jdbcType=VARCHAR}, 
+      #{cUrl,jdbcType=VARCHAR}, #{cRank,jdbcType=VARCHAR}, #{cStatus,jdbcType=VARCHAR}, 
+      #{cAddtime,jdbcType=TIMESTAMP})
+        ON DUPLICATE KEY UPDATE
+        c_name = #{cName,jdbcType=VARCHAR},
+      c_img = #{cImg,jdbcType=VARCHAR},
+      c_url = #{cUrl,jdbcType=VARCHAR},
+      c_rank = #{cRank,jdbcType=VARCHAR},
+      c_status = #{cStatus,jdbcType=VARCHAR},
+      c_AddTime = #{cAddtime,jdbcType=TIMESTAMP}
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Classify" >
+    update classify
+    set c_name = #{cName,jdbcType=VARCHAR},
+      c_img = #{cImg,jdbcType=VARCHAR},
+      c_url = #{cUrl,jdbcType=VARCHAR},
+      c_rank = #{cRank,jdbcType=VARCHAR},
+      c_status = #{cStatus,jdbcType=VARCHAR},
+      c_AddTime = #{cAddtime,jdbcType=TIMESTAMP}
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select c_id, c_name, c_img, c_url, c_rank, c_status, c_AddTime
+    from classify
+    where c_id = #{cId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select c_id, c_name, c_img, c_url, c_rank, c_status, c_AddTime
+    from classify
+  </select>
+</mapper>

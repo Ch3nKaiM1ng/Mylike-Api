@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mylike.mapper.SearchMapper" >
+  <resultMap id="BaseResultMap" type="com.mylike.entity.Search" >
+    <id column="s_id" property="sId" jdbcType="INTEGER" />
+    <result column="s_name" property="sName" jdbcType="VARCHAR" />
+    <result column="s_url" property="sUrl" jdbcType="VARCHAR" />
+    <result column="s_rank" property="sRank" jdbcType="INTEGER" />
+    <result column="s_belong" property="sBelong" jdbcType="CHAR" />
+    <result column="s_status" property="sStatus" jdbcType="VARCHAR" />
+    <result column="s_AddTime" property="sAddtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from search
+    where s_id = #{sId,jdbcType=INTEGER}
+  </delete>
+  <!--<insert id="insert" parameterType="com.mylike.entity.Search" >-->
+    <!--insert into search (s_id, s_name, s_url, -->
+      <!--s_rank, s_belong, s_status, -->
+      <!--s_AddTime)-->
+    <!--values (#{sId,jdbcType=INTEGER}, #{sName,jdbcType=VARCHAR}, #{sUrl,jdbcType=VARCHAR}, -->
+      <!--#{sRank,jdbcType=INTEGER}, #{sBelong,jdbcType=CHAR}, #{sStatus,jdbcType=VARCHAR}, -->
+      <!--#{sAddtime,jdbcType=TIMESTAMP})-->
+  <!--</insert>-->
+
+  <insert id="insert" parameterType="com.mylike.entity.Search" >
+    INSERT INTO search(s_id, s_name, s_url, s_rank, s_belong, s_status, s_AddTime)
+    VALUES (#{sId,jdbcType=INTEGER}, #{sName,jdbcType=VARCHAR}, #{sUrl,jdbcType=VARCHAR},
+    #{sRank,jdbcType=INTEGER}, #{sBelong,jdbcType=CHAR}, #{sStatus,jdbcType=VARCHAR},
+    #{sAddtime,jdbcType=TIMESTAMP})
+    ON DUPLICATE KEY UPDATE
+     s_name = #{sName,jdbcType=VARCHAR},
+    s_url = #{sUrl,jdbcType=VARCHAR},
+    s_rank = #{sRank,jdbcType=INTEGER},
+    s_belong = #{sBelong,jdbcType=CHAR},
+    s_status = #{sStatus,jdbcType=VARCHAR},
+    s_AddTime = #{sAddtime,jdbcType=TIMESTAMP}
+</insert>
+
+<update id="updateByPrimaryKey" parameterType="com.mylike.entity.Search" >
+  update search
+  set s_name = #{sName,jdbcType=VARCHAR},
+    s_url = #{sUrl,jdbcType=VARCHAR},
+    s_rank = #{sRank,jdbcType=INTEGER},
+    s_belong = #{sBelong,jdbcType=CHAR},
+    s_status = #{sStatus,jdbcType=VARCHAR},
+    s_AddTime = #{sAddtime,jdbcType=TIMESTAMP}
+  where s_id = #{sId,jdbcType=INTEGER}
+</update>
+<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  select s_id, s_name, s_url, s_rank, s_belong, s_status, s_AddTime
+  from search
+  where s_id = #{sId,jdbcType=INTEGER}
+</select>
+<select id="selectAll" resultMap="BaseResultMap" >
+  select s_id, s_name, s_url, s_rank, s_belong, s_status, s_AddTime
+  from search
+  <where>
+    s_belong = #{sBelong,jdbcType=CHAR}
+  </where>
+</select>
+</mapper>

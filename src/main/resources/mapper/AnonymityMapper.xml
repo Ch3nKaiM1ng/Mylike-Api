@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mylike.mapper.AnonymityMapper" >
+  <resultMap id="BaseResultMap" type="com.mylike.entity.Anonymity" >
+    <id column="a_id" property="aId" jdbcType="INTEGER" />
+    <result column="a_name" property="aName" jdbcType="VARCHAR" />
+    <result column="a_hendpic" property="aHendpic" jdbcType="VARCHAR" />
+    <result column="a_addTime" property="aAddtime" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from anonymity
+    where a_id = #{aId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mylike.entity.Anonymity" useGeneratedKeys="true" keyProperty="aId">
+    insert into anonymity (a_id, a_name, a_hendpic,
+      a_addTime)
+    values (#{aId,jdbcType=INTEGER}, #{aName,jdbcType=VARCHAR}, #{aHendpic,jdbcType=VARCHAR},
+      #{aAddtime,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Anonymity" >
+    update anonymity
+    set a_name = #{aName,jdbcType=VARCHAR},
+      a_hendpic = #{aHendpic,jdbcType=VARCHAR},
+      a_addTime = #{aAddtime,jdbcType=VARCHAR}
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select a_id, a_name, a_hendpic, a_addTime
+    from anonymity
+    where a_id = #{aId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select a_id, a_name, a_hendpic, a_addTime
+    from anonymity
+  </select>
+  <select id="seleceCount" resultType="Integer" >
+    select count(*) As num
+    from anonymity
+  </select>
+
+  <select id="selectBywhere"  resultMap="BaseResultMap" >
+    select a_id, a_name, a_hendpic, a_addTime
+    from anonymity  limit  #{num} , 1
+  </select>
+</mapper>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mylike.mapper.NavigationMapper" >
+  <resultMap id="BaseResultMap" type="com.mylike.entity.Navigation" >
+    <id column="n_id" property="nId" jdbcType="INTEGER" />
+    <result column="n_name" property="nName" jdbcType="VARCHAR" />
+    <result column="n_url" property="nUrl" jdbcType="VARCHAR" />
+    <result column="n_rank" property="nRank" jdbcType="VARCHAR" />
+    <result column="n_belong" property="nBelong" jdbcType="CHAR" />
+    <result column="m_status" property="mStatus" jdbcType="VARCHAR" />
+    <result column="m_AddTime" property="mAddtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from navigation
+    where n_id = #{nId,jdbcType=INTEGER}
+  </delete>
+  <!--<insert id="insert" parameterType="com.mylike.entity.Navigation" >-->
+    <!--insert into navigation (n_id, n_name, n_url, -->
+      <!--n_rank, n_belong, m_status, -->
+      <!--m_AddTime)-->
+    <!--values (#{nId,jdbcType=INTEGER}, #{nName,jdbcType=VARCHAR}, #{nUrl,jdbcType=VARCHAR}, -->
+      <!--#{nRank,jdbcType=VARCHAR}, #{nBelong,jdbcType=CHAR}, #{mStatus,jdbcType=VARCHAR}, -->
+      <!--#{mAddtime,jdbcType=TIMESTAMP})-->
+  <!--</insert>-->
+
+  <insert id="insert" parameterType="com.mylike.entity.Navigation" >
+    insert into navigation (n_id, n_name, n_url,
+      n_rank, n_belong, m_status,
+      m_AddTime)
+    values (#{nId,jdbcType=INTEGER}, #{nName,jdbcType=VARCHAR}, #{nUrl,jdbcType=VARCHAR},
+      #{nRank,jdbcType=VARCHAR}, #{nBelong,jdbcType=CHAR}, #{mStatus,jdbcType=VARCHAR},
+      #{mAddtime,jdbcType=TIMESTAMP})
+      ON DUPLICATE KEY UPDATE
+      n_name = #{nName,jdbcType=VARCHAR},
+      n_url = #{nUrl,jdbcType=VARCHAR},
+      n_rank = #{nRank,jdbcType=VARCHAR},
+      n_belong = #{nBelong,jdbcType=CHAR},
+      m_status = #{mStatus,jdbcType=VARCHAR},
+      m_AddTime = #{mAddtime,jdbcType=TIMESTAMP}
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Navigation" >
+    update navigation
+    set n_name = #{nName,jdbcType=VARCHAR},
+      n_url = #{nUrl,jdbcType=VARCHAR},
+      n_rank = #{nRank,jdbcType=VARCHAR},
+      n_belong = #{nBelong,jdbcType=CHAR},
+      m_status = #{mStatus,jdbcType=VARCHAR},
+      m_AddTime = #{mAddtime,jdbcType=TIMESTAMP}
+    where n_id = #{nId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select n_id, n_name, n_url, n_rank, n_belong, m_status, m_AddTime
+    from navigation
+    where n_id = #{nId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select n_id, n_name, n_url, n_rank, n_belong, m_status, m_AddTime
+    from navigation
+    <where>
+      n_belong = #{nBelong,jdbcType=CHAR}
+    </where>
+  </select>
+</mapper>

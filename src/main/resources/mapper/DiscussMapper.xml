@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mylike.mapper.DiscussMapper" >
+  <resultMap id="BaseResultMap" type="com.mylike.entity.Discuss" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="v_id" property="vId" jdbcType="INTEGER" />
+    <result column="a_id" property="aId" jdbcType="INTEGER" />
+    <result column="d_id" property="dId" jdbcType="INTEGER" />
+    <result column="u_id" property="uId" jdbcType="INTEGER" />
+    <result column="an_id" property="anId" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="addTime" property="addtime" jdbcType="TIMESTAMP" />
+
+  <collection property="anonymity" ofType="com.mylike.entity.Anonymity">
+    <id column="a_id" property="a_Id" jdbcType="INTEGER" />
+    <result column="a_name" property="aName" jdbcType="VARCHAR" />
+    <result column="a_hendpic" property="aHendpic" jdbcType="VARCHAR" />
+  </collection>
+
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from discuss
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mylike.entity.Discuss" useGeneratedKeys="true" keyProperty="id">
+    insert into discuss (id, v_id, a_id, 
+      d_id, u_id, an_id, parent_id, 
+      content, addTime)
+    values (#{id,jdbcType=INTEGER}, #{vId,jdbcType=INTEGER}, #{aId,jdbcType=INTEGER}, 
+      #{dId,jdbcType=INTEGER}, #{uId,jdbcType=INTEGER}, #{anId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER},
+      #{content,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Discuss" >
+    update discuss
+    set v_id = #{vId,jdbcType=INTEGER},
+      a_id = #{aId,jdbcType=INTEGER},
+      d_id = #{dId,jdbcType=INTEGER},
+      u_id = #{uId,jdbcType=INTEGER},
+      an_id = #{anId,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      addTime = #{addtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap"  >
+    select di.id, di.d_id, di.u_id, di.an_id, di.parent_id, di.content, di.addTime,an.a_name,an.a_hendpic
+    from discuss AS di
+    left join anonymity AS an ON di.an_id = an.a_id
+    where id = #{id,jdbcType=INTEGER} or parent_id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, v_id, a_id, d_id, u_id, an_id, parent_id, content, addTime
+    from discuss
+  </select>
+
+  <select id="selectByDid" resultMap="BaseResultMap"  >
+    select di.id, di.d_id, di.u_id, di.an_id, di.parent_id, di.content, di.addTime,an.a_name,an.a_hendpic
+    from discuss AS di
+    left join anonymity AS an ON di.an_id = an.a_id
+    where d_id = #{dId,jdbcType=INTEGER}
+  </select>
+
+</mapper>

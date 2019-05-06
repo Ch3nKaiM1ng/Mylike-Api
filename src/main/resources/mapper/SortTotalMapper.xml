@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mylike.mapper.SortTotalMapper" >
+  <resultMap id="BaseResultMap" type="com.mylike.entity.SortTotal" >
+    <id column="s_tid" property="sTid" jdbcType="INTEGER" />
+    <result column="s_tcontent" property="sTcontent" jdbcType="VARCHAR" />
+    <result column="s_taddTime" property="sTaddtime" jdbcType="TIMESTAMP" />
+    <result column="s_tuserId" property="sTuserid" jdbcType="INTEGER" />
+
+    <collection property="branches" ofType="com.mylike.entity.SortBranch">
+      <id column="s_id" property="sId" jdbcType="INTEGER" />
+      <result column="s_tId" property="sTid" jdbcType="INTEGER" />
+      <result column="s_content" property="sContent" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sort_total
+    where s_tid = #{sTid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mylike.entity.SortTotal"  useGeneratedKeys="true" keyProperty="sTid">
+    insert into sort_total (s_tid, s_tcontent, s_taddTime, 
+      s_tuserId)
+    values (#{sTid,jdbcType=INTEGER}, #{sTcontent,jdbcType=VARCHAR}, #{sTaddtime,jdbcType=TIMESTAMP}, 
+      #{sTuserid,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mylike.entity.SortTotal" >
+    update sort_total
+    set s_tcontent = #{sTcontent,jdbcType=VARCHAR},
+      s_taddTime = #{sTaddtime,jdbcType=TIMESTAMP},
+      s_tuserId = #{sTuserid,jdbcType=INTEGER}
+    where s_tid = #{sTid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select s_tid, s_tcontent, s_taddTime, s_tuserId
+    from sort_total
+    where s_tid = #{sTid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+
+      SELECT sort_total.s_tid,sort_total.s_tcontent,sort_branch.s_content,sort_branch.s_id,sort_branch.s_tId
+          FROM sort_total
+          LEFT OUTER JOIN sort_branch
+          on sort_total.s_tid = sort_branch.s_tId
+</select>
+</mapper>

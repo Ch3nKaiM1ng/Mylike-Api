@@ -1,0 +1,32 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.3.RELEASE'
+    id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.mylike'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+//    implementation 'org.apache.poi:poi-scratchpad:3.11-beta2'
+//    implementation 'org.apache.poi:poi-ooxml:3.11-beta2'
+//    implementation 'org.apache.poi:poi-ooxml:3.11-beta2'
+//    implementation 'org.apache.poi:poi-excelant:3.11-beta2'
+    implementation 'org.apache.poi:poi:3.16'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation('com.alibaba:fastjson:1.2.47')
+    implementation('mysql:mysql-connector-java')
+    implementation('com.alibaba:druid:1.1.11_preview_9')
+    compile('org.apache.commons:commons-email:1.4')
+    compile ('com.qiniu:qiniu-java-sdk:7.2.+')
+    compile('commons-fileupload:commons-fileupload:1.3.1')
+}

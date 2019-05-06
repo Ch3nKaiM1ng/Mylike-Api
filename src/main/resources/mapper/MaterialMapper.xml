@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mylike.mapper.MaterialMapper" >
+  <resultMap id="BaseResultMap" type="com.mylike.entity.Material" >
+    <id column="m_id" property="mId" jdbcType="INTEGER" />
+    <result column="r_id" property="rId" jdbcType="INTEGER" />
+    <result column="m_url" property="mUrl" jdbcType="VARCHAR" />
+    <result column="m_blong" property="mBlong" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from material
+    where m_id = #{mId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mylike.entity.Material" >
+    insert into material (m_id, r_id, m_url,
+      m_blong)
+    values (#{mId,jdbcType=INTEGER}, #{rId,jdbcType=INTEGER}, #{mUrl,jdbcType=VARCHAR},
+      #{mBlong,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Material" >
+    update material
+    set r_id = #{rId,jdbcType=INTEGER},
+      m_url = #{mUrl,jdbcType=VARCHAR},
+      m_blong = #{mBlong,jdbcType=VARCHAR}
+    where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select m_id, r_id, m_url, m_blong
+    from material
+    where m_id = #{mId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select m_id, r_id, m_url, m_blong
+    from material
+  </select>
+  <select id="selectByRId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select m_id, r_id, m_url, m_blong
+    from material
+    where r_id = #{rId,jdbcType=INTEGER}
+  </select>
+</mapper>

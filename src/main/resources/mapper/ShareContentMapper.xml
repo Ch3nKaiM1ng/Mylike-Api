@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mylike.mapper.ShareContentMapper" >
+  <resultMap id="BaseResultMap" type="com.mylike.entity.ShareContent" >
+    <id column="s_id" property="sId" jdbcType="INTEGER" />
+    <result column="s_name" property="sName" jdbcType="VARCHAR" />
+    <result column="s_headPic" property="sHeadpic" jdbcType="VARCHAR" />
+    <result column="s_content" property="sContent" jdbcType="VARCHAR" />
+    <result column="s_label" property="sLabel" jdbcType="INTEGER" />
+    <result column="s_district" property="sDistrict" jdbcType="VARCHAR" />
+    <result column="s_like" property="sLike" jdbcType="INTEGER" />
+    <result column="s_url" property="sUrl" jdbcType="INTEGER" />
+    <result column="s_browse" property="sBrowse" jdbcType="INTEGER" />
+    <result column="s_addTime" property="sAddtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from share_content
+    where s_id = #{sId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mylike.entity.ShareContent" >
+    insert into share_content (s_id, s_name, s_headPic, 
+      s_content, s_label, s_district, 
+      s_like, s_url, s_browse, 
+      s_addTime)
+    values (#{sId,jdbcType=INTEGER}, #{sName,jdbcType=VARCHAR}, #{sHeadpic,jdbcType=VARCHAR}, 
+      #{sContent,jdbcType=VARCHAR}, #{sLabel,jdbcType=INTEGER}, #{sDistrict,jdbcType=VARCHAR}, 
+      #{sLike,jdbcType=INTEGER}, #{sUrl,jdbcType=INTEGER}, #{sBrowse,jdbcType=INTEGER}, 
+      #{sAddtime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mylike.entity.ShareContent" >
+    update share_content
+    set s_name = #{sName,jdbcType=VARCHAR},
+      s_headPic = #{sHeadpic,jdbcType=VARCHAR},
+      s_content = #{sContent,jdbcType=VARCHAR},
+      s_label = #{sLabel,jdbcType=INTEGER},
+      s_district = #{sDistrict,jdbcType=VARCHAR},
+      s_like = #{sLike,jdbcType=INTEGER},
+      s_url = #{sUrl,jdbcType=INTEGER},
+      s_browse = #{sBrowse,jdbcType=INTEGER},
+      s_addTime = #{sAddtime,jdbcType=TIMESTAMP}
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select s_id, s_name, s_headPic, s_content, s_label, s_district, s_like, s_url, s_browse, 
+    s_addTime
+    from share_content
+    where s_id = #{sId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select s_id, s_name, s_headPic, s_content, s_label, s_district, s_like, s_url, s_browse, 
+    s_addTime
+    from share_content
+  </select>
+</mapper>
