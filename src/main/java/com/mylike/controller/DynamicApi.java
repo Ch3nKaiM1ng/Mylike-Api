@@ -65,7 +65,7 @@ public class DynamicApi {
         return re.SUCCESS();
     }
 //    心得修改
-    @RequestMapping("updateDynamic")
+    @RequestMapping("/updateDynamic")
     public Map<String,Object> updateDynamic(Dynamic dynamic){
         if (dynamic.getdId()!=null){
             service.updateDynamic(dynamic);

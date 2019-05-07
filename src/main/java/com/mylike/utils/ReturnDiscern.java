@@ -26,6 +26,18 @@ public class ReturnDiscern {
         map.put("obj",obj);
         return map;
     }
+    public Map<String,Object> TimeError(int time){
+        Map<String,Object> map = new HashMap<>();
+        map.put("data","-1");
+        map.put("content","每"+time+"分钟只能申请认证一次！");
+        return map;
+    }
+    public Map<String,Object> TimeOut(){
+        Map<String,Object> map = new HashMap<>();
+        map.put("data","-1");
+        map.put("content","验证码已失效，请重新获取！");
+        return map;
+    }
     public String video(){
         return "video";
     }
