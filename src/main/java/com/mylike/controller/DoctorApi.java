@@ -63,5 +63,14 @@ public class DoctorApi {
         }
         return re.ERROR();
     }
+//    医生删除
+    @RequestMapping("/delectById")
+    public Map<String,Object>delectById(Integer dId){
+        if (dId==null){
+            return re.ERROR();
+        }
+        service.delectById(dId);
+        return re.SUCCESS();
+    }
 }
 

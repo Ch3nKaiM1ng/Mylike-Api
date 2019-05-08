@@ -46,4 +46,9 @@ public class DoctorServiceImpl implements DoctorService {
     public void updateDoc(Doctor doctor) {
         mapper.updateByPrimaryKey(doctor);
     }
+
+    @Override
+    public void delectById(Integer dId) {
+        mapper.deleteByPrimaryKey(dId);
+    }
 }

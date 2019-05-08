@@ -18,4 +18,6 @@ public interface DoctorService {
     Object selectDocAll();
 
     void updateDoc(Doctor doctor);
+
+    void delectById(Integer dId);
 }
