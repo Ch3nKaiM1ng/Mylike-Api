@@ -5,6 +5,7 @@ import com.mylike.service.SortService;
 import com.mylike.utils.ReturnDiscern;
 import com.mylike.utils.SortDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,7 +41,7 @@ public class SortApi {
     }
 //    添加分类
     @RequestMapping("/addSort")
-    public Map<String,Object> addSort(Sort sort){
+    public Map<String,Object> addSort(@RequestBody Sort sort){
         service.insert(sort);
         if (sort.getsId()==null){
             return re.ERROR();

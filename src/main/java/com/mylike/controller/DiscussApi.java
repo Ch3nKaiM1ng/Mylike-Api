@@ -6,6 +6,7 @@ import com.mylike.service.DiscussService;
 import com.mylike.utils.DiscussDTO;
 import com.mylike.utils.ReturnDiscern;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class DiscussApi {
     private DiscussDTO disTo = new DiscussDTO();
 //  添加评论
     @RequestMapping("/addDiscuss")
-    public Map<String,Object> addDiscuss(Discuss discuss){
+    public Map<String,Object> addDiscuss(@RequestBody Discuss discuss){
         service.insert(discuss);
         if (discuss.getId()!=null){
             return re.SUCCESS();

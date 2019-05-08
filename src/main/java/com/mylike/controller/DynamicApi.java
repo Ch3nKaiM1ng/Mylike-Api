@@ -7,6 +7,7 @@ import com.mylike.service.DynamicService;
 import com.mylike.utils.DiscussDTO;
 import com.mylike.utils.ReturnDiscern;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +32,7 @@ public class DynamicApi {
 
 //    心得/动态添加
     @RequestMapping("/addDynamic")
-    public Map<String,Object> addDynamic(Dynamic dynamic){
+    public Map<String,Object> addDynamic(@RequestBody Dynamic dynamic){
         dynamic.setdAddtime(new Date());
         System.out.println(dynamic.toString());
         service.insert(dynamic);
@@ -66,7 +67,7 @@ public class DynamicApi {
     }
 //    心得修改
     @RequestMapping("/updateDynamic")
-    public Map<String,Object> updateDynamic(Dynamic dynamic){
+    public Map<String,Object> updateDynamic(@RequestBody Dynamic dynamic){
         if (dynamic.getdId()!=null){
             service.updateDynamic(dynamic);
             return re.SUCCESS();

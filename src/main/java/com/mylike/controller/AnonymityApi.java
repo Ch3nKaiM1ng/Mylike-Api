@@ -3,6 +3,7 @@ package com.mylike.controller;
 import com.mylike.service.AnonymityService;
 import com.mylike.utils.ReturnDiscern;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.mylike.entity.Anonymity;
@@ -27,7 +28,7 @@ public class AnonymityApi {
     }
 //    添加匿名
     @RequestMapping("/addName")
-    public Map<String,Object> addName(Anonymity anonymity){
+    public Map<String,Object> addName(@RequestBody Anonymity anonymity){
         service.addName(anonymity);
         if (anonymity.getaId()==null){
             return re.ERROR();

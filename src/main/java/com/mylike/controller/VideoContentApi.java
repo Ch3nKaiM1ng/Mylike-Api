@@ -5,7 +5,9 @@ import com.mylike.entity.VideoContent;
 import com.mylike.service.VideoContentService;
 import com.mylike.utils.ReturnDiscern;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -22,7 +24,7 @@ public class VideoContentApi {
 
 //  添加视频内容
     @RequestMapping("/addContent")
-    public Map<String, Object> addContent(VideoContent cont){
+    public Map<String, Object> addContent(@RequestBody VideoContent cont){
 
         service.insert(cont);
         Map<String,Object> map = new HashMap<>();
@@ -31,8 +33,8 @@ public class VideoContentApi {
     }
 //    展示首页视频
     @RequestMapping("/showContent" )
-    public List<VideoContent> showContent(String startId, String endId){
-       return service.selectAll(Integer.parseInt(startId),Integer.parseInt(endId));
+    public List<VideoContent> showContent(@RequestParam(value = "startId") Integer startId,@RequestParam(value = "endId") Integer endId){
+        return service.selectAll(startId,endId);
     }
 //    视频详情展示
     @RequestMapping("/showVideo")

@@ -31,7 +31,7 @@ public class ClassifyApi {
     }
 //  修改分类
     @RequestMapping("/updateIfy")
-    public Map<String,Object> updateIfy(Classify classify){
+    public Map<String,Object> updateIfy(@RequestBody Classify classify){
         service.updateIfy(classify);
         return re.SUCCESS();
     }

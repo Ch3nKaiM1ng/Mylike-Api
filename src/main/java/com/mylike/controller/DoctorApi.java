@@ -5,6 +5,7 @@ import com.mylike.entity.Subscribe;
 import com.mylike.service.DoctorService;
 import com.mylike.utils.ReturnDiscern;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +33,7 @@ public class DoctorApi {
     }
 //    预约
     @RequestMapping("/subscribe")
-    public Map<String,Object> subscribe(Subscribe subscribe){
+    public Map<String,Object> subscribe(@RequestBody Subscribe subscribe){
         service.insertSub(subscribe);
         if (subscribe.getsId()==null){
             return re.ERROR();
@@ -41,7 +42,7 @@ public class DoctorApi {
     }
     //添加医生
     @RequestMapping("/addDoctor")
-    public Map<String,Object> addDoctor(Doctor doctor){
+    public Map<String,Object> addDoctor(@RequestBody Doctor doctor){
         service.insertdoctor(doctor);
         if (doctor.getdId()==null){
             return re.ERROR();
@@ -55,7 +56,7 @@ public class DoctorApi {
     }
 //    修改医生
     @RequestMapping("/updateDoc")
-    public Map<String,Object> updateDoc(Doctor doctor){
+    public Map<String,Object> updateDoc(@RequestBody Doctor doctor){
         if (doctor.getdId()!=null){
             service.updateDoc(doctor);
             return re.SUCCESS();

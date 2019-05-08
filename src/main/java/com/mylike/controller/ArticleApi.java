@@ -6,6 +6,7 @@ import com.mylike.service.ArticleService;
 import com.mylike.utils.DateUtils;
 import com.mylike.utils.ReturnDiscern;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class ArticleApi {
     private ReturnDiscern re =new  ReturnDiscern();
 //  添加文章
     @RequestMapping("/addArticle")
-    public Map<String,Object> addArticle(Article article){
+    public Map<String,Object> addArticle(@RequestBody Article article){
         article.setaAddtime(data.NewDate());
         service.insert(article);
         if (article.getaId()!=null){
