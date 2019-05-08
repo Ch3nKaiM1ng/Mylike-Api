@@ -9,6 +9,7 @@ import com.mylike.utils.ReturnDiscern;
 import com.mylike.utils.TimeContrastUtils;
 import com.qiniu.util.Json;
 import org.springframework.http.HttpRequest;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,9 +42,9 @@ public class LoginApi {
         int randNum = new Random().nextInt(9999 - 1000) + 1000;
         String bank = SendMessage(phone,randNum);
         JSONObject json= JSONObject.parseObject(bank);
-        System.out.println(json.toJSONString());
-        req.getSession().setAttribute(phone,randNum);
+        req.getSession().putValue(phone,randNum);
         req.getSession().setAttribute("time",json.get("create_date"));
+        System.out.println(req.getSession().getAttribute(phone));
         return massageReturn.CodeVerify(json);
     }
 //    申请短信验证
@@ -53,10 +54,15 @@ public class LoginApi {
     }
 //  验证
     @RequestMapping("/verification")
-    public Map<String,Object>verification(String phone,int verify,HttpServletRequest req,HttpSession session){
-        if (req.getSession().getAttribute(phone)!=null){
-            int a = (int) req.getSession().getAttribute(phone);
-            String date = (String) req.getSession().getAttribute("time");
+    public Map<String,Object>verification(String phone,int verify,HttpSession session){
+        System.out.println("phone----------"+phone);
+        System.out.println("verify---------"+verify);
+        System.out.println("req-------"+session.getAttribute(phone));
+        if (session.getAttribute(phone)!=null){
+            int a = (int) session.getAttribute(phone);
+            System.out.println("a-------"+a);
+            String date = (String)session.getAttribute("time");
+            System.out.println("date-------"+date);
             if (date!=null){
                 if (time.TimeContrast(date,3).equals("success")){
                     if (verify == a){
