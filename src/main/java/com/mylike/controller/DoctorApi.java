@@ -53,5 +53,14 @@ public class DoctorApi {
     public Map<String,Object> showDocAll(){
         return re.SUCCESSOBJ(service.selectDocAll());
     }
+//    修改医生
+    @RequestMapping("/updateDoc")
+    public Map<String,Object> updateDoc(Doctor doctor){
+        if (doctor.getdId()!=null){
+            service.updateDoc(doctor);
+            return re.SUCCESS();
+        }
+        return re.ERROR();
+    }
 }
 

@@ -16,4 +16,6 @@ public interface DoctorService {
     void insertdoctor(Doctor doctor);
 
     Object selectDocAll();
+
+    void updateDoc(Doctor doctor);
 }

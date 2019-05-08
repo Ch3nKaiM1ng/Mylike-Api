@@ -41,4 +41,9 @@ public class DoctorServiceImpl implements DoctorService {
     public Object selectDocAll() {
         return mapper.selectAll();
     }
+
+    @Override
+    public void updateDoc(Doctor doctor) {
+        mapper.updateByPrimaryKey(doctor);
+    }
 }
