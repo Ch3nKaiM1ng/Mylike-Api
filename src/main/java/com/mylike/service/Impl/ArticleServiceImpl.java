@@ -32,4 +32,14 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> showArticleSort(Integer sId) {
         return mapper.showArticleSort(sId);
     }
+
+    @Override
+    public void updateArticle(Article article) {
+        mapper.updateByPrimaryKey(article);
+    }
+
+    @Override
+    public void delectArticle(Integer aId) {
+        mapper.deleteByPrimaryKey(aId);
+    }
 }

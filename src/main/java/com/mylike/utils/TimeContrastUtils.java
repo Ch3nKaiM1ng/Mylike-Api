@@ -15,6 +15,7 @@ public class TimeContrastUtils {
         long time = System.currentTimeMillis();
         String endDate = String.valueOf(time/1000);
         int interval = Integer.parseInt(endDate) - Integer.parseInt(start);
+//        if结束时间 - 开始时间 > 分钟*60
         if (interval>(minute*60)){
             return "error";
         }

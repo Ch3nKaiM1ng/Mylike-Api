@@ -2,6 +2,7 @@ package com.mylike.controller;
 
 import com.mylike.entity.BannerImg;
 import com.mylike.service.BannerImgService;
+import com.mylike.utils.ReturnDiscern;
 import com.mylike.utils.UpdateImgNameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/banner")
@@ -19,6 +21,7 @@ public class BannerImgApi {
     @Autowired
     private  BannerImgService service;
 
+    private ReturnDiscern re = new ReturnDiscern();
 
 //    查询banner
     @RequestMapping("/showBanner")
@@ -31,5 +34,13 @@ public class BannerImgApi {
         System.out.println(123);
         service.insert(banner);
         return "success";
+    }
+//    更改Banner图片
+    @RequestMapping("/updeteBanner")
+    public Map<String,Object> updateBanner(@RequestBody BannerImg banner){
+        if (banner.getbId()==null){
+            return re.ERROR();
+        }
+        return re.SUCCESS();
     }
 }

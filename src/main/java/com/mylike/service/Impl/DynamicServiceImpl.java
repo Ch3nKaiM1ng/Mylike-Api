@@ -36,7 +36,7 @@ public class DynamicServiceImpl implements DynamicService {
 
     @Override
     public void insert(Dynamic dynamic) {
-        if (dynamic.getVideoUrl().equals("")){
+        if (dynamic.getVideoUrl()==null){
             System.out.println("success!");
         }
         dynamicMapper.insert(dynamic);
@@ -49,7 +49,7 @@ public class DynamicServiceImpl implements DynamicService {
                 material.setrId(relevance.getrId());
                 System.out.println("-------"+dynamic.getVideoUrl()+"----");
 
-                if (dynamic.getVideoUrl().equals("")) {
+                if (dynamic.getVideoUrl()==null) {
                     String[] urlArray=dynamic.getImgUrl().split(",");
                     material.setmBlong(re.img());
                     for (int i = 0;i<urlArray.length;i++){

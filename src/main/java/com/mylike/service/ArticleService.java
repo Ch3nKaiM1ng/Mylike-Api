@@ -12,4 +12,8 @@ public interface ArticleService {
     Object selectById(int aId);
 
     List<Article> showArticleSort(Integer sId);
+
+    void updateArticle(Article article);
+
+    void delectArticle(Integer aId);
 }

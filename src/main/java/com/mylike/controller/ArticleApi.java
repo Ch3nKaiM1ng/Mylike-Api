@@ -50,4 +50,22 @@ public class ArticleApi {
         List<Article> list = service.showArticleSort(sId);
         return re.SUCCESSOBJ(list);
     }
+//    文章修改
+    @RequestMapping("/updateArticle")
+    public Map<String,Object>updateArticle(@RequestBody Article article){
+        if (article.getaId()!=null){
+            service.updateArticle(article);
+            return re.SUCCESS();
+        }
+        return re.ERROR();
+    }
+//    文章删除
+    @RequestMapping("/delectArticle")
+    public Map<String,Object>delectArticle(Integer aId){
+        if (aId!=null){
+            service.delectArticle(aId);
+            return re.SUCCESS();
+        }
+        return re.ERROR();
+    }
 }
