@@ -6,7 +6,7 @@
     <result column="v_name" jdbcType="VARCHAR" property="vName" />
     <result column="v_headPic" jdbcType="VARCHAR" property="vHeadpic" />
     <result column="v_title" jdbcType="VARCHAR" property="vTitle" />
-    <result column="v_content" jdbcType="VARCHAR" property="vContent" />
+    <result column="v_content" jdbcType="LONGVARCHAR" property="vContent" />
     <result column="v_videoUrl" jdbcType="VARCHAR" property="vVideourl" />
     <result column="v_imgUrl" jdbcType="VARCHAR" property="vImgurl" />
     <result column="v_like" jdbcType="VARCHAR" property="vLike" />
@@ -23,7 +23,7 @@
       v_imgUrl, v_like, v_url, 
       v_hot)
     values (#{vId,jdbcType=INTEGER}, #{vName,jdbcType=VARCHAR}, #{vHeadpic,jdbcType=VARCHAR}, 
-      #{vTitle,jdbcType=VARCHAR}, #{vContent,jdbcType=VARCHAR}, #{vVideourl,jdbcType=VARCHAR}, 
+      #{vTitle,jdbcType=VARCHAR}, #{vContent,jdbcType=LONGVARCHAR}, #{vVideourl,jdbcType=VARCHAR},
       #{vImgurl,jdbcType=VARCHAR}, #{vLike,jdbcType=VARCHAR}, #{vUrl,jdbcType=VARCHAR}, 
       #{vHot,jdbcType=VARCHAR})
   </insert>
@@ -32,7 +32,7 @@
     set v_name = #{vName,jdbcType=VARCHAR},
       v_headPic = #{vHeadpic,jdbcType=VARCHAR},
       v_title = #{vTitle,jdbcType=VARCHAR},
-      v_content = #{vContent,jdbcType=VARCHAR},
+      v_content = #{vContent,jdbcType=LONGVARCHAR},
       v_videoUrl = #{vVideourl,jdbcType=VARCHAR},
       v_imgUrl = #{vImgurl,jdbcType=VARCHAR},
       v_like = #{vLike,jdbcType=VARCHAR},

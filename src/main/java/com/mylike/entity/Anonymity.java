@@ -1,6 +1,8 @@
 package com.mylike.entity;
 
-public class Anonymity {
+import java.io.Serializable;
+
+public class Anonymity implements Serializable {
     private Integer aId;
 
     private String aName;

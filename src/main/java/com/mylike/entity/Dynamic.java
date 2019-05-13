@@ -30,7 +30,6 @@ public class Dynamic implements Serializable {
 
     private String dHot;
 
-    private List<Material> materials;
 
     public Integer getdId() {
         return dId;
@@ -112,13 +111,6 @@ public class Dynamic implements Serializable {
         this.dAddtime = dAddtime;
     }
 
-    public List<Material> getMaterials() {
-        return materials;
-    }
-
-    public void setMaterials(List<Material> materials) {
-        this.materials = materials;
-    }
 
     public String getdHot() {
         return dHot;

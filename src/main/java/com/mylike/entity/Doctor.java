@@ -18,7 +18,7 @@ public class Doctor implements Serializable {
 
     private String dIntro;
 
-    private Integer dNumber;
+    private String dNumber;
 
     private Integer dGood;
 
@@ -83,11 +83,11 @@ public class Doctor implements Serializable {
         this.dIntro = dIntro == null ? null : dIntro.trim();
     }
 
-    public Integer getdNumber() {
+    public String getdNumber() {
         return dNumber;
     }
 
-    public void setdNumber(Integer dNumber) {
+    public void setdNumber(String dNumber) {
         this.dNumber = dNumber;
     }
 

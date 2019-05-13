@@ -1,5 +1,7 @@
 package com.mylike.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,6 +19,7 @@ public class Broadcast implements Serializable {
 
     private String bStatus;
 
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date bAddtime;
 
     public Integer getbId() {

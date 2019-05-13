@@ -41,7 +41,7 @@ public class DynamicApi {
         }
         return re.SUCCESS();
     }
-//    心得/动态查询
+//    心得/动态主页查询
     @RequestMapping("/showDynamic")
     public Map<String,Object>showDynamic(){
         return service.selectAll();
@@ -74,5 +74,18 @@ public class DynamicApi {
         }
         return re.ERROR();
     }
-
+//    心得删除
+    @RequestMapping("/delectDynamic")
+    public Map<String,Object> deldectDynamic(Integer dId){
+        if (dId!=null){
+            service.delecetDynamic(dId);
+            return re.SUCCESS();
+        }
+        return re.ERROR();
+    }
+//    所有查询
+    @RequestMapping("/showAll")
+    public Map<String,Object>showAll(){
+        return re.SUCCESSOBJ(service.showAll());
+    }
 }

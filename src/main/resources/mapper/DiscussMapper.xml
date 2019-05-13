@@ -61,4 +61,11 @@
     where d_id = #{dId,jdbcType=INTEGER}
   </select>
 
+  <select id="selectByVid" resultMap="BaseResultMap"  >
+    select di.id, di.v_id, di.u_id, di.an_id, di.parent_id, di.content, di.addTime,an.a_name,an.a_hendpic
+    from discuss AS di
+    left join anonymity AS an ON di.an_id = an.a_id
+    where v_id = #{vId,jdbcType=INTEGER}
+  </select>
+
 </mapper>

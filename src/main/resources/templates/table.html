@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>深圳美莱</title>
+    <link rel="stylesheet" href="/static/css/table.css">
+    <script src="/static/js/jquery-2.1.1.min.js"></script>
+    <!-- 生产环境版本，优化了尺寸和速度 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="icon" href="/static/img/ok.png">
+
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-header style="height: auto;">
+            <h1>{{ message }}</h1>
+            <el-row :gutter="20">
+                <el-col :span="12" :offset="12">
+                    <div class="header_right">
+                        <el-date-picker
+                                v-model="valueTime"
+
+                                type="daterange"
+                                format="yyyy-MM-dd"
+                                value-format="timestamp"
+                                align="right"
+                                unlink-panels
+                                range-separator="至"
+                                start-placeholder="开始日期"
+                                end-placeholder="结束日期"
+                                :picker-options="pickerOptions2">
+                        </el-date-picker>
+                        <el-button type="primary" icon="el-icon-search" v-on:click="search">搜索</el-button>
+                    </div>
+                </el-col>
+            </el-row>
+        </el-header>
+        <el-main>
+            <el-table
+
+                    ref="multipleTable"
+                    :data="tableData3"
+                    tooltip-effect="dark"
+                    style="width: 100%;font-size: 18px;margin: 0 auto;"
+                    @selection-change="handleSelectionChange">
+                <el-table-column
+                        type="selection"
+                        width="55">
+                </el-table-column>
+                <el-table-column
+                        prop="id"
+                        label="ID"
+                        width="55">
+                </el-table-column>
+                <el-table-column
+                        prop="newtime"
+                        label="提交日期"
+                        width="120">
+                </el-table-column>
+                <el-table-column
+                        prop="name"
+                        label="姓名"
+                        width="120">
+                </el-table-column>
+                <el-table-column
+                        prop="phone"
+                        label="phone"
+                        width="140">
+                </el-table-column>
+                <el-table-column
+                        prop="sex"
+                        label="性别"
+                        width="140">
+                </el-table-column>
+                <el-table-column
+                        prop="district"
+                        label="地址">
+                </el-table-column>
+
+                <el-table-column
+                        prop="actuality"
+                        label="牙齿现状">
+                </el-table-column>
+                <el-table-column
+                        prop="type"
+                        label="矫正类型">
+                </el-table-column>
+                <el-table-column
+                        prop="budget"
+                        label="预算">
+                </el-table-column>
+                <el-table-column
+                        prop="staging"
+                        label="分期">
+                </el-table-column>
+                <el-table-column
+                        prop="examine"
+                        label="检查">
+                </el-table-column>
+                <el-table-column
+                        prop="scan"
+                        label="扫描">
+                </el-table-column>
+                <el-table-column
+                        prop="age"
+                        label="年龄">
+                </el-table-column>
+            </el-table>
+
+            <el-row :gutter="20">
+                <el-col :span="6" :offset="1">
+                    <div class="table_left">
+                        <el-pagination
+                                @current-change="current"
+                                layout="prev, pager, next"
+                                :total="total"
+                                style="font-size: 22px;float: left">
+                        </el-pagination>
+
+                    </div>
+                </el-col>
+
+                <el-col :span="6" :offset="6">
+                    <div class="table_right" onclick="down()">
+
+                        <el-button style="font-size: 18px;float: left" type="primary" icon="el-icon-download">下载表单</el-button>
+                    </div>
+                </el-col>
+            </el-row>
+            <!--<div style="margin-top: 20px">-->
+                <!--<el-button @click="toggleSelection([tableData3[1], tableData3[2]])">切换第二、第三行的选中状态</el-button>-->
+                <!--<el-button @click="toggleSelection()">取消选择</el-button>-->
+            <!--</div>-->
+        </el-main>
+        <!--footer-->
+        <!--<el-footer>Footer</el-footer>-->
+    </el-container>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data () {
+            return {
+                radio: '1',
+                message:'Hello meilai!',
+                pickerOptions2: {
+                    shortcuts: [{
+                        text: '最近一周',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '最近一个月',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '最近三个月',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }]
+                },
+                valueTime: '',
+                tableData3: {},
+                multipleSelection: [],
+                total:0,
+                Index:1,
+                startime:" ",
+                endtime:" "
+            };
+        },
+
+        mounted() {
+            let vm=this;
+            console.group('------mounted 挂载结束状态，开始请求接口------');
+            console.log(vm)
+            vm.ajax(vm)
+        },
+        // 方法
+        methods: {
+
+            handleSelectionChange(val) {
+                this.multipleSelection = val;
+            },
+            current(val){
+                // 分页器改变时
+                console.log(val)
+                console.log(this.total);
+                this.Index = val //改变当前页
+                this.ajax()
+            },
+            search(){
+                console.log(this.valueTime[0])
+                console.log(this.valueTime[1])
+                this.startime = this.valueTime[0]
+                this.endtime = this.valueTime[1]
+            }
+            // 请求数据
+            ,ajax(){
+                var vm = this;
+                $.ajax({
+                    url: 'http://172.16.19.106:8081/selectAll'
+                   ,type: "get"
+                    // ,async: false
+                    ,dataType: 'JSON'
+                    // ,jsonp: "callback"//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+                    , success: function (data) {
+                        // if(rst.code == 0){
+                        console.log(data);
+                            vm.tableData3=data;//数据
+                            vm.total=data.length;//总数
+                            vm.Index = 1;//当前页
+                         // }
+                    }
+                    , error: function (data) {
+                        alert("error!");
+                    }
+                })
+            }
+        }
+
+    });
+
+</script>
+<script>
+    function down() {
+        $.ajax({
+            url: 'http://172.16.19.106:8081/export'
+            ,type: "get"
+             ,async: false
+            ,dataType: 'text'
+            , success: function (data) {
+              window.location.href="http://172.16.19.106:8080/"+data;
+            }
+            , error: function (data) {
+                alert("error!");
+            }
+        })
+    }
+</script>
+</body>
+</html>

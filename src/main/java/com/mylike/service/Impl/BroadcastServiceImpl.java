@@ -17,4 +17,14 @@ public class BroadcastServiceImpl implements BroadcastService{
     public List<Broadcast> selectAll(String bBelong) {
         return mapper.selectAll(bBelong);
     }
+
+    @Override
+    public void update(Broadcast broadcast) {
+        mapper.updateByPrimaryKey(broadcast);
+    }
+
+    @Override
+    public void delectById(Integer bId) {
+        mapper.deleteByPrimaryKey(bId);
+    }
 }

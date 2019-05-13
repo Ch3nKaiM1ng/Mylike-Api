@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script>
+        //designWidth:设计稿的实际宽度值，需要根据实际设置
+        //maxWidth:制作稿的最大宽度值，需要根据实际设置
+        //这段js的最后面有两个参数记得要设置，一个为设计稿实际宽度，一个为制作稿最大宽度，例如设计稿为750，最大宽度为750，则为(750,750)
+        !function (e, t) { function n() { var n = l.getBoundingClientRect().width; t = t || 540, n > t && (n = t); var i = 100 * n / e; r.innerHTML = "html{font-size:" + i + "px;}" } var i, d = document, o = window, l = d.documentElement, r = document.createElement("style"); if (l.firstElementChild) l.firstElementChild.appendChild(r); else { var a = d.createElement("div"); a.appendChild(r), d.write(a.innerHTML), a = null } n(), o.addEventListener("resize", function () { clearTimeout(i), i = setTimeout(n, 300) }, !1), o.addEventListener("pageshow", function (e) { e.persisted && (clearTimeout(i), i = setTimeout(n, 300)) }, !1), "complete" === d.readyState ? d.body.style.fontSize = "16px" : d.addEventListener("DOMContentLoaded", function (e) { d.body.style.fontSize = "16px" }, !1) }(750, 750);
+    </script>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+    <link rel="icon" href="/static/img/ok.png">
+</head>
+<!--统计开始-->
+<div style="display:none">
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1276372949'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s96.cnzz.com/z_stat.php%3Fid%3D1276372949%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+<body >
+<!--第一页-->
+    <div class="page0" >
+        <img class="page_banner" src="/static/img/banner.png" />
+        <img class="page_title" src="/static/img/title.png" />
+        <div class="page_titles">
+            <p>您的牙齿现状如何？</p>
+        </div>
+
+        <div class="option_left " id="1" onclick="nextPage(0,this.id)">
+            <div class="triangle">
+                <span><p>①</p></span>
+            </div>
+            <img src="/static/img/1-1.png" />
+            <div class="all_ok_sleep"  id="actuality1"></div>
+            <p>牙齿稀疏，牙齿过小</p>
+        </div>
+        <div class="option_right" id="2" onclick="nextPage(0,this.id)">
+            <div class="triangle">
+                <span><p>②</p></span>
+            </div>
+            <img src="/static/img/1-2.png" />
+            <div class="all_ok_sleep"  id="actuality2"></div>
+            <p>龅牙，牙齿前突</p>
+        </div>
+
+        <div class="option_left" id="3" onclick="nextPage(0,this.id)">
+            <div class="triangle">
+                <span><p>③</p></span>
+            </div>
+            <img src="/static/img/1-3.png" />
+            <div class="all_ok_sleep"  id="actuality3"></div>
+            <p>地包天，下巴前伸</p>
+        </div>
+
+        <div class="option_right" id="4" onclick="nextPage(0,this.id)">
+            <div class="triangle">
+                <span><p>④</p></span>
+            </div>
+            <img src="/static/img/1-4.png" />
+            <div class="all_ok_sleep"  id="actuality4"></div>
+            <p>中线不齐，嘴歪</p>
+        </div>
+
+        <div class="option_left" id="5" onclick="nextPage(0,this.id)">
+            <div class="triangle">
+                <span><p>⑤</p></span>
+            </div>
+            <img src="/static/img/1-5.png" />
+            <div class="all_ok_sleep"  id="actuality5"></div>
+            <p>牙齿错颌，下巴歪</p>
+        </div>
+
+        <div class="option_right" id="6" onclick="nextPage(0,this.id)">
+            <div class="triangle">
+                <span><p>⑥</p></span>
+            </div>
+            <img src="/static/img/1-6.png" />
+            <div class="all_ok_sleep"  id="actuality6"></div>
+            <p>牙齿不齐，乱，拥挤</p>
+        </div>
+
+        <div class="option_left" id="7" onclick="nextPage(0,this.id)">
+            <div class="triangle">
+                <span><p>⑦</p></span>
+            </div>
+            <img src="/static/img/1-7.png" />
+            <div class="all_ok_sleep"  id="actuality7"></div>
+            <p>虎牙，牙齿拥挤，难清洗</p>
+        </div>
+
+        <div class="option_right" id="8" onclick="nextPage(0,this.id)">
+            <div class="triangle">
+                <span><p>⑧</p></span>
+            </div>
+            <img src="/static/img/1-8.png" />
+            <div class="all_ok_sleep"  id="actuality8"></div>
+            <p>开颌，嘴巴不闭合</p>
+        </div>
+    </div>
+<!--第二页-->
+    <div class="page1" >
+        <div class="page1_back">
+            <img class="page_title" src="/static/img/title.png">
+            <div class="page_titles">
+                <p>你想做那种矫正？</p>
+            </div>
+            <div class="option_left2" id="1" onclick="nextPage(1,this.id)">
+                <div class="triangle">
+                    <span><p>①</p></span>
+                </div>
+                <img src="/static/img/2-1.jpg" />
+                <div class="all_ok_sleep"  id="type1"></div>
+                <p>传统金属矫正</p>
+            </div>
+
+            <div class="option_right2" id="2" onclick="nextPage(1,this.id)">
+                <div class="triangle">
+                    <span><p>②</p></span>
+                </div>
+                <img src="/static/img/2-2.jpg" />
+                <div class="all_ok_sleep"  id="type2"></div>
+                <p>自锁快速矫正</p>
+            </div><div class="option_left2" id="3" onclick="nextPage(1,this.id)">
+            <div class="triangle">
+                <span><p>③</p></span>
+            </div>
+            <img src="/static/img/2-3.jpg" />
+            <div class="all_ok_sleep"  id="type3"></div>
+            <p>冰晶半隐形矫正</p>
+        </div>
+
+            <div class="option_right2" id="4" onclick="nextPage(1,this.id)">
+                <div class="triangle">
+                    <span><p>④</p></span>
+                </div>
+                <img src="/static/img/2-4.jpg" />
+                <div class="all_ok_sleep"  id="type4"></div>
+                <p>全隐形矫正</p>
+            </div>
+            <div class="option_left2" id="5" onclick="nextPage(1,this.id)">
+                <div class="triangle">
+                    <span><p>⑤</p></span>
+                </div>
+                <img src="/static/img/2-5.jpg" />
+                <div class="all_ok_sleep"  id="type5"></div>
+                <p>不清楚，医生推荐</p>
+            </div>
+        </div>
+    </div>
+<!--第三页-->
+    <div class="page2" >
+        <div class="page2_one">
+            <div class="page2_one_back" >你的矫正费用预算是多少？</div>
+
+            <div class="page2_one_select" id="2" onclick="nextPage(2,this.id)">5000~10000元
+                <div class="all_ok_1" id="budget2"></div>
+            </div>
+            <div class="page2_one_select" id="3" onclick="nextPage(2,this.id)">10000~20000元
+                <div class="all_ok_1" id="budget3"></div>
+            </div>
+            <div class="page2_one_select" id="4" onclick="nextPage(2,this.id)">20000~50000元
+                <div class="all_ok_1" id="budget4"></div>
+            </div>
+            <div class="page2_one_select" id="5" onclick="nextPage(2,this.id)">50000以上
+                <div class="all_ok_1" id="budget5"></div>
+            </div>
+        </div>
+        <div class="page2_two">
+            <div class="page2_one_back1">
+                <span class="page2_one_back1_span1">您是否需要分期付款？</span>
+            </div>
+            <span class="page2_one_back1_span2">我院矫正可分期付款，最低至0首付、0利息</span>
+            <div class="page2_one_select" id="1" onclick="nextPage(3,this.id)">分期
+                <div class="all_ok_1" id="staging1"></div>
+            </div>
+            <div class="page2_one_select" id="2" onclick="nextPage(3,this.id)">不分期
+                <div class="all_ok_1" id="staging2"></div>
+            </div>
+
+        </div>
+    </div>
+<!--第四页-->
+    <div class="page3" >
+        <div class="page3_one">
+            <div class="page3_one_back" >是否需要免费的口腔检查服务</div>
+            <p class="page_p">我院现开展免费口腔检查,免费拍片、免费专家面诊，免费矫正方案设计，您是否需要？</p>
+            <div class="page2_one_select" id="1" onclick="nextPage(4,this.id)">需要
+                <div class="all_ok_1"  id="examine1"></div>
+            </div>
+            <div class="page2_one_select" id="2" onclick="nextPage(4,this.id)">不需要
+                <div class="all_ok_1"  id="examine2"></div>
+            </div>
+        </div>
+        <div class="page3_one margintop40">
+            <div class="page3_one_back1">是否体验过“数字化口内扫描”技术</div>
+            <p class="page_p" style="width: 89%;">美莱口腔拥有美国数字化口扫设备，只需10分钟即可看到矫正3D动画。</p>
+            <div class="page2_one_select" id="1" onclick="nextPage(5,this.id)">需要
+                <div class="all_ok_1"  id="scan1"></div>
+            </div>
+            <div class="page2_one_select" id="2" onclick="nextPage(5,this.id)">不需要
+                <div class="all_ok_1"  id="scan2"></div>
+            </div>
+        </div>
+    </div>
+<!--第五页-->
+    <div class="page4" >
+        <div class="page4_one">
+            <div class="page4_one_back" id="1" onclick="nextPage(6,this.id)">您的年龄是？
+            </div>
+            <div class="page2_one_select" id="1" onclick="nextPage(6,this.id)">3~11岁
+                <div class="all_ok_1"  id="age2"></div>
+            </div>
+            <div class="page2_one_select" id="2" onclick="nextPage(6,this.id)">12~18岁
+                <div class="all_ok_1"  id="age3"></div>
+            </div>
+            <div class="page2_one_select" id="3" onclick="nextPage(6,this.id)">19~30岁
+                <div class="all_ok_1"  id="age4"></div>
+            </div>
+            <div class="page2_one_select" id="4" onclick="nextPage(6,this.id)">31~45岁
+                <div class="all_ok_1"  id="age5"></div>
+            </div>
+            <div class="page2_one_select" id="5" onclick="nextPage(6,this.id)">46以上
+                <div class="all_ok_1"  id="age6"></div>
+            </div>
+        </div>
+        <div class="page4_two margintop40">
+            <div class="page4_one_back">您所在的区域是？</div>
+            <div class="page4_one_back2">
+                <div class="page4_one_back2_div" id="1" onclick="nextPage(7,this.id)">福田
+                    <div class="all_ok_1"  id="district1"></div>
+                </div>
+
+                <div class="page4_one_back2_div" id="2" onclick="nextPage(7,this.id)">罗湖
+                    <div class="all_ok_1"  id="district2"></div>
+                </div>
+                <div class="page4_one_back2_div" id="3" onclick="nextPage(7,this.id)">南山
+                    <div class="all_ok_1"  id="district3"></div>
+                </div>
+                <div class="page4_one_back2_div" id="4" onclick="nextPage(7,this.id)">盐田
+                    <div class="all_ok_1"  id="district4"></div>
+                </div>
+                <div class="page4_one_back2_div" id="5" onclick="nextPage(7,this.id)">龙岗
+                    <div class="all_ok_1"  id="district5"></div>
+                </div>
+                <div class="page4_one_back2_div" id="6" onclick="nextPage(7,this.id)">龙华
+                    <div class="all_ok_1"  id="district6"></div>
+                </div>
+                <div class="page4_one_back2_div" id="7" onclick="nextPage(7,this.id)">宝安
+                    <div class="all_ok_1"  id="district7"></div>
+                </div>
+                <div class="page4_one_back2_div" id="8" onclick="nextPage(7,this.id)">坪山
+                    <div class="all_ok_1"  id="district8"></div>
+                </div>
+                <div class="page4_one_back2_div" id="9" onclick="nextPage(7,this.id)">光明
+                    <div class="all_ok_1"  id="district9"></div>
+                </div>
+                <div class="page4_one_back2_div" id="10" onclick="nextPage(7,this.id)"> 大鹏
+                    <div class="all_ok_1"  id="district10"></div>
+                </div>
+                <div class="page4_one_back2_div" id="11" onclick="nextPage(7,this.id)">其他
+                    <div class="all_ok_1"  id="district11"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        </div>
+
+    </div>
+    <!--第六页-->
+    <div class="page5" >
+        <div class="page5_one">
+            <div class="page5_one_back position1"></div>
+            <div class="page5_one_back position2"></div>
+            <div class="page3_one_back" style="width: 77%;font-size: 0.38rem;">填写信息获取报价和优惠</div>
+            <div class="page5_one_select">
+                <span class="page5_one_select_name">姓名</span>
+                <input id="name" type="text" >
+            </div>
+            <div class="page5_one_select">
+                <span class="page5_one_select_name">性别</span>
+                <div class="page5_one_select_people male" id="1" onclick="nextPage(8,this.id)">
+                    <div class="all_ok_2"  id="sex1" style="display: block"></div>
+                </div>
+                <div class="page5_one_select_people girl" id="2" onclick="nextPage(8,this.id)">
+                    <div class="all_ok_2"  id="sex2"></div>
+                </div>
+            </div>
+            <div class="page5_one_select">
+                <span class="page5_one_select_name">电话</span>
+                <input id="phone" type="text">
+                <!--<p>*说明：24小时内系统客服人员将致电告知您的矫正评估费用及特别优惠，请您电话保持畅通！</p>-->
+            </div>
+        </div>
+        <div class="page5_btn" onclick="sub()">提交</div>
+        <div class="page5_two margintop40">
+            <div class="page5_one_back position1" style="top: -0.3rem"></div>
+            <div class="page5_two_back">已经有<span id="num">631</span>人提交</div>
+            <div class="page5_two_li">
+                <span class="page5_two_li_span1">提交人</span>
+                <span class="page5_two_li_span2">手机号</span>
+                <span class="page5_two_li_span1">提交时间</span>
+            </div>
+            <div class="page5_two_center" id="demo"  style="overflow:hidden;height:1.8rem;">
+                <ul >
+                    <li>
+                        <div class="page5_two_li2">
+                            <span class="page5_two_li_span1">赵先生</span>
+                            <span class="page5_two_li_span2">130********</span>
+                            <span class="page5_two_li_span1">1分钟前</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="page5_two_li2">
+                            <span class="page5_two_li_span1">李先生</span>
+                            <span class="page5_two_li_span2">150********</span>
+                            <span class="page5_two_li_span1">1分钟前</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="page5_two_li2">
+                            <span class="page5_two_li_span1">宋先生</span>
+                            <span class="page5_two_li_span2">130********</span>
+                            <span class="page5_two_li_span1">3分钟前</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="page5_two_li2">
+                            <span class="page5_two_li_span1">梁女士</span>
+                            <span class="page5_two_li_span2">187********</span>
+                            <span class="page5_two_li_span1">5分钟前</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="page5_two_li2">
+                            <span class="page5_two_li_span1">王先生</span>
+                            <span class="page5_two_li_span2">187********</span>
+                            <span class="page5_two_li_span1">6分钟前</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="page5_two_li2">
+                            <span class="page5_two_li_span1">刘女士</span>
+                            <span class="page5_two_li_span2">150********</span>
+                            <span class="page5_two_li_span1">8分钟前</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="page5_two_li2">
+                            <span class="page5_two_li_span1">王女士</span>
+                            <span class="page5_two_li_span2">137********</span>
+                            <span class="page5_two_li_span1">10分钟前</span>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--遮罩-->
+    <div class="page_mask">
+        <div class="page_mask_img">
+            <img src="/static/img/mask.png"  alt="">
+        </div>
+    </div>
+<script src="/static/js/jquery-2.1.1.min.js"></script>
+<script src="/static/js/kst.js"></script>
+<script>
+    <!--数字自增-->
+    var nums = Math.random().toFixed(2)*500+500;
+    var num = $("#num");
+    setInterval(function working(){
+        num.text(nums++);;
+    },5000);
+
+    function AutoScroll(obj) {
+        $(obj).find("ul:first").animate({
+                marginTop: "-30px"
+            },
+            500,
+            function() {
+                $(this).css({
+                    marginTop: "0px"
+                }).find("li:first").appendTo(this);
+            });
+    }
+    $(document).ready(function() {
+        setInterval('AutoScroll("#demo")', 2000)
+    });
+</script>
+<script>
+    var dateArray = new Array(22);
+    dateArray[17] = 1;
+    dateArray[18] = 'name';
+    dateArray[20] = 'phone';
+    var plural = true;
+    function nextPage(indexes,id) {
+        var coordinate = indexes*2+1;
+        var nextPageID = indexes + 1;
+        var lastPageID = indexes -1;
+        var next_k = nextPageID*2+1;
+        var last_k = lastPageID*2+1;
+        if (indexes==0){
+            dateArray[indexes*2] = "actuality";  //牙齿现状
+        }
+        if (indexes==1){
+            dateArray[indexes*2] = "type"; //矫正类型
+        }
+        if (indexes==2){
+            dateArray[indexes*2] = "budget"; //预算
+            if (dateArray[next_k]==null){
+                plural=false;
+            }else {
+                plural=true;
+            }
+        }
+        if (indexes==3){
+            dateArray[indexes*2] = "staging"; //是否分期
+            if (dateArray[last_k]==null){
+                plural=false;
+            }else {
+                plural=true;
+                indexes = 2;
+                nextPageID = indexes + 1;
+            }
+        }
+        if (indexes==4){
+            dateArray[indexes*2] = "examine"; //是否检查
+            if (dateArray[next_k]==null){
+                plural=false;
+            }else {
+                plural=true;
+                indexes = 3;
+                nextPageID = indexes + 1;
+            }
+        }
+        if (indexes==5){
+            dateArray[indexes*2] = "scan"; //是否扫描
+            if (dateArray[last_k]==null){
+                plural=false;
+            }else {
+                plural=true;
+                indexes = 3;
+                nextPageID = indexes + 1;
+            }
+        }
+        if (indexes==6){
+            dateArray[indexes*2] = "age"; //年龄
+            if (dateArray[next_k]==null){
+                plural=false;
+            }else {
+                plural=true;
+                indexes = 4;
+                nextPageID = indexes + 1;
+            }
+        }
+        if (indexes==7){
+            dateArray[indexes*2] = "district"; //地区
+            if (dateArray[last_k]==null){
+                plural=false;
+            }else {
+                plural=true;
+                indexes = 4;
+                nextPageID = indexes + 1;
+            }
+        }
+        if (indexes==8){
+            plural=false;
+            dateArray[indexes*2] = "sex"; //性别
+        }
+        var v = coordinate-1;
+        if (dateArray[coordinate]!=null){
+            $('#'+dateArray[v]+dateArray[coordinate]).hide();
+        }
+        $('#'+dateArray[v]+id).show();
+        dateArray[coordinate] = id;
+        if (plural==true){
+            setTimeout(function () {
+                    $('.'+'page'+indexes).css("display","NONE");
+                    $('#'+dateArray[v]+dateArray[coordinate]).hide();
+                    $('.'+'page'+nextPageID).css("display","block");
+            },300);
+        }
+    }
+    function sub() {
+        var name = document.getElementById("name").value;
+        var phone = document.getElementById("phone").value;
+
+        if (name=='') {
+            $("#name").attr("placeholder","*请输入姓名！");
+
+        }else if(phone==''){
+            $("#phone").attr("placeholder","*请输入电话！");
+        }else {
+            dateArray[19] = name;
+            dateArray[21] = phone;
+
+            $.ajax({
+                type:"post",
+                url:"https://m.szmlkq.com/addData",
+                data:{params:dateArray},
+                traditional: true,
+                dataType:"text",
+                success: function(data){
+                    if (data){
+                        $(".page_mask").show();
+                    } else {
+                        alert("发生错误，请致电：400-801-8088");
+                    }
+                }
+            })
+        }
+    }
+</script>
+</body>
+</html>

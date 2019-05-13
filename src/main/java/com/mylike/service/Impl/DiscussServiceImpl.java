@@ -33,8 +33,15 @@ public class DiscussServiceImpl implements DiscussService {
         return mapper.selectByDid(dId);
     }
 
+//    评论单个查询
     @Override
     public List<Discuss> showDiscussById(int parentId) {
         return mapper.selectByPrimaryKey(parentId);
+    }
+
+//  视频评论查询
+    @Override
+    public List<Discuss> selectByVId(int vId) {
+        return mapper.selectByVid(vId);
     }
 }

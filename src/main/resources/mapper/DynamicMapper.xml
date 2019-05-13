@@ -5,12 +5,14 @@
     <id column="d_id" property="dId" jdbcType="INTEGER" />
     <result column="d_name" property="dName" jdbcType="VARCHAR" />
     <result column="d_headPic" property="dHeadpic" jdbcType="VARCHAR" />
-    <result column="d_content" property="dContent" jdbcType="VARCHAR" />
+    <result column="d_content" property="dContent" jdbcType="LONGVARCHAR" />
     <result column="d_site" property="dSite" jdbcType="VARCHAR" />
     <result column="d_like" property="dLike" jdbcType="INTEGER" />
     <result column="d_browse" property="dBrowse" jdbcType="INTEGER" />
     <result column="d_addTime" property="dAddtime" jdbcType="TIMESTAMP" />
-    <result column="d_hot" property="dHot" jdbcType="TIMESTAMP" />
+    <result column="d_hot" property="dHot" jdbcType="VARCHAR" />
+    <result column="imgUrl" property="imgUrl" jdbcType="LONGVARCHAR" />
+    <result column="videoUrl" property="videoUrl" jdbcType="VARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from dynamic
@@ -19,32 +21,41 @@
   <insert id="insert" parameterType="com.mylike.entity.Dynamic" useGeneratedKeys="true" keyProperty="dId">
     insert into dynamic (d_id, d_name, d_headPic, 
       d_content, d_site, d_like, 
-      d_browse, d_addTime)
+      d_browse, d_addTime,d_hot,imgUrl,videoUrl)
     values (#{dId,jdbcType=INTEGER}, #{dName,jdbcType=VARCHAR}, #{dHeadpic,jdbcType=VARCHAR}, 
-      #{dContent,jdbcType=VARCHAR}, #{dSite,jdbcType=VARCHAR}, #{dLike,jdbcType=INTEGER},
-      #{dBrowse,jdbcType=INTEGER}, #{dAddtime,jdbcType=TIMESTAMP})
+      #{dContent,jdbcType=LONGVARCHAR}, #{dSite,jdbcType=VARCHAR}, #{dLike,jdbcType=INTEGER},
+      #{dBrowse,jdbcType=INTEGER}, #{dAddtime,jdbcType=TIMESTAMP},#{dHot,jdbcType=VARCHAR},<![CDATA[ #{imgUrl,jdbcType=LONGVARCHAR} ]]>,#{videoUrl,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Dynamic" >
     update dynamic
     set d_name = #{dName,jdbcType=VARCHAR},
       d_headPic = #{dHeadpic,jdbcType=VARCHAR},
-      d_content = #{dContent,jdbcType=VARCHAR},
+      d_content = #{dContent,jdbcType=LONGVARCHAR},
       d_site = #{dSite,jdbcType=VARCHAR},
       d_like = #{dLike,jdbcType=INTEGER},
       d_browse = #{dBrowse,jdbcType=INTEGER},
       d_addTime = #{dAddtime,jdbcType=TIMESTAMP}
+      ,d_hot = #{dHot,jdbcType=VARCHAR},
+      imgUrl = <![CDATA[#{imgUrl,jdbcType=LONGVARCHAR}]]>,
+      videoUrl = #{videoUrl,jdbcType=VARCHAR}
     where d_id = #{dId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime
+    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl
     from dynamic
     where d_id = #{dId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime
+    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl
     from dynamic
     where d_hot = "hot"
   </select>
+
+  <select id="showAll" resultMap="BaseResultMap" >
+    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl
+    from dynamic
+  </select>
+
 
   <update id="dynamicLike" parameterType="java.lang.Integer" >
     update dynamic

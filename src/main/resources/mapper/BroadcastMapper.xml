@@ -21,6 +21,13 @@
     values (#{bId,jdbcType=INTEGER}, #{bContent,jdbcType=VARCHAR}, #{bUrl,jdbcType=VARCHAR}, 
       #{bRank,jdbcType=VARCHAR}, #{bBelong,jdbcType=VARCHAR}, #{bStatus,jdbcType=VARCHAR}, 
       #{bAddtime,jdbcType=TIMESTAMP})
+       ON DUPLICATE KEY UPDATE
+       b_content = #{bContent,jdbcType=VARCHAR},
+      b_url = #{bUrl,jdbcType=VARCHAR},
+      b_rank = #{bRank,jdbcType=VARCHAR},
+      b_belong = #{bBelong,jdbcType=VARCHAR},
+      b_status = #{bStatus,jdbcType=VARCHAR},
+      b_AddTime = #{bAddtime,jdbcType=TIMESTAMP}
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Broadcast" >
     update broadcast

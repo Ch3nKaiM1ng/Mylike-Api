@@ -10,4 +10,6 @@ public interface DiscussService {
     List<Discuss> selectByDId(Integer dId);
 
     List<Discuss> showDiscussById(int parentId);
+
+    List<Discuss> selectByVId(int vId);
 }

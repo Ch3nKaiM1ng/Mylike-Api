@@ -23,12 +23,6 @@ public class DynamicServiceImpl implements DynamicService {
 //    动态库
     @Autowired
     private DynamicMapper dynamicMapper;
-//    素材关联库
-    @Autowired
-    private MaterialRelevanceMapper relevanceMapper;
-//    素材库
-    @Autowired
-    private MaterialMapper materialMapper;
 
     MaterialRelevance relevance = new MaterialRelevance();
     Material material = new Material();
@@ -40,44 +34,12 @@ public class DynamicServiceImpl implements DynamicService {
             System.out.println("success!");
         }
         dynamicMapper.insert(dynamic);
-        if (dynamic.getdId()!=null){
-            relevance.setrId(null);
-            relevance.setdId(dynamic.getdId());
-            relevanceMapper.insert(relevance);
-            if (relevance.getrId()!=null){
-                material.setmId(null);
-                material.setrId(relevance.getrId());
-                System.out.println("-------"+dynamic.getVideoUrl()+"----");
-
-                if (dynamic.getVideoUrl()==null) {
-                    String[] urlArray=dynamic.getImgUrl().split(",");
-                    material.setmBlong(re.img());
-                    for (int i = 0;i<urlArray.length;i++){
-                        material.setmUrl(urlArray[i]);
-                        materialMapper.insert(material);
-                    }
-                }else if (dynamic.getImgUrl().equals("")){
-                    material.setmUrl(dynamic.getVideoUrl());
-                    material.setmBlong(re.video());
-                    materialMapper.insert(material);
-                }
-            }
-        }
     }
 
     @Override
     public Map<String, Object> selectAll() {
         Map<String,Object> map = new HashMap<>();
         List<Dynamic> dynamic = dynamicMapper.selectAll();
-        for (Dynamic dynamics:dynamic){
-            if (dynamics.getdId()!=null){
-                System.out.println("error");
-                relevance = relevanceMapper.selectByDId(dynamics.getdId());
-                if (relevance.getrId()!=null){
-                    dynamics.setMaterials(materialMapper.selectByRId(relevance.getrId()));
-                }
-            }
-        }
         map.put("data",dynamic);
         return map;
     }
@@ -87,12 +49,6 @@ public class DynamicServiceImpl implements DynamicService {
     @Override
     public Dynamic showDynamicById(Integer dId) {
         Dynamic dynamic =dynamicMapper.selectByPrimaryKey(dId);
-        if (dynamic.getdId()!=null){
-            relevance = relevanceMapper.selectByDId(dynamic.getdId());
-            if (relevance.getrId()!=null){
-                dynamic.setMaterials(materialMapper.selectByRId(relevance.getrId()));
-            }
-        }
         return dynamic;
     }
 
@@ -105,5 +61,15 @@ public class DynamicServiceImpl implements DynamicService {
     @Override
     public void updateDynamic(Dynamic dynamic) {
         dynamicMapper.updateByPrimaryKey(dynamic);
+    }
+
+    @Override
+    public void delecetDynamic(Integer dId) {
+        dynamicMapper.deleteByPrimaryKey(dId);
+    }
+
+    @Override
+    public List<Dynamic> showAll() {
+        return dynamicMapper.showAll();
     }
 }

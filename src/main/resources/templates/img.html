@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="/file/uploading" enctype="multipart/form-data">
+    <input type="file" name="file" value="file">
+    <input type="submit" value="确定">
+</form>
+
+
+<form action="http://localhost:8080/videoContent/addContent" method="post">
+    ID:<input type="text" name="VName"><br/>
+    Username:<input type="text" name="vLike"><br/>
+    <input type="submit" value="Submit">
+</form>
+<div onclick="ajax()">
+    <p>点击</p>
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.4.0.js"
+        integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+        crossorigin="anonymous"></script>
+<script></script>
+<script>
+    function ajax() {
+        $.ajax({
+            type : "post",//向后台请求的方式，有post，get两种方法
+            url : "http://172.16.19.101:8080/broadcast/addBroadcast",//url填写的是请求的路径
+            cache : false,//缓存是否打开
+            data : [{//请求的数据，
+                bUrl:123,
+                bContent:123
+            },{
+                bUrl:456,
+                bContent:456
+            }
+            ],
+            dataType : 'json',//请求的数据类型
+            success : function(data) {//请求的返回成功的方法
+                console.log(data)
+            },
+        });
+    }
+</script>
+</body>
+</html>
