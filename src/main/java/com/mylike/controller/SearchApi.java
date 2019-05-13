@@ -6,6 +6,7 @@ import com.mylike.entity.Search;
 import com.mylike.entity.VideoContent;
 import com.mylike.service.ArticleService;
 import com.mylike.service.SearchService;
+import com.mylike.service.SortService;
 import com.mylike.service.VideoContentService;
 import com.mylike.utils.ReturnDiscern;
 import org.apache.ibatis.annotations.Param;
@@ -31,18 +32,20 @@ public class SearchApi {
     private ArticleService articleService;
     @Autowired
     private VideoContentService videoContentService;
+    @Autowired
+    private SortService sortService;
 
     private ReturnDiscern re = new ReturnDiscern();
 
-//    查询关键词
+    //    查询关键词
     @RequestMapping("/showSearch")
-    public List<Search> showSearch(String sBelong){
+    public List<Search> showSearch(String sBelong) {
         return service.select(sBelong);
     }
 
-//    添加关键词
+    //    添加关键词
     @RequestMapping("/addSearch")
-    public String addSearch(@RequestBody List<Search> search){
+    public String addSearch(@RequestBody List<Search> search) {
         service.insert(search);
         return "success";
     }
@@ -51,17 +54,29 @@ public class SearchApi {
      * 全文检索
      */
     @RequestMapping("/showByKey")
-    public Map<String,Object> fullTextSearch(String keyWord){
+    public Map<String, Object> fullTextSearch(String keyWord) {
 
         System.out.println(keyWord);
         List<Article> articles = this.articleService.showArticlesByTitle(keyWord);
 
         List<VideoContent> videoContents = this.videoContentService.showVideoContentsByTitle(keyWord);
 
-        Map<String,Object> map=new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         map = re.SUCCESS();
-        map.put("article",articles);
-        map.put("video",videoContents);
+        map.put("article", articles);
+        map.put("video", videoContents);
+
+        return map;
+    }
+
+    /**
+     * 检索分类
+     */
+    @RequestMapping("/showSort")
+    public Map<String, Object> showSort(@RequestParam("keyWord") String keyWord) {
+
+        Map<String, Object> map = re.SUCCESS();
+        map.put("sort", this.sortService.showSortsByName(keyWord));
 
         return map;
     }

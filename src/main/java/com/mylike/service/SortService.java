@@ -12,4 +12,6 @@ public interface SortService {
     void insert(Sort sort);
 
     void delectSort(int sId);
+
+    List<Sort> showSortsByName(String name);
 }

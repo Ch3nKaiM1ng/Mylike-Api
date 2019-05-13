@@ -13,6 +13,7 @@ public class SortServiceImpl implements SortService {
 
     @Autowired
     private SortMapper mapper;
+
     @Override
     public List<Sort> selectAll() {
         return mapper.selectAll();
@@ -25,12 +26,17 @@ public class SortServiceImpl implements SortService {
 
     @Override
     public void insert(Sort sort) {
-        sort.setsSid(sort.getsSid()==null?0:sort.getsSid());
+        sort.setsSid(sort.getsSid() == null ? 0 : sort.getsSid());
         mapper.insert(sort);
     }
 
     @Override
     public void delectSort(int sId) {
         mapper.deleteByPrimaryKey(sId);
+    }
+
+    @Override
+    public List<Sort> showSortsByName(String name) {
+        return this.mapper.selectSortsByName(name);
     }
 }

@@ -40,4 +40,10 @@
     where s_sId = #{sSid,jdbcType=INTEGER}
   </select>
 
+  <select id="selectSortsByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select s_id, s_name, s_sId, s_addTime
+    from sort
+    where s_name like CONCAT(CONCAT('%', #{name},'%'))
+  </select>
+
 </mapper>
