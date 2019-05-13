@@ -42,4 +42,11 @@ public class ArticleServiceImpl implements ArticleService {
     public void delectArticle(Integer aId) {
         mapper.deleteByPrimaryKey(aId);
     }
+
+    @Override
+    public List<Article> showArticlesByTitle(String title) {
+        return showArticlesByTitle(title);
+    }
+
+
 }

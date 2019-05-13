@@ -13,4 +13,6 @@ public interface VideoContentService {
     VideoContent selectId(int vId);
 
     void delectById(int vId);
+
+    List<VideoContent> showVideoContentsByTitle(String title);
 }

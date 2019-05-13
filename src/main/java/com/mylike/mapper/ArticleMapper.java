@@ -1,6 +1,8 @@
 package com.mylike.mapper;
 
 import com.mylike.entity.Article;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface ArticleMapper {
@@ -15,4 +17,6 @@ public interface ArticleMapper {
     int updateByPrimaryKey(Article record);
 
     List<Article> showArticleSort(Integer sId);
+
+    List<Article> selectByTitle(@Param("title") String title);
 }

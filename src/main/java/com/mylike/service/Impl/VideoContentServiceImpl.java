@@ -1,7 +1,6 @@
 package com.mylike.service.Impl;
 
 
-
 import com.mylike.entity.VideoContent;
 import com.mylike.mapper.MaterialMapper;
 import com.mylike.mapper.VideoContentMapper;
@@ -34,7 +33,7 @@ public class VideoContentServiceImpl implements VideoContentService {
     @Override
     public List<VideoContent> selectAll(int startId, int endId) {
         int nums = 0;
-        List<VideoContent> Contents  =videoContentMapper.selectAll(startId,endId);
+        List<VideoContent> Contents = videoContentMapper.selectAll(startId, endId);
         return Contents;
     }
 
@@ -46,5 +45,10 @@ public class VideoContentServiceImpl implements VideoContentService {
     @Override
     public void delectById(int vId) {
         videoContentMapper.deleteByPrimaryKey(vId);
+    }
+
+    @Override
+    public List<VideoContent> showVideoContentsByTitle(String title) {
+        return videoContentMapper.selectVideoContentsByTitle(title);
     }
 }
