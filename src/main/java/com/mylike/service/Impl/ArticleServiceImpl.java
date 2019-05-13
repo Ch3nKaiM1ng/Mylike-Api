@@ -44,8 +44,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> showArticlesByTitle(String title) {
-        return showArticlesByTitle(title);
+    public List<Article> showArticlesByTitle(String keyWord) {
+        return mapper.selectByTitle(keyWord);
     }
 
 

@@ -59,6 +59,6 @@
     select a_id, a_title, a_content, a_coverImg, a_signature, a_addTime, a_synopsis,
     a_sortId, a_sonId
     from article
-    where a_title=#{title}
+    where a_title like CONCAT(CONCAT('%', #{title},'%'))  or a_content like  CONCAT(CONCAT('%', #{title},'%'))
   </select>
 </mapper>

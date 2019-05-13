@@ -7,6 +7,7 @@ import com.mylike.entity.VideoContent;
 import com.mylike.service.ArticleService;
 import com.mylike.service.SearchService;
 import com.mylike.service.VideoContentService;
+import com.mylike.utils.ReturnDiscern;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.javassist.tools.rmi.Sample;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class SearchApi {
     @Autowired
     private VideoContentService videoContentService;
 
+    private ReturnDiscern re = new ReturnDiscern();
+
 //    查询关键词
     @RequestMapping("/showSearch")
     public List<Search> showSearch(String sBelong){
@@ -47,14 +50,16 @@ public class SearchApi {
     /**
      * 全文检索
      */
-    @RequestMapping("/fullTextSearch")
+    @RequestMapping("/showByKey")
     public Map<String,Object> fullTextSearch(String keyWord){
 
+        System.out.println(keyWord);
         List<Article> articles = this.articleService.showArticlesByTitle(keyWord);
 
         List<VideoContent> videoContents = this.videoContentService.showVideoContentsByTitle(keyWord);
 
         Map<String,Object> map=new HashMap<>();
+        map = re.SUCCESS();
         map.put("article",articles);
         map.put("video",videoContents);
 

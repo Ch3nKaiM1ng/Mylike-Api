@@ -56,6 +56,6 @@
     select v_id, v_name, v_headPic, v_title, v_content, v_videoUrl, v_imgUrl, v_like,
     v_url, v_hot
     from video_content
-    where title=#{title}
+    where v_title like CONCAT(CONCAT('%', #{title},'%'))  or v_content like  CONCAT(CONCAT('%', #{title},'%'))
   </select>
 </mapper>
