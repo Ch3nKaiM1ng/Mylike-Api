@@ -1,8 +1,12 @@
 package com.mylike.controller;
 
+import com.mylike.entity.Article;
 import com.mylike.entity.Navigation;
 import com.mylike.entity.Search;
+import com.mylike.entity.VideoContent;
+import com.mylike.service.ArticleService;
 import com.mylike.service.SearchService;
+import com.mylike.service.VideoContentService;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.javassist.tools.rmi.Sample;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +17,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Console;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/search")
 public class SearchApi {
     @Autowired
     private SearchService service;
+    @Autowired
+    private ArticleService articleService;
+    @Autowired
+    private VideoContentService videoContentService;
 
 //    查询关键词
     @RequestMapping("/showSearch")
@@ -32,5 +42,22 @@ public class SearchApi {
     public String addSearch(@RequestBody List<Search> search){
         service.insert(search);
         return "success";
+    }
+
+    /**
+     * 全文检索
+     */
+    @RequestMapping("/fullTextSearch")
+    public Map<String,Object> fullTextSearch(String keyWord){
+
+        List<Article> articles = this.articleService.showArticlesByTitle(keyWord);
+
+        List<VideoContent> videoContents = this.videoContentService.showVideoContentsByTitle(keyWord);
+
+        Map<String,Object> map=new HashMap<>();
+        map.put("article",articles);
+        map.put("video",videoContents);
+
+        return map;
     }
 }
