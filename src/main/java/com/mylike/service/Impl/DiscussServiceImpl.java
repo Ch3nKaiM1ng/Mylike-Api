@@ -44,4 +44,9 @@ public class DiscussServiceImpl implements DiscussService {
     public List<Discuss> selectByVId(int vId) {
         return mapper.selectByVid(vId);
     }
+
+    @Override
+    public List<Discuss> selectByAId(Integer aId) {
+        return mapper.selectByAid(aId);
+    }
 }

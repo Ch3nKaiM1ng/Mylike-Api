@@ -76,8 +76,6 @@ public class SearchApi {
     public Map<String, Object> showSort(@RequestParam("keyWord") String keyWord) {
 
         Map<String, Object> map = re.SUCCESS();
-        map.put("sort", this.sortService.showSortsByName(keyWord));
-
-        return map;
+        return re.SUCCESSOBJ(this.sortService.showSortsByName(keyWord));
     }
 }

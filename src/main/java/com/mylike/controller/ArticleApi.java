@@ -3,13 +3,16 @@ package com.mylike.controller;
 import com.mylike.entity.Article;
 import com.mylike.mapper.ArticleMapper;
 import com.mylike.service.ArticleService;
+import com.mylike.service.DiscussService;
 import com.mylike.utils.DateUtils;
+import com.mylike.utils.DiscussDTO;
 import com.mylike.utils.ReturnDiscern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +26,11 @@ public class ArticleApi {
     private DateUtils data = new DateUtils();
 //    返回utils
     private ReturnDiscern re =new  ReturnDiscern();
+//    评论
+    @Autowired
+    private DiscussService discussService;
+    //  递归
+    private DiscussDTO disTo = new DiscussDTO();
 //  添加文章
     @RequestMapping("/addArticle")
     public Map<String,Object> addArticle(@RequestBody Article article){
@@ -41,8 +49,16 @@ public class ArticleApi {
     }
 //    查询文章byID
     @RequestMapping("/showArticleBy")
-    public Map<String,Object> showArticleById(int aId){
-       return re.SUCCESSOBJ(service.selectById(aId));
+    public Map<String,Object> showArticleById(Integer aId){
+//       查询评论
+        Map<String,Object> map =new HashMap<>();
+        if (aId!=null){
+            map = re.SUCCESSOBJ(service.selectById(aId));
+            //        查询评价
+            map.put("discuss",disTo.convert(0,discussService.selectByAId(aId)));
+            return map;
+        }
+        return re.ERROR();
     }
 //    通过分类查文章
     @RequestMapping("/showArticleSort")

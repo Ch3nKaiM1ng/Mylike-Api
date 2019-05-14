@@ -17,4 +17,6 @@ public interface DiscussMapper {
     List<Discuss> selectByDid(Integer dId);
 
     List<Discuss> selectByVid(Integer vId);
+
+    List<Discuss> selectByAid(Integer aId);
 }
