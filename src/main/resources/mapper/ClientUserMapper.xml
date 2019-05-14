@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mylike.mapper.ClientUserMapper">
+    <resultMap id="BaseResultMap" type="com.mylike.entity.ClientUser">
+        <id column="c_id" jdbcType="INTEGER" property="cId"/>
+        <result column="c_name" jdbcType="VARCHAR" property="cName"/>
+        <result column="c_nickname" jdbcType="VARCHAR" property="cNickname"/>
+        <result column="c_photo" jdbcType="VARCHAR" property="cPhoto"/>
+        <result column="c_age" jdbcType="INTEGER" property="cAge"/>
+        <result column="c_phone" jdbcType="INTEGER" property="cPhone"/>
+        <result column="c_sex" jdbcType="CHAR" property="cSex"/>
+        <result column="c_acc_number" jdbcType="VARCHAR" property="cAccNumber"/>
+        <result column="c_pwd" jdbcType="VARCHAR" property="cPwd"/>
+        <result column="c_EMail" jdbcType="VARCHAR" property="cEmail"/>
+        <result column="c_district" jdbcType="VARCHAR" property="cDistrict"/>
+        <result column="c_grade" jdbcType="VARCHAR" property="cGrade"/>
+        <result column="QQId" jdbcType="INTEGER" property="qqid"/>
+        <result column="WechatId" jdbcType="INTEGER" property="wechatid"/>
+        <result column="AlipayId" jdbcType="INTEGER" property="alipayid"/>
+        <result column="c_status" jdbcType="VARCHAR" property="cStatus"/>
+        <result column="c_AddTime" jdbcType="TIMESTAMP" property="cAddtime"/>
+    </resultMap>
+
+    <insert id="insertSelective" parameterType="com.mylike.entity.ClientUser">
+        insert into client_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cId != null">
+                c_id,
+            </if>
+            <if test="cName != null">
+                c_name,
+            </if>
+            <if test="cNickname != null">
+                c_nickname,
+            </if>
+            <if test="cPhoto != null">
+                c_photo,
+            </if>
+            <if test="cAge != null">
+                c_age,
+            </if>
+            <if test="cPhone != null">
+                c_phone,
+            </if>
+            <if test="cSex != null">
+                c_sex,
+            </if>
+            <if test="cAccNumber != null">
+                c_acc_number,
+            </if>
+            <if test="cPwd != null">
+                c_pwd,
+            </if>
+            <if test="cEmail != null">
+                c_EMail,
+            </if>
+            <if test="cDistrict != null">
+                c_district,
+            </if>
+            <if test="cGrade != null">
+                c_grade,
+            </if>
+            <if test="qqid != null">
+                QQId,
+            </if>
+            <if test="wechatid != null">
+                WechatId,
+            </if>
+            <if test="alipayid != null">
+                AlipayId,
+            </if>
+            <if test="cStatus != null">
+                c_status,
+            </if>
+            <if test="cAddtime != null">
+                c_AddTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cId != null">
+                #{cId,jdbcType=INTEGER},
+            </if>
+            <if test="cName != null">
+                #{cName,jdbcType=VARCHAR},
+            </if>
+            <if test="cNickname != null">
+                #{cNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="cPhoto != null">
+                #{cPhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="cAge != null">
+                #{cAge,jdbcType=INTEGER},
+            </if>
+            <if test="cPhone != null">
+                #{cPhone,jdbcType=INTEGER},
+            </if>
+            <if test="cSex != null">
+                #{cSex,jdbcType=CHAR},
+            </if>
+            <if test="cAccNumber != null">
+                #{cAccNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="cPwd != null">
+                #{cPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="cEmail != null">
+                #{cEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="cDistrict != null">
+                #{cDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="cGrade != null">
+                #{cGrade,jdbcType=VARCHAR},
+            </if>
+            <if test="qqid != null">
+                #{qqid,jdbcType=INTEGER},
+            </if>
+            <if test="wechatid != null">
+                #{wechatid,jdbcType=INTEGER},
+            </if>
+            <if test="alipayid != null">
+                #{alipayid,jdbcType=INTEGER},
+            </if>
+            <if test="cStatus != null">
+                #{cStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="cAddtime != null">
+                #{cAddtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.mylike.entity.ClientUser">
+        update client_user
+        <set>
+            <if test="cName != null">
+                c_name = #{cName,jdbcType=VARCHAR},
+            </if>
+            <if test="cNickname != null">
+                c_nickname = #{cNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="cPhoto != null">
+                c_photo = #{cPhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="cAge != null">
+                c_age = #{cAge,jdbcType=INTEGER},
+            </if>
+            <if test="cPhone != null">
+                c_phone = #{cPhone,jdbcType=INTEGER},
+            </if>
+            <if test="cSex != null">
+                c_sex = #{cSex,jdbcType=CHAR},
+            </if>
+            <if test="cAccNumber != null">
+                c_acc_number = #{cAccNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="cPwd != null">
+                c_pwd = #{cPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="cEmail != null">
+                c_EMail = #{cEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="cDistrict != null">
+                c_district = #{cDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="cGrade != null">
+                c_grade = #{cGrade,jdbcType=VARCHAR},
+            </if>
+            <if test="qqid != null">
+                QQId = #{qqid,jdbcType=INTEGER},
+            </if>
+            <if test="wechatid != null">
+                WechatId = #{wechatid,jdbcType=INTEGER},
+            </if>
+            <if test="alipayid != null">
+                AlipayId = #{alipayid,jdbcType=INTEGER},
+            </if>
+            <if test="cStatus != null">
+                c_status = #{cStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="cAddtime != null">
+                c_AddTime = #{cAddtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where c_id = #{cId,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="selectByPhone"  resultMap="BaseResultMap" parameterType="java.lang.String">
+        select * from client_user where c_phone=#{phone}
+    </select>
+</mapper>
