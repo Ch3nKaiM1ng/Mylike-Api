@@ -63,4 +63,13 @@ public class VideoContentApi {
         service.delectById(vId);
         return re.SUCCESS();
     }
+//    视频修改
+    @RequestMapping("/updateVideo")
+    public Map<String,Object>updateVideo(@RequestBody VideoContent video){
+        if (video.getvId()!=null){
+            service.updateVideo(video);
+            return re.SUCCESS();
+        }
+        return re.ERROR();
+    }
 }

@@ -15,4 +15,6 @@ public interface VideoContentService {
     void delectById(int vId);
 
     List<VideoContent> showVideoContentsByTitle(String title);
+
+    void updateVideo(VideoContent video);
 }
