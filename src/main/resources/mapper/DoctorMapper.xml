@@ -9,7 +9,7 @@
     <result column="d_adept" property="dAdept" jdbcType="VARCHAR" />
     <result column="d_intro" property="dIntro" jdbcType="VARCHAR" />
     <result column="d_number" property="dNumber" jdbcType="VARCHAR" />
-    <result column="d_good" property="dGood" jdbcType="INTEGER" />
+    <result column="d_good" property="dGood" jdbcType="VARCHAR" />
     <result column="d_fans" property="dFans" jdbcType="INTEGER" />
     <result column="d_consult" property="dConsult" jdbcType="INTEGER" />
     <result column="d_subscribe" property="dSubscribe" jdbcType="INTEGER" />
@@ -30,7 +30,7 @@
       d_attestation, d_addTime,d_good_num)
     values (#{dId,jdbcType=INTEGER}, #{dHeadpic,jdbcType=VARCHAR}, #{dName,jdbcType=VARCHAR}, 
       #{dDuty,jdbcType=VARCHAR}, #{dAdept,jdbcType=VARCHAR}, #{dIntro,jdbcType=VARCHAR}, 
-      #{dNumber,jdbcType=VARCHAR}, #{dGood,jdbcType=INTEGER}, #{dFans,jdbcType=INTEGER},
+      #{dNumber,jdbcType=VARCHAR}, #{dGood,jdbcType=VARCHAR}, #{dFans,jdbcType=INTEGER},
       #{dConsult,jdbcType=INTEGER}, #{dSubscribe,jdbcType=INTEGER}, #{dWeibo,jdbcType=VARCHAR}, 
       #{dAttestation,jdbcType=VARCHAR}, #{dAddtime,jdbcType=TIMESTAMP},#{dGoodNum,jdbcType=INTEGER})
   </insert>
@@ -42,7 +42,7 @@
       d_adept = #{dAdept,jdbcType=VARCHAR},
       d_intro = #{dIntro,jdbcType=VARCHAR},
       d_number = #{dNumber,jdbcType=VARCHAR},
-      d_good = #{dGood,jdbcType=INTEGER},
+      d_good = #{dGood,jdbcType=VARCHAR},
       d_fans = #{dFans,jdbcType=INTEGER},
       d_consult = #{dConsult,jdbcType=INTEGER},
       d_subscribe = #{dSubscribe,jdbcType=INTEGER},

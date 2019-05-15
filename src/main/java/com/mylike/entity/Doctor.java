@@ -20,7 +20,7 @@ public class Doctor implements Serializable {
 
     private String dNumber;
 
-    private Integer dGood;
+    private String dGood;
 
     private Integer dFans;
 
@@ -101,14 +101,6 @@ public class Doctor implements Serializable {
         this.dNumber = dNumber;
     }
 
-    public Integer getdGood() {
-        return dGood;
-    }
-
-    public void setdGood(Integer dGood) {
-        this.dGood = dGood;
-    }
-
     public Integer getdFans() {
         return dFans;
     }
@@ -151,6 +143,14 @@ public class Doctor implements Serializable {
 
     public Date getdAddtime() {
         return dAddtime;
+    }
+
+    public String getdGood() {
+        return dGood;
+    }
+
+    public void setdGood(String dGood) {
+        this.dGood = dGood;
     }
 
     public void setdAddtime(Date dAddtime) {
