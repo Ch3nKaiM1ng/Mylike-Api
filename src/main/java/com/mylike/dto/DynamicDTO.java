@@ -1,12 +1,11 @@
-package com.mylike.entity;
+package com.mylike.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-public class Dynamic implements Serializable {
+public class DynamicDTO {
+
     private Integer dId;
 
     private String dName;
@@ -29,6 +28,9 @@ public class Dynamic implements Serializable {
     private Date dAddtime;
 
     private String dHot;
+
+    //评论数
+    private Integer discussNum;
 
     private String dLabel;
 
@@ -120,12 +122,19 @@ public class Dynamic implements Serializable {
         this.dAddtime = dAddtime;
     }
 
-
     public String getdHot() {
         return dHot;
     }
 
     public void setdHot(String dHot) {
         this.dHot = dHot;
+    }
+
+    public Integer getDiscussNum() {
+        return discussNum;
+    }
+
+    public void setDiscussNum(Integer discussNum) {
+        this.discussNum = discussNum;
     }
 }

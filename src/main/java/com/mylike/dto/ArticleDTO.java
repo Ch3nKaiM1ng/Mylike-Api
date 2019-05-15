@@ -1,11 +1,11 @@
-package com.mylike.entity;
+package com.mylike.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class Article implements Serializable {
+public class ArticleDTO implements Serializable {
     private Integer aId;
 
     private String aTitle;
@@ -24,6 +24,8 @@ public class Article implements Serializable {
     private Integer aSortId;
 
     private Integer aSonId;
+    //评论数
+    private Integer discussNum;
 
     private String  aLabel;
 
@@ -33,6 +35,14 @@ public class Article implements Serializable {
 
     public void setaLabel(String aLabel) {
         this.aLabel = aLabel;
+    }
+
+    public Integer getDiscussNum() {
+        return discussNum;
+    }
+
+    public void setDiscussNum(Integer discussNum) {
+        this.discussNum = discussNum;
     }
 
     public Integer getaId() {

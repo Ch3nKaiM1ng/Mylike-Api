@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mylike.mapper.VideoContentMapper">
-  <resultMap id="BaseResultMap" type="com.mylike.entity.VideoContent">
-    <id column="v_id" jdbcType="INTEGER" property="vId" />
-    <result column="v_name" jdbcType="VARCHAR" property="vName" />
-    <result column="v_headPic" jdbcType="VARCHAR" property="vHeadpic" />
-    <result column="v_title" jdbcType="VARCHAR" property="vTitle" />
-    <result column="v_content" jdbcType="LONGVARCHAR" property="vContent" />
-    <result column="v_videoUrl" jdbcType="VARCHAR" property="vVideourl" />
-    <result column="v_imgUrl" jdbcType="VARCHAR" property="vImgurl" />
-    <result column="v_like" jdbcType="VARCHAR" property="vLike" />
-    <result column="v_url" jdbcType="VARCHAR" property="vUrl" />
-    <result column="v_hot" jdbcType="VARCHAR" property="vHot" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <resultMap id="BaseResultMap" type="com.mylike.entity.VideoContent">
+        <id column="v_id" jdbcType="INTEGER" property="vId"/>
+        <result column="v_name" jdbcType="VARCHAR" property="vName"/>
+        <result column="v_headPic" jdbcType="VARCHAR" property="vHeadpic"/>
+        <result column="v_title" jdbcType="VARCHAR" property="vTitle"/>
+        <result column="v_content" jdbcType="LONGVARCHAR" property="vContent"/>
+        <result column="v_videoUrl" jdbcType="VARCHAR" property="vVideourl"/>
+        <result column="v_imgUrl" jdbcType="VARCHAR" property="vImgurl"/>
+        <result column="v_like" jdbcType="VARCHAR" property="vLike"/>
+        <result column="v_url" jdbcType="VARCHAR" property="vUrl"/>
+        <result column="v_hot" jdbcType="VARCHAR" property="vHot"/>
+        <result column="v_label" jdbcType="VARCHAR" property="vLabel"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from video_content
     where v_id = #{vId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.mylike.entity.VideoContent" useGeneratedKeys="true" keyProperty="vId">
+    <insert id="insert" parameterType="com.mylike.entity.VideoContent" useGeneratedKeys="true" keyProperty="vId">
     insert into video_content (v_id, v_name, v_headPic, 
       v_title, v_content, v_videoUrl, 
       v_imgUrl, v_like, v_url, 
-      v_hot)
+      v_hot,v_label)
     values (#{vId,jdbcType=INTEGER}, #{vName,jdbcType=VARCHAR}, #{vHeadpic,jdbcType=VARCHAR}, 
       #{vTitle,jdbcType=VARCHAR}, #{vContent,jdbcType=LONGVARCHAR}, #{vVideourl,jdbcType=VARCHAR},
       #{vImgurl,jdbcType=VARCHAR}, #{vLike,jdbcType=VARCHAR}, #{vUrl,jdbcType=VARCHAR}, 
-      #{vHot,jdbcType=VARCHAR})
+      #{vHot,jdbcType=VARCHAR},#{vLabel,jdbcType=VARCHAR})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.mylike.entity.VideoContent">
+    <update id="updateByPrimaryKey" parameterType="com.mylike.entity.VideoContent">
     update video_content
     set v_name = #{vName,jdbcType=VARCHAR},
       v_headPic = #{vHeadpic,jdbcType=VARCHAR},
@@ -37,25 +38,30 @@
       v_imgUrl = #{vImgurl,jdbcType=VARCHAR},
       v_like = #{vLike,jdbcType=VARCHAR},
       v_url = #{vUrl,jdbcType=VARCHAR},
-      v_hot = #{vHot,jdbcType=VARCHAR}
+      v_hot = #{vHot,jdbcType=VARCHAR},
+      v_label=#{vLabel,jdbcType=VARCHAR}
     where v_id = #{vId,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select v_id, v_name, v_headPic, v_title, v_content, v_videoUrl, v_imgUrl, v_like, 
-    v_url, v_hot
+    v_url, v_hot,v_label
     from video_content
     where v_id = #{vId,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
+    <select id="selectAll" resultMap="BaseResultMap">
     select v_id, v_name, v_headPic, v_title, v_content, v_videoUrl, v_imgUrl, v_like, 
-    v_url, v_hot
+    v_url, v_hot,v_label
     from video_content limit #{startId} , #{endId}
   </select>
 
-  <select id="selectVideoContentsByTitle" resultMap="BaseResultMap">
+    <select id="selectVideoContentsByTitle" resultMap="BaseResultMap">
     select v_id, v_name, v_headPic, v_title, v_content, v_videoUrl, v_imgUrl, v_like,
-    v_url, v_hot
+    v_url, v_hot,v_label
     from video_content
     where v_title like CONCAT(CONCAT('%', #{title},'%'))  or v_content like  CONCAT(CONCAT('%', #{title},'%'))
   </select>
+
+    <select id="selectVideoContentsByLabel" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from video_content where v_label like concat(concat('%',#{label},'%'))
+    </select>
 </mapper>

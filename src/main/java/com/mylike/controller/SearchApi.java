@@ -1,24 +1,22 @@
 package com.mylike.controller;
 
+import com.mylike.dto.ArticleDTO;
+import com.mylike.dto.DynamicDTO;
+import com.mylike.dto.VideoContentDTO;
 import com.mylike.entity.Article;
-import com.mylike.entity.Navigation;
+import com.mylike.entity.Dynamic;
 import com.mylike.entity.Search;
 import com.mylike.entity.VideoContent;
-import com.mylike.service.ArticleService;
-import com.mylike.service.SearchService;
-import com.mylike.service.SortService;
-import com.mylike.service.VideoContentService;
+import com.mylike.service.*;
 import com.mylike.utils.ReturnDiscern;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.javassist.tools.rmi.Sample;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.Console;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +32,10 @@ public class SearchApi {
     private VideoContentService videoContentService;
     @Autowired
     private SortService sortService;
+    @Autowired
+    private DiscussService discussService;
+    @Autowired
+    private DynamicService dynamicService;
 
     private ReturnDiscern re = new ReturnDiscern();
 
@@ -77,5 +79,52 @@ public class SearchApi {
 
         Map<String, Object> map = re.SUCCESS();
         return re.SUCCESSOBJ(this.sortService.showSortsByName(keyWord));
+    }
+
+    /**
+     * 检索标签
+     */
+    @RequestMapping("/showByLabel")
+    public Map<String, Object> showByLabel(String label) {
+
+        List<Article> articles = this.articleService.showArticlesByLabel(label);
+
+        List<ArticleDTO> articleDTOs = new ArrayList<>();
+        for (Article article : articles) {
+            ArticleDTO articleDTO = new ArticleDTO();
+            BeanUtils.copyProperties(article, articleDTO);
+            Integer count = this.discussService.showCountByAid(article.getaId());
+            articleDTO.setDiscussNum(count);
+            articleDTOs.add(articleDTO);
+        }
+
+        List<VideoContent> videoContents = this.videoContentService.showVideoContentsByLabel(label);
+
+        List<VideoContentDTO> videoContentDTOs = new ArrayList<>();
+        for (VideoContent videoContent : videoContents) {
+            VideoContentDTO videoContentDTO = new VideoContentDTO();
+            BeanUtils.copyProperties(videoContent, videoContentDTO);
+            Integer count = this.discussService.showCountByVid(videoContent.getvId());
+            videoContentDTO.setDiscussNum(count);
+            videoContentDTOs.add(videoContentDTO);
+        }
+
+        List<Dynamic> dynamics = this.dynamicService.showDynamicsByLabel(label);
+
+        List<DynamicDTO> dynamicDTOs = new ArrayList<>();
+        for (Dynamic dynamic : dynamics) {
+            DynamicDTO dynamicDTO = new DynamicDTO();
+            BeanUtils.copyProperties(dynamic, dynamicDTOs);
+            Integer count = this.discussService.showCountByVid(dynamic.getdId());
+            dynamicDTO.setDiscussNum(count);
+            dynamicDTOs.add(dynamicDTO);
+        }
+
+        Map<String, Object> obj = new HashMap<>();
+        obj.put("articles", articles);
+        obj.put("videoContents", videoContents);
+        obj.put("dynamics", dynamics);
+
+        return re.SUCCESSOBJ(obj);
     }
 }

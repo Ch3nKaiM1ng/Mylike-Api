@@ -17,4 +17,6 @@ public interface VideoContentService {
     List<VideoContent> showVideoContentsByTitle(String title);
 
     void updateVideo(VideoContent video);
+
+    List<VideoContent> showVideoContentsByLabel(String label);
 }

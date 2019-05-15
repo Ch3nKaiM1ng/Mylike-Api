@@ -16,6 +16,7 @@
     <result column="d_weibo" property="dWeibo" jdbcType="VARCHAR" />
     <result column="d_attestation" property="dAttestation" jdbcType="VARCHAR" />
     <result column="d_addTime" property="dAddtime" jdbcType="TIMESTAMP" />
+    <result column="d_good_num" jdbcType="INTEGER" property="dGoodNum" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from doctor
@@ -26,12 +27,12 @@
       d_duty, d_adept, d_intro, 
       d_number, d_good, d_fans, 
       d_consult, d_subscribe, d_weibo, 
-      d_attestation, d_addTime)
+      d_attestation, d_addTime,d_good_num)
     values (#{dId,jdbcType=INTEGER}, #{dHeadpic,jdbcType=VARCHAR}, #{dName,jdbcType=VARCHAR}, 
       #{dDuty,jdbcType=VARCHAR}, #{dAdept,jdbcType=VARCHAR}, #{dIntro,jdbcType=VARCHAR}, 
       #{dNumber,jdbcType=VARCHAR}, #{dGood,jdbcType=INTEGER}, #{dFans,jdbcType=INTEGER},
       #{dConsult,jdbcType=INTEGER}, #{dSubscribe,jdbcType=INTEGER}, #{dWeibo,jdbcType=VARCHAR}, 
-      #{dAttestation,jdbcType=VARCHAR}, #{dAddtime,jdbcType=TIMESTAMP})
+      #{dAttestation,jdbcType=VARCHAR}, #{dAddtime,jdbcType=TIMESTAMP},#{dGoodNum,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Doctor" >
     update doctor
@@ -47,22 +48,23 @@
       d_subscribe = #{dSubscribe,jdbcType=INTEGER},
       d_weibo = #{dWeibo,jdbcType=VARCHAR},
       d_attestation = #{dAttestation,jdbcType=VARCHAR},
-      d_addTime = #{dAddtime,jdbcType=TIMESTAMP}
+      d_addTime = #{dAddtime,jdbcType=TIMESTAMP},
+      d_good_num=#{dGoodNum,jdbcType=INTEGER}
     where d_id = #{dId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select d_id, d_headPic, d_name, d_duty, d_adept, d_intro, d_number, d_good, d_fans, 
-    d_consult, d_subscribe, d_weibo, d_attestation, d_addTime
+    d_consult, d_subscribe, d_weibo, d_attestation, d_addTime,d_good_num
     from doctor
     where d_id = #{dId,jdbcType=INTEGER}
   </select>
   <select id="selectother" resultMap="BaseResultMap" >
-    select d_id, d_headPic, d_name, d_intro
+    select d_id, d_headPic, d_name, d_intro,d_good_num
     from doctor
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select d_id, d_headPic, d_name, d_duty, d_adept, d_intro, d_number, d_good, d_fans,
-    d_consult, d_subscribe, d_weibo, d_attestation, d_addTime
+    d_consult, d_subscribe, d_weibo, d_attestation, d_addTime,d_good_num
     from doctor
   </select>
 </mapper>

@@ -56,4 +56,9 @@ public class VideoContentServiceImpl implements VideoContentService {
     public void updateVideo(VideoContent video) {
         videoContentMapper.updateByPrimaryKey(video);
     }
+
+    @Override
+    public List<VideoContent> showVideoContentsByLabel(String label) {
+        return this.videoContentMapper.selectVideoContentsByLabel(label);
+    }
 }

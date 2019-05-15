@@ -20,7 +20,7 @@ import java.util.Map;
 @Service
 public class DynamicServiceImpl implements DynamicService {
 
-//    动态库
+    //    动态库
     @Autowired
     private DynamicMapper dynamicMapper;
 
@@ -30,34 +30,33 @@ public class DynamicServiceImpl implements DynamicService {
 
     @Override
     public void insert(Dynamic dynamic) {
-        if (dynamic.getVideoUrl()==null){
+        if (dynamic.getVideoUrl() == null) {
             System.out.println("success!");
         }
         dynamicMapper.insert(dynamic);
     }
 
     @Override
-    public Map<String, Object> selectAll() {
-        Map<String,Object> map = new HashMap<>();
+    public List<Dynamic> selectAll() {
         List<Dynamic> dynamic = dynamicMapper.selectAll();
-        map.put("data",dynamic);
-        return map;
+        return dynamic;
     }
 
 //    单个查询
 
     @Override
     public Dynamic showDynamicById(Integer dId) {
-        Dynamic dynamic =dynamicMapper.selectByPrimaryKey(dId);
+        Dynamic dynamic = dynamicMapper.selectByPrimaryKey(dId);
         return dynamic;
     }
 
-//    文章点赞
+    //    文章点赞
     @Override
     public void dynamicLike(Integer dId) {
         dynamicMapper.dynamicLike(dId);
     }
-//文章更新
+
+    //文章更新
     @Override
     public void updateDynamic(Dynamic dynamic) {
         dynamicMapper.updateByPrimaryKey(dynamic);
@@ -71,5 +70,10 @@ public class DynamicServiceImpl implements DynamicService {
     @Override
     public List<Dynamic> showAll() {
         return dynamicMapper.showAll();
+    }
+
+    @Override
+    public List<Dynamic> showDynamicsByLabel(String label) {
+        return this.dynamicMapper.selectDynamicsByLabel(label);
     }
 }

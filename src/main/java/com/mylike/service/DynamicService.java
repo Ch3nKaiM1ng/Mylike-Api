@@ -8,7 +8,7 @@ import java.util.Map;
 public interface DynamicService {
     void insert(Dynamic dynamic);
 
-    Map<String, Object> selectAll();
+    List<Dynamic> selectAll();
 
     Dynamic showDynamicById(Integer dId);
 
@@ -19,4 +19,6 @@ public interface DynamicService {
     void delecetDynamic(Integer dId);
 
     List<Dynamic> showAll();
+
+    List<Dynamic> showDynamicsByLabel(String label);
 }

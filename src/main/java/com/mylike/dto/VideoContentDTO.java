@@ -1,8 +1,8 @@
-package com.mylike.entity;
+package com.mylike.dto;
 
 import java.io.Serializable;
 
-public class VideoContent implements Serializable {
+public class VideoContentDTO implements Serializable {
     private Integer vId;
 
     private String vName;
@@ -23,6 +23,8 @@ public class VideoContent implements Serializable {
 
     private String vHot;
 
+    private Integer discussNum;
+
     private String vLabel;
 
     public String getvLabel() {
@@ -31,6 +33,14 @@ public class VideoContent implements Serializable {
 
     public void setvLabel(String vLabel) {
         this.vLabel = vLabel;
+    }
+
+    public Integer getDiscussNum() {
+        return discussNum;
+    }
+
+    public void setDiscussNum(Integer discussNum) {
+        this.discussNum = discussNum;
     }
 
     public Integer getvId() {

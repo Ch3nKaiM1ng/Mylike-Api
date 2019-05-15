@@ -14,4 +14,20 @@ public interface DiscussService {
     List<Discuss> selectByVId(int vId);
 
     List<Discuss> selectByAId(Integer aId);
+
+    /**
+     * 根据心得id查询好评数
+     */
+    Integer showCountByDid(Integer dId);
+
+    /**
+     * 根据视频Id查询好评数
+     */
+    Integer showCountByVid(Integer vId);
+
+    /**
+     * 根据文章Id查询好评数
+     */
+    Integer showCountByAid(Integer aId);
+
 }

@@ -19,4 +19,6 @@ public interface ArticleMapper {
     List<Article> showArticleSort(Integer sId);
 
     List<Article> selectByTitle(@Param("title") String title);
+
+    List<Article> selectArticlesByLabel(@Param("label") String label);
 }

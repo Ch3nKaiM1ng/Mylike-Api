@@ -20,4 +20,9 @@ public interface VideoContentMapper {
      * 根据title查询视频内容
      */
     List<VideoContent> selectVideoContentsByTitle(@Param("title") String title);
+
+    /**
+     * 根据标签查询视频neiro
+     */
+    List<VideoContent> selectVideoContentsByLabel(@Param("label")String label);
 }

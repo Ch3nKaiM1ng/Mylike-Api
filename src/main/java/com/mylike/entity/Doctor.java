@@ -35,6 +35,16 @@ public class Doctor implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date dAddtime;
 
+    private Integer dGoodNum;
+
+    public Integer getdGoodNum() {
+        return dGoodNum;
+    }
+
+    public void setdGoodNum(Integer dGoodNum) {
+        this.dGoodNum = dGoodNum;
+    }
+
     public Integer getdId() {
         return dId;
     }

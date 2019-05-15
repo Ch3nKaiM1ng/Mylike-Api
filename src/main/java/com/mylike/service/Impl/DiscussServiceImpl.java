@@ -18,28 +18,28 @@ public class DiscussServiceImpl implements DiscussService {
     @Autowired
     private AnonymityMapper anonymityMapper;
 
-//    添加评论
+    //    添加评论
     public void insert(Discuss discuss) {
         int num = anonymityMapper.seleceCount();
-        int nums =new Random().nextInt(num-0)+0;
+        int nums = new Random().nextInt(num - 0) + 0;
         Anonymity anonymity = anonymityMapper.selectBywhere(nums);
         discuss.setAnId(anonymity.getaId());
         mapper.insert(discuss);
     }
 
-//    心得/动态单个查询
+    //    心得/动态单个查询
     @Override
     public List<Discuss> selectByDId(Integer dId) {
         return mapper.selectByDid(dId);
     }
 
-//    评论单个查询
+    //    评论单个查询
     @Override
     public List<Discuss> showDiscussById(int parentId) {
         return mapper.selectByPrimaryKey(parentId);
     }
 
-//  视频评论查询
+    //  视频评论查询
     @Override
     public List<Discuss> selectByVId(int vId) {
         return mapper.selectByVid(vId);
@@ -49,4 +49,21 @@ public class DiscussServiceImpl implements DiscussService {
     public List<Discuss> selectByAId(Integer aId) {
         return mapper.selectByAid(aId);
     }
+
+    @Override
+    public Integer showCountByDid(Integer dId) {
+        return this.mapper.countByDid(dId);
+    }
+
+    @Override
+    public Integer showCountByVid(Integer vId) {
+        return this.mapper.countByVid(vId);
+    }
+
+    @Override
+    public Integer showCountByAid(Integer aId) {
+        return this.mapper.countByAid(aId);
+    }
+
+
 }

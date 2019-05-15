@@ -19,4 +19,10 @@ public interface DiscussMapper {
     List<Discuss> selectByVid(Integer vId);
 
     List<Discuss> selectByAid(Integer aId);
+
+    Integer countByDid(Integer dId);
+
+    Integer countByVid(Integer vId);
+
+    Integer countByAid(Integer aid);
 }

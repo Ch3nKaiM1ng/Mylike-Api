@@ -2,6 +2,7 @@ package com.mylike.mapper;
 
 
 import com.mylike.entity.Dynamic;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface DynamicMapper {
     void dynamicLike(Integer dId);
 
     List<Dynamic> showAll();
+
+    List<Dynamic> selectDynamicsByLabel(@Param("label")String label);
 }

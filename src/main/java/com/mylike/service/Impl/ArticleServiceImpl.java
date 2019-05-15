@@ -48,5 +48,10 @@ public class ArticleServiceImpl implements ArticleService {
         return mapper.selectByTitle(keyWord);
     }
 
+    @Override
+    public List<Article> showArticlesByLabel(String label) {
+        return this.mapper.selectArticlesByLabel(label);
+    }
+
 
 }
