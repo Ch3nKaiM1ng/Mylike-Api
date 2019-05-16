@@ -66,8 +66,8 @@ public class LoginApi {
 //        req.getSession().setAttribute(phone, randNum);
 //        req.getSession().setAttribute("time", dateUtils.Fornat(dateUtils.NewDate()));
         System.out.println(randNum);
-//        return SendMessage(phone, randNum);
-        return re.SUCCESS();
+        return SendMessage(phone, randNum);
+//        return re.SUCCESS();
     }
 
     //    申请短信验证
@@ -92,7 +92,7 @@ public class LoginApi {
         if (session.getAttribute(phone) == null && date == null) {
             return re.ERROR();
         }
-        if (!time.timeCompare(date, 1)) {
+        if (!time.timeCompare(date, 3)) {
             if (verify == (Integer) session.getAttribute(phone)) {
                 if (this.clientUserService.showByPhone(phone) == null) {
                     //保存用户信息
@@ -106,7 +106,7 @@ public class LoginApi {
                     session.removeAttribute(phone);
                 }
             }
-        } else if (time.timeCompare(date, 1)) {
+        } else if (time.timeCompare(date, 3)) {
             return re.TimeOut();
         }
 
