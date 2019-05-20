@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mylike.mapper.SurveyMediaMapper">
+  <resultMap id="BaseResultMap" type="com.mylike.entity.SurveyMedia">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="age" jdbcType="VARCHAR" property="age" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="channel" jdbcType="VARCHAR" property="channel" />
+    <result column="manner" jdbcType="VARCHAR" property="manner" />
+    <result column="attention" jdbcType="VARCHAR" property="attention" />
+    <result column="WeChat" jdbcType="VARCHAR" property="wechat" />
+    <result column="inspect" jdbcType="VARCHAR" property="inspect" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, `state`, age, `name`, phone, addTime, remark, channel, manner, attention, WeChat, 
+    inspect
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from survey_media
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <insert id="insertSelective" parameterType="com.mylike.entity.SurveyMedia"  keyProperty="id">
+    insert into survey_media
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="addtime != null">
+        addTime,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="channel != null">
+        channel,
+      </if>
+      <if test="manner != null">
+        manner,
+      </if>
+      <if test="attention != null">
+        attention,
+      </if>
+      <if test="wechat != null">
+        WeChat,
+      </if>
+      <if test="inspect != null">
+        inspect,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="manner != null">
+        #{manner,jdbcType=VARCHAR},
+      </if>
+      <if test="attention != null">
+        #{attention,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="inspect != null">
+        #{inspect,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.mylike.entity.SurveyMedia">
+    update survey_media
+    <set>
+      <if test="state != null">
+        `state` = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        addTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="manner != null">
+        manner = #{manner,jdbcType=VARCHAR},
+      </if>
+      <if test="attention != null">
+        attention = #{attention,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        WeChat = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="inspect != null">
+        inspect = #{inspect,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByChannel" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from survey_media
+    where channel = #{channel}
+  </select>
+
+</mapper>

@@ -1,9 +1,7 @@
 package com.mylike.utils;
 
 
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -44,6 +42,10 @@ public class UpdateImgNameUtils {
         System.out.println(filename);
         //调用7牛API上传
         ImgUtils.addImg(filename,sdf.format(new Date())+serviceImgName);
+
+        //删除临时文件
+        filename.delete();
+
         //返回图片路径
         return ImgUtils.publicFile(serviceImgName,"http://data.szmlkq.com/"+sdf.format(new Date()));
     }
