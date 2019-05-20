@@ -35,4 +35,10 @@ public interface DiscussService {
      */
     int update(Discuss discuss);
 
+
+    /**
+     * 根据关联id删除评论
+     */
+    int deleteByRelationId(Discuss discuss);
+
 }

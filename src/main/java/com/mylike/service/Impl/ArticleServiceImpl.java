@@ -1,10 +1,13 @@
 package com.mylike.service.Impl;
 
 import com.mylike.entity.Article;
+import com.mylike.entity.Discuss;
 import com.mylike.mapper.ArticleMapper;
+import com.mylike.mapper.DiscussMapper;
 import com.mylike.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,6 +15,8 @@ import java.util.List;
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleMapper mapper;
+    @Autowired
+    private DiscussMapper discussMapper;
 
     @Override
     public void insert(Article article) {
@@ -38,9 +43,15 @@ public class ArticleServiceImpl implements ArticleService {
         mapper.updateByPrimaryKey(article);
     }
 
+    @Transactional
     @Override
     public void delectArticle(Integer aId) {
-        mapper.deleteByPrimaryKey(aId);
+        int count = mapper.deleteByPrimaryKey(aId);
+        if (count > 0) {
+            Discuss discuss = new Discuss();
+            discuss.setaId(aId);
+            this.discussMapper.deleteByRelationId(discuss);
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.mylike.service.Impl;
 
 
+import com.mylike.entity.Discuss;
 import com.mylike.entity.Dynamic;
 import com.mylike.entity.Material;
 import com.mylike.entity.MaterialRelevance;
@@ -12,6 +13,7 @@ import com.mylike.service.DynamicService;
 import com.mylike.utils.ReturnDiscern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +25,8 @@ public class DynamicServiceImpl implements DynamicService {
     //    动态库
     @Autowired
     private DynamicMapper dynamicMapper;
+    @Autowired
+    private DiscussMapper discussMapper;
 
     MaterialRelevance relevance = new MaterialRelevance();
     Material material = new Material();
@@ -62,9 +66,15 @@ public class DynamicServiceImpl implements DynamicService {
         dynamicMapper.updateByPrimaryKey(dynamic);
     }
 
+    @Transactional
     @Override
     public void delecetDynamic(Integer dId) {
-        dynamicMapper.deleteByPrimaryKey(dId);
+        int count = dynamicMapper.deleteByPrimaryKey(dId);
+        if (count > 0) {
+            Discuss discuss = new Discuss();
+            discuss.setdId(dId);
+            this.discussMapper.deleteByRelationId(discuss);
+        }
     }
 
     @Override

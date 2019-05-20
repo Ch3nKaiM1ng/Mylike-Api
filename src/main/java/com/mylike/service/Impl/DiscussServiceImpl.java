@@ -74,4 +74,10 @@ public class DiscussServiceImpl implements DiscussService {
     }
 
 
+    @Override
+    public int deleteByRelationId(Discuss discuss) {
+        return this.mapper.deleteByRelationId(discuss);
+    }
+
+
 }

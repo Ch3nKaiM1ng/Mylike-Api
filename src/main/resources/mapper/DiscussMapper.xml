@@ -122,4 +122,17 @@
     <select id="countByAid" resultType="java.lang.Integer" parameterType="java.lang.Integer">
     select count(1) from discuss where a_id=#{aId}
   </select>
+
+    <delete id="deleteByRelationId" parameterType="com.mylike.entity.Discuss">
+        delete from discuss where
+        <if test="vId != null">
+            v_id = #{vId,jdbcType=INTEGER}
+        </if>
+        <if test="aId != null">
+            a_id = #{aId,jdbcType=INTEGER}
+        </if>
+        <if test="dId != null">
+            d_id = #{dId,jdbcType=INTEGER}
+        </if>
+    </delete>
 </mapper>

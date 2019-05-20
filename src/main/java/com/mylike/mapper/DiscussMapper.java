@@ -1,6 +1,7 @@
 package com.mylike.mapper;
 
 import com.mylike.entity.Discuss;
+
 import java.util.List;
 
 public interface DiscussMapper {
@@ -27,4 +28,6 @@ public interface DiscussMapper {
     Integer countByVid(Integer vId);
 
     Integer countByAid(Integer aid);
+
+    int deleteByRelationId(Discuss discuss);
 }

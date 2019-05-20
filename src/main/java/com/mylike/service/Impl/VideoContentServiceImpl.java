@@ -1,12 +1,15 @@
 package com.mylike.service.Impl;
 
 
+import com.mylike.entity.Discuss;
 import com.mylike.entity.VideoContent;
+import com.mylike.mapper.DiscussMapper;
 import com.mylike.mapper.MaterialMapper;
 import com.mylike.mapper.VideoContentMapper;
 import com.mylike.service.VideoContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,6 +17,8 @@ import java.util.List;
 public class VideoContentServiceImpl implements VideoContentService {
     @Autowired
     private VideoContentMapper videoContentMapper;
+    @Autowired
+    private DiscussMapper discussMapper;
 
 
     public void insert(VideoContent content) {
@@ -42,9 +47,16 @@ public class VideoContentServiceImpl implements VideoContentService {
         return videoContentMapper.selectByPrimaryKey(vId);
     }
 
+    @Transactional
     @Override
     public void delectById(int vId) {
-        videoContentMapper.deleteByPrimaryKey(vId);
+        int count = videoContentMapper.deleteByPrimaryKey(vId);
+        if (count > 0) {
+            //删除评论
+            Discuss discuss = new Discuss();
+            discuss.setvId(vId);
+            this.discussMapper.deleteByRelationId(discuss);
+        }
     }
 
     @Override
