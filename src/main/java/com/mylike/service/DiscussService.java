@@ -30,4 +30,9 @@ public interface DiscussService {
      */
     Integer showCountByAid(Integer aId);
 
+    /**
+     * 修改评论
+     */
+    int update(Discuss discuss);
+
 }

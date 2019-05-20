@@ -14,6 +14,8 @@ public interface DiscussMapper {
 
     int updateByPrimaryKey(Discuss record);
 
+    int updateByPrimaryKeySelective(Discuss discuss);
+
     List<Discuss> selectByDid(Integer dId);
 
     List<Discuss> selectByVid(Integer vId);

@@ -28,6 +28,16 @@ public class Discuss implements Serializable {
 
     private List<Anonymity> anonymity;
 
+    private Integer isDelete;
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
+
     public Integer getId() {
         return id;
     }

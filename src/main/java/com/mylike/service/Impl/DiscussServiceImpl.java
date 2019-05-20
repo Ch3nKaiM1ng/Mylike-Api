@@ -65,5 +65,13 @@ public class DiscussServiceImpl implements DiscussService {
         return this.mapper.countByAid(aId);
     }
 
+    /**
+     * 修改评论
+     */
+    @Override
+    public int update(Discuss discuss) {
+        return this.mapper.updateByPrimaryKeySelective(discuss);
+    }
+
 
 }
