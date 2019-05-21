@@ -9,7 +9,7 @@
         <result column="v_content" jdbcType="LONGVARCHAR" property="vContent"/>
         <result column="v_videoUrl" jdbcType="VARCHAR" property="vVideourl"/>
         <result column="v_imgUrl" jdbcType="VARCHAR" property="vImgurl"/>
-        <result column="v_like" jdbcType="VARCHAR" property="vLike"/>
+        <result column="v_like" jdbcType="INTEGER" property="vLike"/>
         <result column="v_url" jdbcType="VARCHAR" property="vUrl"/>
         <result column="v_hot" jdbcType="VARCHAR" property="vHot"/>
         <result column="v_label" jdbcType="VARCHAR" property="vLabel"/>
@@ -25,7 +25,7 @@
       v_hot,v_label)
     values (#{vId,jdbcType=INTEGER}, #{vName,jdbcType=VARCHAR}, #{vHeadpic,jdbcType=VARCHAR}, 
       #{vTitle,jdbcType=VARCHAR}, #{vContent,jdbcType=LONGVARCHAR}, #{vVideourl,jdbcType=VARCHAR},
-      #{vImgurl,jdbcType=VARCHAR}, #{vLike,jdbcType=VARCHAR}, #{vUrl,jdbcType=VARCHAR}, 
+      #{vImgurl,jdbcType=VARCHAR}, #{vLike,jdbcType=INTEGER}, #{vUrl,jdbcType=VARCHAR},
       #{vHot,jdbcType=VARCHAR},#{vLabel,jdbcType=VARCHAR})
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.mylike.entity.VideoContent">
@@ -36,7 +36,7 @@
       v_content = #{vContent,jdbcType=LONGVARCHAR},
       v_videoUrl = #{vVideourl,jdbcType=VARCHAR},
       v_imgUrl = #{vImgurl,jdbcType=VARCHAR},
-      v_like = #{vLike,jdbcType=VARCHAR},
+      v_like = #{vLike,jdbcType=INTEGER},
       v_url = #{vUrl,jdbcType=VARCHAR},
       v_hot = #{vHot,jdbcType=VARCHAR},
       v_label=#{vLabel,jdbcType=VARCHAR}

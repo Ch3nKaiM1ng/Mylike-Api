@@ -17,7 +17,7 @@ public class VideoContent implements Serializable {
 
     private String vImgurl;
 
-    private String vLike;
+    private Integer vLike;
 
     private String vUrl;
 
@@ -89,12 +89,12 @@ public class VideoContent implements Serializable {
         this.vImgurl = vImgurl == null ? null : vImgurl.trim();
     }
 
-    public String getvLike() {
+    public Integer getvLike() {
         return vLike;
     }
 
-    public void setvLike(String vLike) {
-        this.vLike = vLike == null ? null : vLike.trim();
+    public void setvLike(Integer vLike) {
+        this.vLike = vLike;
     }
 
     public String getvUrl() {
