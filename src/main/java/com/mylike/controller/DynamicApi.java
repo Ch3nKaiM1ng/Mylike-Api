@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
@@ -19,7 +20,7 @@ import java.util.*;
 public class DynamicApi {
 
     @Autowired
-    private DynamicService service;
+    private DynamicService dynamicService;
 
     //  评价
     @Autowired
@@ -34,7 +35,7 @@ public class DynamicApi {
     public Map<String, Object> addDynamic(@RequestBody Dynamic dynamic) {
         dynamic.setdAddtime(new Date());
         System.out.println(dynamic.toString());
-        service.insert(dynamic);
+        dynamicService.insert(dynamic);
         if (dynamic.getdId() == null) {
             return re.ERROR();
         }
@@ -44,8 +45,8 @@ public class DynamicApi {
     //    心得/动态主页查询
     @RequestMapping("/showDynamic")
     public Map<String, Object> showDynamic() {
-        List<Dynamic> dynamics = service.selectAll();
-        List<DynamicDTO> list=new ArrayList<>();
+        List<Dynamic> dynamics = dynamicService.selectAll();
+        List<DynamicDTO> list = new ArrayList<>();
         for (Dynamic dynamic : dynamics) {
             DynamicDTO dynamicDTO = new DynamicDTO();
             BeanUtils.copyProperties(dynamic, dynamicDTO);
@@ -60,7 +61,7 @@ public class DynamicApi {
     @RequestMapping("/showDynamicById")
     public Map<String, Object> showDynamicById(Integer dId) {
         Map<String, Object> map = new HashMap<>();
-        Dynamic dynamic = service.showDynamicById(dId);
+        Dynamic dynamic = dynamicService.showDynamicById(dId);
         if (dynamic.getdId() != null) {
             map.putAll(re.SUCCESSOBJ(dynamic));
 //        查询评价
@@ -73,7 +74,7 @@ public class DynamicApi {
     //    心得点赞
     @RequestMapping("/dynamicLike")
     public Map<String, Object> dynamicLike(Integer dId) {
-        service.dynamicLike(dId);
+        dynamicService.dynamicLike(dId);
         return re.SUCCESS();
     }
 
@@ -81,7 +82,7 @@ public class DynamicApi {
     @RequestMapping("/updateDynamic")
     public Map<String, Object> updateDynamic(@RequestBody Dynamic dynamic) {
         if (dynamic.getdId() != null) {
-            service.updateDynamic(dynamic);
+            dynamicService.updateDynamic(dynamic);
             return re.SUCCESS();
         }
         return re.ERROR();
@@ -91,7 +92,7 @@ public class DynamicApi {
     @RequestMapping("/delectDynamic")
     public Map<String, Object> deldectDynamic(Integer dId) {
         if (dId != null) {
-            service.delecetDynamic(dId);
+            dynamicService.delecetDynamic(dId);
             return re.SUCCESS();
         }
         return re.ERROR();
@@ -100,6 +101,24 @@ public class DynamicApi {
     //    所有查询
     @RequestMapping("/showAll")
     public Map<String, Object> showAll() {
-        return re.SUCCESSOBJ(service.showAll());
+        return re.SUCCESSOBJ(dynamicService.showAll());
+    }
+
+
+    @RequestMapping("/giveALike")
+    public Map<String, Object> giveALike(@RequestParam("dId") Integer dId) {
+
+        Dynamic oldDynamic = this.dynamicService.showDynamicById(dId);
+        if (oldDynamic == null) {
+            return re.ERROR();
+        }
+        Dynamic dynamic = new Dynamic();
+        dynamic.setdId(dId);
+        int likeNum = oldDynamic.getdLike() == null ? 0 : oldDynamic.getdLike();
+        dynamic.setdLike(++likeNum);
+
+        this.dynamicService.updateDynamic(dynamic);
+
+        return re.SUCCESS();
     }
 }

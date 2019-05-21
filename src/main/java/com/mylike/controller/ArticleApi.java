@@ -2,7 +2,6 @@ package com.mylike.controller;
 
 import com.mylike.dto.ArticleDTO;
 import com.mylike.entity.Article;
-import com.mylike.mapper.ArticleMapper;
 import com.mylike.service.ArticleService;
 import com.mylike.service.DiscussService;
 import com.mylike.utils.DateUtils;
@@ -23,7 +22,7 @@ import java.util.Map;
 @RestController
 public class ArticleApi {
     @Autowired
-    private ArticleService service;
+    private ArticleService articleService;
 
     //    时间utils
     private DateUtils data = new DateUtils();
@@ -39,7 +38,7 @@ public class ArticleApi {
     @RequestMapping("/addArticle")
     public Map<String, Object> addArticle(@RequestBody Article article) {
         article.setaAddtime(data.NewDate());
-        service.insert(article);
+        articleService.insert(article);
         if (article.getaId() != null) {
             return re.SUCCESS();
         }
@@ -50,7 +49,7 @@ public class ArticleApi {
     @RequestMapping("/showArticleAll")
     public Map<String, Object> showArticleAll() {
 
-        List<Article> articles = service.seleceAll();
+        List<Article> articles = articleService.seleceAll();
         List<ArticleDTO> articleDTOs = new ArrayList<>();
         for (Article article : articles) {
             ArticleDTO articleDTO = new ArticleDTO();
@@ -69,7 +68,7 @@ public class ArticleApi {
 //       查询评论
         Map<String, Object> map = new HashMap<>();
         if (aId != null) {
-            map = re.SUCCESSOBJ(service.selectById(aId));
+            map = re.SUCCESSOBJ(articleService.selectById(aId));
             //        查询评价
             map.put("discuss", disTo.convert(0, discussService.selectByAId(aId)));
             return map;
@@ -80,7 +79,7 @@ public class ArticleApi {
     //    通过分类查文章
     @RequestMapping("/showArticleSort")
     public Map<String, Object> showArticleSort(int sId) {
-        List<Article> list = service.showArticleSort(sId);
+        List<Article> list = articleService.showArticleSort(sId);
         return re.SUCCESSOBJ(list);
     }
 
@@ -88,7 +87,7 @@ public class ArticleApi {
     @RequestMapping("/updateArticle")
     public Map<String, Object> updateArticle(@RequestBody Article article) {
         if (article.getaId() != null) {
-            service.updateArticle(article);
+            articleService.updateArticle(article);
             return re.SUCCESS();
         }
         return re.ERROR();
@@ -98,7 +97,7 @@ public class ArticleApi {
     @RequestMapping("/delectArticle")
     public Map<String, Object> delectArticle(Integer aId) {
         if (aId != null) {
-            service.delectArticle(aId);
+            articleService.delectArticle(aId);
             return re.SUCCESS();
         }
         return re.ERROR();

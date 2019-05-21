@@ -51,23 +51,7 @@ public class LoginApi {
         int randNum = new Random().nextInt(9999 - 1000) + 1000;
         req.getSession().setAttribute(phone, randNum);
 
-
-//        if (req.getSession().getAttribute(phone) != null) {
-//            String date = (String) req.getSession().getAttribute("time");
-//            if (date != null) {
-//                if (this.time.TimeContrast(date, 1).equals("error")) {
-//                    return re.TimeError(1);
-//                }
-//                req.getSession().setAttribute(phone, randNum);
-//                req.getSession().setAttribute("time", dateUtils.Fornat(dateUtils.NewDate()));
-//                return SendMessage(phone, randNum);
-//            }
-//        }
-//        req.getSession().setAttribute(phone, randNum);
-//        req.getSession().setAttribute("time", dateUtils.Fornat(dateUtils.NewDate()));
-        System.out.println(randNum);
         return SendMessage(phone, randNum);
-//        return re.SUCCESS();
     }
 
     //    申请短信验证

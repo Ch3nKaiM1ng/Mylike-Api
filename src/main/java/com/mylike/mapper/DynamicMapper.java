@@ -15,7 +15,7 @@ public interface DynamicMapper {
 
     List<Dynamic> selectAll();
 
-    int updateByPrimaryKey(Dynamic record);
+    int updateByPrimaryKeySelective(Dynamic record);
 
     void dynamicLike(Integer dId);
 

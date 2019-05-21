@@ -28,20 +28,59 @@
       #{vImgurl,jdbcType=VARCHAR}, #{vLike,jdbcType=INTEGER}, #{vUrl,jdbcType=VARCHAR},
       #{vHot,jdbcType=VARCHAR},#{vLabel,jdbcType=VARCHAR})
   </insert>
-    <update id="updateByPrimaryKey" parameterType="com.mylike.entity.VideoContent">
-    update video_content
-    set v_name = #{vName,jdbcType=VARCHAR},
-      v_headPic = #{vHeadpic,jdbcType=VARCHAR},
-      v_title = #{vTitle,jdbcType=VARCHAR},
-      v_content = #{vContent,jdbcType=LONGVARCHAR},
-      v_videoUrl = #{vVideourl,jdbcType=VARCHAR},
-      v_imgUrl = #{vImgurl,jdbcType=VARCHAR},
-      v_like = #{vLike,jdbcType=INTEGER},
-      v_url = #{vUrl,jdbcType=VARCHAR},
-      v_hot = #{vHot,jdbcType=VARCHAR},
-      v_label=#{vLabel,jdbcType=VARCHAR}
-    where v_id = #{vId,jdbcType=INTEGER}
-  </update>
+<!--    <update id="updateByPrimaryKeySelective" parameterType="com.mylike.entity.VideoContent">-->
+<!--    update video_content-->
+<!--    set v_name = #{vName,jdbcType=VARCHAR},-->
+<!--      v_headPic = #{vHeadpic,jdbcType=VARCHAR},-->
+<!--      v_title = #{vTitle,jdbcType=VARCHAR},-->
+<!--      v_content = #{vContent,jdbcType=LONGVARCHAR},-->
+<!--      v_videoUrl = #{vVideourl,jdbcType=VARCHAR},-->
+<!--      v_imgUrl = #{vImgurl,jdbcType=VARCHAR},-->
+<!--      v_like = #{vLike,jdbcType=INTEGER},-->
+<!--      v_url = #{vUrl,jdbcType=VARCHAR},-->
+<!--      v_hot = #{vHot,jdbcType=VARCHAR},-->
+<!--      v_label=#{vLabel,jdbcType=VARCHAR}-->
+<!--    where v_id = #{vId,jdbcType=INTEGER}-->
+<!--  </update>-->
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.mylike.entity.VideoContent">
+        update video_content
+        <set>
+            <if test="vName != null">
+                v_name = #{vName,jdbcType=VARCHAR},
+            </if>
+            <if test="vHeadpic != null">
+                v_headPic = #{vHeadpic,jdbcType=VARCHAR},
+            </if>
+            <if test="vTitle != null">
+                v_title = #{vTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="vVideourl != null">
+                v_videoUrl = #{vVideourl,jdbcType=VARCHAR},
+            </if>
+            <if test="vImgurl != null">
+                v_imgUrl = #{vImgurl,jdbcType=VARCHAR},
+            </if>
+            <if test="vLike != null">
+                v_like = #{vLike,jdbcType=INTEGER},
+            </if>
+            <if test="vUrl != null">
+                v_url = #{vUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="vHot != null">
+                v_hot = #{vHot,jdbcType=VARCHAR},
+            </if>
+            <if test="vLabel != null">
+                v_label = #{vLabel,jdbcType=VARCHAR},
+            </if>
+            <if test="vContent != null">
+                v_content = #{vContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where v_id = #{vId,jdbcType=INTEGER}
+    </update>
+
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select v_id, v_name, v_headPic, v_title, v_content, v_videoUrl, v_imgUrl, v_like, 
     v_url, v_hot,v_label

@@ -14,7 +14,7 @@ public interface VideoContentMapper {
 
     List<VideoContent> selectAll(@Param("startId") int startId, @Param("endId") int endId);
 
-    int updateByPrimaryKey(VideoContent record);
+    int updateByPrimaryKeySelective(VideoContent record);
 
     /**
      * 根据title查询视频内容

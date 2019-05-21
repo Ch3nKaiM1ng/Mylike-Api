@@ -7,17 +7,13 @@ import com.mylike.entity.Material;
 import com.mylike.entity.MaterialRelevance;
 import com.mylike.mapper.DiscussMapper;
 import com.mylike.mapper.DynamicMapper;
-import com.mylike.mapper.MaterialMapper;
-import com.mylike.mapper.MaterialRelevanceMapper;
 import com.mylike.service.DynamicService;
 import com.mylike.utils.ReturnDiscern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class DynamicServiceImpl implements DynamicService {
@@ -63,7 +59,7 @@ public class DynamicServiceImpl implements DynamicService {
     //文章更新
     @Override
     public void updateDynamic(Dynamic dynamic) {
-        dynamicMapper.updateByPrimaryKey(dynamic);
+        dynamicMapper.updateByPrimaryKeySelective(dynamic);
     }
 
     @Transactional

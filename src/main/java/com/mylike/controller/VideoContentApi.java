@@ -23,7 +23,7 @@ import java.util.Map;
 @RequestMapping("/videoContent")
 public class VideoContentApi {
     @Autowired
-    private VideoContentService service;
+    private VideoContentService videoContentService;
 
     //  return
     private ReturnDiscern re = new ReturnDiscern();
@@ -37,7 +37,7 @@ public class VideoContentApi {
     @RequestMapping("/addContent")
     public Map<String, Object> addContent(@RequestBody VideoContent cont) {
 
-        service.insert(cont);
+        videoContentService.insert(cont);
         Map<String, Object> map = new HashMap<>();
         map.put("content", cont);
         return map;
@@ -47,7 +47,7 @@ public class VideoContentApi {
     @RequestMapping("/showContent")
     public Map<String, Object> showContent(@RequestParam(value = "startId") Integer startId, @RequestParam(value = "endId") Integer endId) {
 
-        List<VideoContent> videoContents = service.selectAll(startId, endId);
+        List<VideoContent> videoContents = videoContentService.selectAll(startId, endId);
         List<VideoContentDTO> videoContentDTOs = new ArrayList<>();
         for (VideoContent videoContent : videoContents) {
             VideoContentDTO videoContentDTO = new VideoContentDTO();
@@ -64,7 +64,7 @@ public class VideoContentApi {
     public Map<String, Object> showVideo(Integer vId) {
         Map<String, Object> map = new HashMap<>();
         if (vId != null) {
-            map = re.SUCCESSOBJ(service.selectId(vId));
+            map = re.SUCCESSOBJ(videoContentService.selectId(vId));
             //        查询评价
             map.put("discuss", disTo.convert(0, discussService.selectByVId(vId)));
             return map;
@@ -76,7 +76,7 @@ public class VideoContentApi {
     //    删除视频
     @RequestMapping("/delectVideo")
     public Map<String, Object> delectVideo(int vId) {
-        service.delectById(vId);
+        videoContentService.delectById(vId);
         return re.SUCCESS();
     }
 
@@ -84,9 +84,26 @@ public class VideoContentApi {
     @RequestMapping("/updateVideo")
     public Map<String, Object> updateVideo(@RequestBody VideoContent video) {
         if (video.getvId() != null) {
-            service.updateVideo(video);
+            videoContentService.updateVideo(video);
             return re.SUCCESS();
         }
         return re.ERROR();
+    }
+
+    @RequestMapping("/giveALike")
+    public Map<String, Object> giveALike(@RequestParam(name = "vId") Integer vId) {
+
+        VideoContent oldVideoContent = this.videoContentService.selectId(vId);
+        if (oldVideoContent == null) {
+            return re.ERROR();
+        }
+        VideoContent videoContent = new VideoContent();
+        videoContent.setvId(vId);
+        int likeNum = oldVideoContent.getvLike() == null ? 0 : oldVideoContent.getvLike();
+        videoContent.setvLike(++likeNum);
+
+        this.videoContentService.updateVideo(videoContent);
+
+        return re.SUCCESS();
     }
 }
