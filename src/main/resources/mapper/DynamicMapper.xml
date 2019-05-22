@@ -27,21 +27,62 @@
       #{dContent,jdbcType=LONGVARCHAR}, #{dSite,jdbcType=VARCHAR}, #{dLike,jdbcType=INTEGER},
       #{dBrowse,jdbcType=INTEGER}, #{dAddtime,jdbcType=TIMESTAMP},#{dHot,jdbcType=VARCHAR},<![CDATA[ #{imgUrl,jdbcType=LONGVARCHAR} ]]>,#{videoUrl,jdbcType=VARCHAR},#{dLabel,jdbcType=VARCHAR})
   </insert>
-    <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Dynamic">
-    update dynamic
-    set d_name = #{dName,jdbcType=VARCHAR},
-      d_headPic = #{dHeadpic,jdbcType=VARCHAR},
-      d_content = #{dContent,jdbcType=LONGVARCHAR},
-      d_site = #{dSite,jdbcType=VARCHAR},
-      d_like = #{dLike,jdbcType=INTEGER},
-      d_browse = #{dBrowse,jdbcType=INTEGER},
-      d_addTime = #{dAddtime,jdbcType=TIMESTAMP}
-      ,d_hot = #{dHot,jdbcType=VARCHAR},
-      imgUrl = <![CDATA[#{imgUrl,jdbcType=LONGVARCHAR}]]>,
-      videoUrl = #{videoUrl,jdbcType=VARCHAR},
-      d_label=#{dLabel,jdbcType=VARCHAR}
-    where d_id = #{dId,jdbcType=INTEGER}
-  </update>
+<!--    <update id="updateByPrimaryKeySelective" parameterType="com.mylike.entity.Dynamic">-->
+<!--    update dynamic-->
+<!--    set d_name = #{dName,jdbcType=VARCHAR},-->
+<!--      d_headPic = #{dHeadpic,jdbcType=VARCHAR},-->
+<!--      d_content = #{dContent,jdbcType=LONGVARCHAR},-->
+<!--      d_site = #{dSite,jdbcType=VARCHAR},-->
+<!--      d_like = #{dLike,jdbcType=INTEGER},-->
+<!--      d_browse = #{dBrowse,jdbcType=INTEGER},-->
+<!--      d_addTime = #{dAddtime,jdbcType=TIMESTAMP}-->
+<!--      ,d_hot = #{dHot,jdbcType=VARCHAR},-->
+<!--      imgUrl = <![CDATA[#{imgUrl,jdbcType=LONGVARCHAR}]]>,-->
+<!--      videoUrl = #{videoUrl,jdbcType=VARCHAR},-->
+<!--      d_label=#{dLabel,jdbcType=VARCHAR}-->
+<!--    where d_id = #{dId,jdbcType=INTEGER}-->
+<!--  </update>-->
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.mylike.entity.Dynamic">
+        update dynamic
+        <set>
+            <if test="dName != null">
+                d_name = #{dName,jdbcType=VARCHAR},
+            </if>
+            <if test="dHeadpic != null">
+                d_headPic = #{dHeadpic,jdbcType=VARCHAR},
+            </if>
+            <if test="dSite != null">
+                d_site = #{dSite,jdbcType=VARCHAR},
+            </if>
+            <if test="dLike != null">
+                d_like = #{dLike,jdbcType=INTEGER},
+            </if>
+            <if test="dBrowse != null">
+                d_browse = #{dBrowse,jdbcType=INTEGER},
+            </if>
+            <if test="dAddtime != null">
+                d_addTime = #{dAddtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dHot != null">
+                d_hot = #{dHot,jdbcType=VARCHAR},
+            </if>
+            <if test="videoUrl != null">
+                videoUrl = #{videoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="dLabel != null">
+                d_label = #{dLabel,jdbcType=VARCHAR},
+            </if>
+            <if test="dContent != null">
+                d_content = #{dContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="imgUrl != null">
+                imgUrl = #{imgUrl,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where d_id = #{dId,jdbcType=INTEGER}
+    </update>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label
     from dynamic

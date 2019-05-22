@@ -60,7 +60,7 @@ public class DynamicServiceImpl implements DynamicService {
     //文章更新
     @Override
     public void updateDynamic(Dynamic dynamic) {
-        dynamicMapper.updateByPrimaryKey(dynamic);
+        dynamicMapper.updateByPrimaryKeySelective(dynamic);
     }
 
     @Transactional

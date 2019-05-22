@@ -4,7 +4,6 @@ package com.mylike.service.Impl;
 import com.mylike.entity.Discuss;
 import com.mylike.entity.VideoContent;
 import com.mylike.mapper.DiscussMapper;
-import com.mylike.mapper.MaterialMapper;
 import com.mylike.mapper.VideoContentMapper;
 import com.mylike.service.VideoContentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +65,7 @@ public class VideoContentServiceImpl implements VideoContentService {
 
     @Override
     public void updateVideo(VideoContent video) {
-        videoContentMapper.updateByPrimaryKey(video);
+        videoContentMapper.updateByPrimaryKeySelective(video);
     }
 
     @Override
