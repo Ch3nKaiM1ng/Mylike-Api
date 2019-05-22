@@ -41,10 +41,25 @@ public class DynamicApi {
         return re.SUCCESS();
     }
 
-    //    心得/动态主页查询
+//        首页心得/动态主页查询
     @RequestMapping("/showDynamic")
     public Map<String, Object> showDynamic() {
         List<Dynamic> dynamics = service.selectAll();
+        List<DynamicDTO> list=new ArrayList<>();
+        for (Dynamic dynamic : dynamics) {
+            DynamicDTO dynamicDTO = new DynamicDTO();
+            BeanUtils.copyProperties(dynamic, dynamicDTO);
+            Integer count = this.discussService.showCountByDid(dynamic.getdId());
+            dynamicDTO.setDiscussNum(count);
+            list.add(dynamicDTO);
+        }
+        return re.SUCCESSOBJ(list);
+    }
+
+    //    首页心得/动态主页查询
+    @RequestMapping("/showDynamicForHide")
+    public Map<String, Object> showDynamicForHide(String startId,String endId) {
+        List<Dynamic> dynamics = service.selectcForHide(startId,endId);
         List<DynamicDTO> list=new ArrayList<>();
         for (Dynamic dynamic : dynamics) {
             DynamicDTO dynamicDTO = new DynamicDTO();

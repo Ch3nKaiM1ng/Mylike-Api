@@ -7,17 +7,13 @@ import com.mylike.entity.Material;
 import com.mylike.entity.MaterialRelevance;
 import com.mylike.mapper.DiscussMapper;
 import com.mylike.mapper.DynamicMapper;
-import com.mylike.mapper.MaterialMapper;
-import com.mylike.mapper.MaterialRelevanceMapper;
 import com.mylike.service.DynamicService;
 import com.mylike.utils.ReturnDiscern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class DynamicServiceImpl implements DynamicService {
@@ -25,6 +21,7 @@ public class DynamicServiceImpl implements DynamicService {
     //    动态库
     @Autowired
     private DynamicMapper dynamicMapper;
+//    评论库
     @Autowired
     private DiscussMapper discussMapper;
 
@@ -77,13 +74,21 @@ public class DynamicServiceImpl implements DynamicService {
         }
     }
 
+//    查询所有
     @Override
     public List<Dynamic> showAll() {
         return dynamicMapper.showAll();
     }
 
+//    查询BY分类
     @Override
     public List<Dynamic> showDynamicsByLabel(String label) {
         return this.dynamicMapper.selectDynamicsByLabel(label);
+    }
+
+//    查询Hide
+    @Override
+    public List<Dynamic> selectcForHide(String startId, String endId) {
+        return this.dynamicMapper.selectcForHide(Integer.parseInt(startId),Integer.parseInt(endId));
     }
 }
