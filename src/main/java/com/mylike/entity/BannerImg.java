@@ -1,5 +1,7 @@
 package com.mylike.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,7 +18,12 @@ public class BannerImg implements Serializable {
 
     private String bBelong;
 
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date bAddtime;
+
+    private String title;
+
+    private String intro;
 
     public Integer getbId() {
         return bId;
@@ -72,5 +79,21 @@ public class BannerImg implements Serializable {
 
     public void setbAddtime(Date bAddtime) {
         this.bAddtime = bAddtime;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro == null ? null : intro.trim();
     }
 }

@@ -9,6 +9,8 @@
     <result column="b_status" property="bStatus" jdbcType="VARCHAR" />
     <result column="b_belong" property="bBelong" jdbcType="VARCHAR" />
     <result column="b_addtime" property="bAddtime" jdbcType="TIMESTAMP" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from banner_img
@@ -20,37 +22,40 @@
       b_addtime)
     values (#{bId,jdbcType=INTEGER}, #{bName,jdbcType=VARCHAR}, #{bUrl,jdbcType=VARCHAR}, 
       #{bSite,jdbcType=VARCHAR}, #{bStatus,jdbcType=VARCHAR}, #{bBelong,jdbcType=VARCHAR}, 
-      #{bAddtime,jdbcType=TIMESTAMP})
+      #{bAddtime,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}
+      )
        ON DUPLICATE KEY UPDATE
         b_name = #{bName,jdbcType=VARCHAR},
       b_url = #{bUrl,jdbcType=VARCHAR},
       b_site = #{bSite,jdbcType=VARCHAR},
       b_status = #{bStatus,jdbcType=VARCHAR},
       b_belong = #{bBelong,jdbcType=VARCHAR},
-      b_addtime = #{bAddtime,jdbcType=TIMESTAMP}
+      b_addtime = #{bAddtime,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR}
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mylike.entity.BannerImg" >
-    update banner_img
+       update banner_img
     set b_name = #{bName,jdbcType=VARCHAR},
       b_url = #{bUrl,jdbcType=VARCHAR},
       b_site = #{bSite,jdbcType=VARCHAR},
       b_status = #{bStatus,jdbcType=VARCHAR},
       b_belong = #{bBelong,jdbcType=VARCHAR},
-      b_addtime = #{bAddtime,jdbcType=TIMESTAMP}
+      b_addtime = #{bAddtime,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR}
     where b_id = #{bId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select b_id, b_name, b_url, b_site, b_status, b_belong, b_addtime
+   select b_id, b_name, b_url, b_site, b_status, b_belong, b_addtime, title, intro
     from banner_img
     where b_id = #{bId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String">
-    select b_id, b_name, b_url, b_site, b_status, b_belong, b_addtime
+    select b_id, b_name, b_url, b_site, b_status, b_belong, b_addtime, title, intro
     from banner_img
-    <where>
+    where
       b_belong = #{bBelong}
-      and
-      b_site = #{bSite}
-    </where>
+      and b_site = #{bSite}
   </select>
 </mapper>

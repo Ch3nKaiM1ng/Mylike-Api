@@ -1,15 +1,13 @@
 package com.mylike.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.mylike.entity.BannerImg;
 import com.mylike.service.BannerImgService;
 import com.mylike.utils.ReturnDiscern;
-import com.mylike.utils.UpdateImgNameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
 
 import java.util.List;
 import java.util.Map;
@@ -25,13 +23,18 @@ public class BannerImgApi {
 
 //    查询banner
     @RequestMapping("/showBanner")
-    public List<BannerImg> showBanner(String bBelong,String bSite){
-        return service.selectAll(bBelong,bSite);
+    public Map<String, Object> showBanner(String bBelong, String bSite){
+
+        System.out.println(bBelong+bSite);
+        List<BannerImg> banner = service.selectAll(bBelong,bSite);
+
+        System.out.println(JSONObject.toJSON(banner).toString());
+
+        return re.SUCCESSOBJ(banner);
     }
 //    添加banner
     @RequestMapping("/addBanner")
     public String addBanner(@RequestBody List<BannerImg> banner) {
-        System.out.println(123);
         service.insert(banner);
         return "success";
     }
