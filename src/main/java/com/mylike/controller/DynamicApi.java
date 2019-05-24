@@ -6,6 +6,7 @@ import com.mylike.service.DiscussService;
 import com.mylike.service.DynamicService;
 import com.mylike.utils.DiscussDTO;
 import com.mylike.utils.ReturnDiscern;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -59,8 +60,8 @@ public class DynamicApi {
 
     //    首页心得/动态主页查询
     @RequestMapping("/showDynamicForHide")
-    public Map<String, Object> showDynamicForHide(String startId,String endId) {
-        List<Dynamic> dynamics = service.selectcForHide(startId,endId);
+    public Map<String, Object> showDynamicForHide(@Param("startId") String startId, String endId) {
+        List<Dynamic> dynamics = dynamicService.selectcForHide(startId,endId);
         List<DynamicDTO> list=new ArrayList<>();
         for (Dynamic dynamic : dynamics) {
             DynamicDTO dynamicDTO = new DynamicDTO();

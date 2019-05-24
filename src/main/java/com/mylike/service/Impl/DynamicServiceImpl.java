@@ -89,6 +89,7 @@ public class DynamicServiceImpl implements DynamicService {
 //    查询Hide
     @Override
     public List<Dynamic> selectcForHide(String startId, String endId) {
-        return this.dynamicMapper.selectcForHide(Integer.parseInt(startId),Integer.parseInt(endId));
+        int start = Integer.parseInt(startId)*Integer.parseInt(endId);
+        return this.dynamicMapper.selectcForHide(start,Integer.parseInt(endId));
     }
 }
