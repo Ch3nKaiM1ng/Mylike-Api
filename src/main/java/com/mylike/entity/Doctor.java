@@ -30,6 +30,8 @@ public class Doctor implements Serializable {
 
     private String dWeibo;
 
+    private Integer dYear;
+
     private String dAttestation;
 
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
@@ -155,5 +157,13 @@ public class Doctor implements Serializable {
 
     public void setdAddtime(Date dAddtime) {
         this.dAddtime = dAddtime;
+    }
+
+    public Integer getdYear() {
+        return dYear;
+    }
+
+    public void setdYear(Integer dYear) {
+        this.dYear = dYear;
     }
 }

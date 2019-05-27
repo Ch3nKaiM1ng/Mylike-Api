@@ -11,6 +11,7 @@
     <result column="d_number" property="dNumber" jdbcType="VARCHAR" />
     <result column="d_good" property="dGood" jdbcType="VARCHAR" />
     <result column="d_fans" property="dFans" jdbcType="INTEGER" />
+    <result column="d_year" property="dYear" jdbcType="INTEGER" />
     <result column="d_consult" property="dConsult" jdbcType="INTEGER" />
     <result column="d_subscribe" property="dSubscribe" jdbcType="INTEGER" />
     <result column="d_weibo" property="dWeibo" jdbcType="VARCHAR" />
@@ -27,12 +28,12 @@
       d_duty, d_adept, d_intro, 
       d_number, d_good, d_fans, 
       d_consult, d_subscribe, d_weibo, 
-      d_attestation, d_addTime,d_good_num)
+      d_attestation, d_addTime,d_good_num,d_year)
     values (#{dId,jdbcType=INTEGER}, #{dHeadpic,jdbcType=VARCHAR}, #{dName,jdbcType=VARCHAR}, 
       #{dDuty,jdbcType=VARCHAR}, #{dAdept,jdbcType=VARCHAR}, #{dIntro,jdbcType=VARCHAR}, 
       #{dNumber,jdbcType=VARCHAR}, #{dGood,jdbcType=VARCHAR}, #{dFans,jdbcType=INTEGER},
       #{dConsult,jdbcType=INTEGER}, #{dSubscribe,jdbcType=INTEGER}, #{dWeibo,jdbcType=VARCHAR}, 
-      #{dAttestation,jdbcType=VARCHAR}, #{dAddtime,jdbcType=TIMESTAMP},#{dGoodNum,jdbcType=INTEGER})
+      #{dAttestation,jdbcType=VARCHAR}, #{dAddtime,jdbcType=TIMESTAMP},#{dGoodNum,jdbcType=INTEGER},#{dYear,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Doctor" >
     update doctor
@@ -49,12 +50,13 @@
       d_weibo = #{dWeibo,jdbcType=VARCHAR},
       d_attestation = #{dAttestation,jdbcType=VARCHAR},
       d_addTime = #{dAddtime,jdbcType=TIMESTAMP},
-      d_good_num=#{dGoodNum,jdbcType=INTEGER}
+      d_good_num=#{dGoodNum,jdbcType=INTEGER},
+      d_year=#{dYear,jdbcType=INTEGER}
     where d_id = #{dId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select d_id, d_headPic, d_name, d_duty, d_adept, d_intro, d_number, d_good, d_fans, 
-    d_consult, d_subscribe, d_weibo, d_attestation, d_addTime,d_good_num
+    d_consult, d_subscribe, d_weibo, d_attestation, d_addTime,d_good_num,d_year
     from doctor
     where d_id = #{dId,jdbcType=INTEGER}
   </select>
@@ -64,7 +66,7 @@
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select d_id, d_headPic, d_name, d_duty, d_adept, d_intro, d_number, d_good, d_fans,
-    d_consult, d_subscribe, d_weibo, d_attestation, d_addTime,d_good_num
+    d_consult, d_subscribe, d_weibo, d_attestation, d_addTime,d_good_num,d_year
     from doctor
   </select>
 </mapper>
