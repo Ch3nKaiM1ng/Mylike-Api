@@ -54,8 +54,14 @@
   <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String">
     select b_id, b_name, b_url, b_site, b_status, b_belong, b_addtime, title, intro
     from banner_img
-    where
+    <where>
+    <if test=" bBelong != null">
       b_belong = #{bBelong}
+    </if>
+    <if test="bSite != null">
       and b_site = #{bSite}
+    </if>
+
+    </where>
   </select>
 </mapper>
