@@ -67,6 +67,8 @@ public class VideoContentApi {
             map = re.SUCCESSOBJ(videoContentService.selectId(vId));
             //        查询评价
             map.put("discuss", disTo.convert(0, discussService.selectByVId(vId)));
+            //浏览数加一
+            this.videoContentService.addBrowseNum(vId);
             return map;
         }
         return re.ERROR();

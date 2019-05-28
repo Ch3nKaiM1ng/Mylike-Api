@@ -43,7 +43,7 @@ public class DynamicApi {
         return re.SUCCESS();
     }
 
-//        首页心得/动态主页查询
+    //        首页心得/动态主页查询
     @RequestMapping("/showDynamic")
     public Map<String, Object> showDynamic() {
         List<Dynamic> dynamics = dynamicService.selectAll();
@@ -61,8 +61,8 @@ public class DynamicApi {
     //    首页心得/动态主页查询
     @RequestMapping("/showDynamicForHide")
     public Map<String, Object> showDynamicForHide(@Param("startId") String startId, String endId) {
-        List<Dynamic> dynamics = dynamicService.selectcForHide(startId,endId);
-        List<DynamicDTO> list=new ArrayList<>();
+        List<Dynamic> dynamics = dynamicService.selectcForHide(startId, endId);
+        List<DynamicDTO> list = new ArrayList<>();
         for (Dynamic dynamic : dynamics) {
             DynamicDTO dynamicDTO = new DynamicDTO();
             BeanUtils.copyProperties(dynamic, dynamicDTO);
@@ -75,13 +75,15 @@ public class DynamicApi {
 
     //    心得/动态单个查询
     @RequestMapping("/showDynamicById")
-    public Map<String, Object> showDynamicById(Integer dId) {
+    public Map<String, Object> showDynamicById(@RequestParam("dId") Integer dId) {
         Map<String, Object> map = new HashMap<>();
         Dynamic dynamic = dynamicService.showDynamicById(dId);
         if (dynamic.getdId() != null) {
             map.putAll(re.SUCCESSOBJ(dynamic));
 //        查询评价
             map.put("discuss", disTo.convert(0, discussService.selectByDId(dId)));
+            //浏览量加一
+            this.dynamicService.addBrowseNum(dId);
             return map;
         }
         return re.ERROR();

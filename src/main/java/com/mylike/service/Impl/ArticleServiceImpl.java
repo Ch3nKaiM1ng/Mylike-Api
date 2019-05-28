@@ -64,5 +64,13 @@ public class ArticleServiceImpl implements ArticleService {
         return this.mapper.selectArticlesByLabel(label);
     }
 
+    /**
+     * 浏览数加一
+     */
+    @Override
+    public int addBrowseNum(Integer aId) {
+        return this.mapper.addBrowseNum(aId);
+    }
+
 
 }

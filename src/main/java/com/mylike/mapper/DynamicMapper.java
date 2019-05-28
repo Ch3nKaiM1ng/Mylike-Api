@@ -24,4 +24,6 @@ public interface DynamicMapper {
     List<Dynamic> selectDynamicsByLabel(@Param("label")String label);
 
     List<Dynamic> selectcForHide(@Param("startId") Integer startId, @Param("endId")Integer endId);
+
+    int addBrowseNum(@Param("dId")Integer dId);
 }

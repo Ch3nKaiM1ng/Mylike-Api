@@ -106,6 +106,12 @@
     where d_id = #{dId,jdbcType=INTEGER}
   </update>
 
+    <update id="addBrowseNum" parameterType="java.lang.Integer">
+    update dynamic
+     set  d_browse = d_browse + 1
+    where d_id = #{dId,jdbcType=INTEGER}
+  </update>
+
     <select id="selectDynamicsByLabel" parameterType="java.lang.String" resultMap="BaseResultMap">
         select * from dynamic where d_label like concat(concat('%',#{label},'%'))
     </select>

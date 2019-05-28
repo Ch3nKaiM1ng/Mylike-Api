@@ -13,6 +13,8 @@
         <result column="v_url" jdbcType="VARCHAR" property="vUrl"/>
         <result column="v_hot" jdbcType="VARCHAR" property="vHot"/>
         <result column="v_label" jdbcType="VARCHAR" property="vLabel"/>
+        <result column="v_num" jdbcType="INTEGER" property="vNum"/>
+        <result column="v_browse" jdbcType="INTEGER" property="vBrowse"/>
     </resultMap>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from video_content
@@ -22,26 +24,26 @@
     insert into video_content (v_id, v_name, v_headPic, 
       v_title, v_content, v_videoUrl, 
       v_imgUrl, v_like, v_url, 
-      v_hot,v_label)
+      v_hot,v_label,v_num, v_browse)
     values (#{vId,jdbcType=INTEGER}, #{vName,jdbcType=VARCHAR}, #{vHeadpic,jdbcType=VARCHAR}, 
       #{vTitle,jdbcType=VARCHAR}, #{vContent,jdbcType=LONGVARCHAR}, #{vVideourl,jdbcType=VARCHAR},
       #{vImgurl,jdbcType=VARCHAR}, #{vLike,jdbcType=INTEGER}, #{vUrl,jdbcType=VARCHAR},
-      #{vHot,jdbcType=VARCHAR},#{vLabel,jdbcType=VARCHAR})
+      #{vHot,jdbcType=VARCHAR},#{vLabel,jdbcType=VARCHAR},#{vNum,jdbcType=INTEGER}, #{vBrowse,jdbcType=INTEGER})
   </insert>
-<!--    <update id="updateByPrimaryKeySelective" parameterType="com.mylike.entity.VideoContent">-->
-<!--    update video_content-->
-<!--    set v_name = #{vName,jdbcType=VARCHAR},-->
-<!--      v_headPic = #{vHeadpic,jdbcType=VARCHAR},-->
-<!--      v_title = #{vTitle,jdbcType=VARCHAR},-->
-<!--      v_content = #{vContent,jdbcType=LONGVARCHAR},-->
-<!--      v_videoUrl = #{vVideourl,jdbcType=VARCHAR},-->
-<!--      v_imgUrl = #{vImgurl,jdbcType=VARCHAR},-->
-<!--      v_like = #{vLike,jdbcType=INTEGER},-->
-<!--      v_url = #{vUrl,jdbcType=VARCHAR},-->
-<!--      v_hot = #{vHot,jdbcType=VARCHAR},-->
-<!--      v_label=#{vLabel,jdbcType=VARCHAR}-->
-<!--    where v_id = #{vId,jdbcType=INTEGER}-->
-<!--  </update>-->
+    <!--    <update id="updateByPrimaryKeySelective" parameterType="com.mylike.entity.VideoContent">-->
+    <!--    update video_content-->
+    <!--    set v_name = #{vName,jdbcType=VARCHAR},-->
+    <!--      v_headPic = #{vHeadpic,jdbcType=VARCHAR},-->
+    <!--      v_title = #{vTitle,jdbcType=VARCHAR},-->
+    <!--      v_content = #{vContent,jdbcType=LONGVARCHAR},-->
+    <!--      v_videoUrl = #{vVideourl,jdbcType=VARCHAR},-->
+    <!--      v_imgUrl = #{vImgurl,jdbcType=VARCHAR},-->
+    <!--      v_like = #{vLike,jdbcType=INTEGER},-->
+    <!--      v_url = #{vUrl,jdbcType=VARCHAR},-->
+    <!--      v_hot = #{vHot,jdbcType=VARCHAR},-->
+    <!--      v_label=#{vLabel,jdbcType=VARCHAR}-->
+    <!--    where v_id = #{vId,jdbcType=INTEGER}-->
+    <!--  </update>-->
 
     <update id="updateByPrimaryKeySelective" parameterType="com.mylike.entity.VideoContent">
         update video_content
@@ -76,6 +78,12 @@
             <if test="vContent != null">
                 v_content = #{vContent,jdbcType=LONGVARCHAR},
             </if>
+            <if test="vNum != null">
+                #{vNum,jdbcType=INTEGER},
+            </if>
+            <if test="vBrowse != null">
+                #{vBrowse,jdbcType=INTEGER},
+            </if>
         </set>
         where v_id = #{vId,jdbcType=INTEGER}
     </update>
@@ -83,19 +91,19 @@
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select v_id, v_name, v_headPic, v_title, v_content, v_videoUrl, v_imgUrl, v_like, 
-    v_url, v_hot,v_label
+    v_url, v_hot,v_label,v_num, v_browse
     from video_content
     where v_id = #{vId,jdbcType=INTEGER}
   </select>
     <select id="selectAll" resultMap="BaseResultMap">
     select v_id, v_name, v_headPic, v_title, v_content, v_videoUrl, v_imgUrl, v_like, 
-    v_url, v_hot,v_label
+    v_url, v_hot,v_label,v_num, v_browse
     from video_content limit #{startId} , #{endId}
   </select>
 
     <select id="selectVideoContentsByTitle" resultMap="BaseResultMap">
     select v_id, v_name, v_headPic, v_title, v_content, v_videoUrl, v_imgUrl, v_like,
-    v_url, v_hot,v_label
+    v_url, v_hot,v_label,v_num, v_browse
     from video_content
     where v_title like CONCAT(CONCAT('%', #{title},'%'))  or v_content like  CONCAT(CONCAT('%', #{title},'%'))
   </select>
@@ -103,4 +111,10 @@
     <select id="selectVideoContentsByLabel" parameterType="java.lang.String" resultMap="BaseResultMap">
         select * from video_content where v_label like concat(concat('%',#{label},'%'))
     </select>
+
+    <update id="addBrowseNum" parameterType="java.lang.Integer">
+    update video_content
+     set  v_browse = v_browse + 1
+    where v_id = #{vId,jdbcType=INTEGER}
+  </update>
 </mapper>

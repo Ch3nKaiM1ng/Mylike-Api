@@ -72,4 +72,9 @@ public class VideoContentServiceImpl implements VideoContentService {
     public List<VideoContent> showVideoContentsByLabel(String label) {
         return this.videoContentMapper.selectVideoContentsByLabel(label);
     }
+
+    @Override
+    public int addBrowseNum(Integer vId) {
+        return this.videoContentMapper.addBrowseNum(vId);
+    }
 }

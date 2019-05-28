@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mylike.mapper.ArticleMapper" >
-  <resultMap id="BaseResultMap" type="com.mylike.entity.Article" >
-    <id column="a_id" property="aId" jdbcType="INTEGER" />
-    <result column="a_title" property="aTitle" jdbcType="VARCHAR" />
-    <result column="a_content" property="aContent" jdbcType="LONGVARCHAR" />
-    <result column="a_coverImg" property="aCoverimg" jdbcType="LONGVARCHAR" />
-    <result column="a_signature" property="aSignature" jdbcType="VARCHAR" />
-    <result column="a_addTime" property="aAddtime" jdbcType="TIMESTAMP" />
-    <result column="a_synopsis" property="aSynopsis" jdbcType="LONGVARCHAR" />
-    <result column="a_sortId" property="aSortId" jdbcType="INTEGER" />
-    <result column="a_sonId" property="aSonId" jdbcType="INTEGER" />
-    <result column="a_label" property="aLabel" jdbcType="INTEGER" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+<mapper namespace="com.mylike.mapper.ArticleMapper">
+    <resultMap id="BaseResultMap" type="com.mylike.entity.Article">
+        <id column="a_id" property="aId" jdbcType="INTEGER"/>
+        <result column="a_title" property="aTitle" jdbcType="VARCHAR"/>
+        <result column="a_content" property="aContent" jdbcType="LONGVARCHAR"/>
+        <result column="a_coverImg" property="aCoverimg" jdbcType="LONGVARCHAR"/>
+        <result column="a_signature" property="aSignature" jdbcType="VARCHAR"/>
+        <result column="a_addTime" property="aAddtime" jdbcType="TIMESTAMP"/>
+        <result column="a_synopsis" property="aSynopsis" jdbcType="LONGVARCHAR"/>
+        <result column="a_sortId" property="aSortId" jdbcType="INTEGER"/>
+        <result column="a_sonId" property="aSonId" jdbcType="INTEGER"/>
+        <result column="a_label" property="aLabel" jdbcType="INTEGER"/>
+        <result column="a_num" jdbcType="INTEGER" property="aNum"/>
+        <result column="a_browse" jdbcType="INTEGER" property="aBrowse"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from article
     where a_id = #{aId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.mylike.entity.Article" useGeneratedKeys="true" keyProperty="aId">
+    <insert id="insert" parameterType="com.mylike.entity.Article" useGeneratedKeys="true" keyProperty="aId">
     insert into article (a_id, a_title, a_content, 
       a_coverImg, a_signature, a_addTime, 
-      a_synopsis, a_sortId, a_sonId,a_label
+      a_synopsis, a_sortId, a_sonId,a_label, a_num,
+      a_browse
       )
     values (#{aId,jdbcType=INTEGER}, #{aTitle,jdbcType=VARCHAR}, <![CDATA[ #{aContent,jdbcType=LONGVARCHAR} ]]>,
       #{aCoverimg,jdbcType=LONGVARCHAR}, #{aSignature,jdbcType=VARCHAR}, #{aAddtime,jdbcType=TIMESTAMP},
-      #{aSynopsis,jdbcType=LONGVARCHAR}, #{aSortId,jdbcType=INTEGER}, #{aSonId,jdbcType=INTEGER},#{aLabel,jdbcType=VARCHAR}
+      #{aSynopsis,jdbcType=LONGVARCHAR}, #{aSortId,jdbcType=INTEGER}, #{aSonId,jdbcType=INTEGER},#{aLabel,jdbcType=VARCHAR},
+      #{aNum,jdbcType=INTEGER}, #{aBrowse,jdbcType=INTEGER}
       )
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Article" >
+    <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Article">
     update article
     set a_title = #{aTitle,jdbcType=VARCHAR},
       a_content = <![CDATA[#{aContent,jdbcType=LONGVARCHAR} ]]>,
@@ -37,35 +41,43 @@
       a_synopsis = #{aSynopsis,jdbcType=LONGVARCHAR},
       a_sortId = #{aSortId,jdbcType=INTEGER},
       a_sonId = #{aSonId,jdbcType=INTEGER},
-      a_label= #{aLabel,jdbcType=VARCHAR}
+      a_label= #{aLabel,jdbcType=VARCHAR},
+      a_num = #{record.aNum,jdbcType=INTEGER},
+      a_browse = #{record.aBrowse,jdbcType=INTEGER}
     where a_id = #{aId,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select a_id, a_title, a_content, a_coverImg, a_signature, a_addTime, a_synopsis,
-    a_sortId, a_sonId,a_label
+    a_sortId, a_sonId,a_label,a_num,a_browse
     from article
     where a_id = #{aId,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
+    <select id="selectAll" resultMap="BaseResultMap">
     select a_id, a_title, a_coverImg, a_signature, a_addTime, a_synopsis,
-    a_sortId, a_sonId,a_label
+    a_sortId, a_sonId,a_label,a_num,a_browse
     from article
   </select>
-  <select id="showArticleSort" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <select id="showArticleSort" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select a_id, a_title, a_content, a_coverImg, a_signature, a_addTime, a_synopsis,
-    a_sortId, a_sonId,a_label
+    a_sortId, a_sonId,a_label,a_num,a_browse
     from article
     where a_sonId = #{sId,jdbcType=INTEGER}
   </select>
-  <select id="selectByTitle" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="selectByTitle" resultMap="BaseResultMap" parameterType="java.lang.String">
     select a_id, a_title, a_content, a_coverImg, a_signature, a_addTime, a_synopsis,
-    a_sortId, a_sonId,a_label
+    a_sortId, a_sonId,a_label,a_num,a_browse
     from article
     where a_title like CONCAT(CONCAT('%', #{title},'%'))  or a_content like  CONCAT(CONCAT('%', #{title},'%'))
   </select>
 
 
-  <select id="selectArticlesByLabel" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectArticlesByLabel" parameterType="java.lang.String" resultMap="BaseResultMap">
         select * from article where a_label like concat(concat('%',#{label},'%'))
     </select>
+
+    <update id="addBrowseNum" parameterType="java.lang.Integer">
+    update article
+     set  a_browse = a_browse + 1
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
 </mapper>

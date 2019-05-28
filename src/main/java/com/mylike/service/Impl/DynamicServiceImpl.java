@@ -21,7 +21,7 @@ public class DynamicServiceImpl implements DynamicService {
     //    动态库
     @Autowired
     private DynamicMapper dynamicMapper;
-//    评论库
+    //    评论库
     @Autowired
     private DiscussMapper discussMapper;
 
@@ -74,22 +74,30 @@ public class DynamicServiceImpl implements DynamicService {
         }
     }
 
-//    查询所有
+    //    查询所有
     @Override
     public List<Dynamic> showAll() {
         return dynamicMapper.showAll();
     }
 
-//    查询BY分类
+    //    查询BY分类
     @Override
     public List<Dynamic> showDynamicsByLabel(String label) {
         return this.dynamicMapper.selectDynamicsByLabel(label);
     }
 
-//    查询Hide
+    //    查询Hide
     @Override
     public List<Dynamic> selectcForHide(String startId, String endId) {
-        int start = Integer.parseInt(startId)*Integer.parseInt(endId);
-        return this.dynamicMapper.selectcForHide(start,Integer.parseInt(endId));
+        int start = Integer.parseInt(startId) * Integer.parseInt(endId);
+        return this.dynamicMapper.selectcForHide(start, Integer.parseInt(endId));
+    }
+
+    /**
+     * 浏览量加一
+     */
+    @Override
+    public int addBrowseNum(Integer dId) {
+        return this.dynamicMapper.addBrowseNum(dId);
     }
 }

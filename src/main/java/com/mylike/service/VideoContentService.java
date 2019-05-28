@@ -19,4 +19,6 @@ public interface VideoContentService {
     void updateVideo(VideoContent video);
 
     List<VideoContent> showVideoContentsByLabel(String label);
+
+    int addBrowseNum(Integer vId);
 }

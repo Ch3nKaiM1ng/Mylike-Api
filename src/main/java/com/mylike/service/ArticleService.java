@@ -20,4 +20,6 @@ public interface ArticleService {
     List<Article> showArticlesByTitle(String keyWord);
 
     List<Article> showArticlesByLabel(String label);
+
+    int addBrowseNum(Integer aId);
 }

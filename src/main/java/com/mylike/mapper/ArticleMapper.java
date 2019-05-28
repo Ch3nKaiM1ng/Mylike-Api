@@ -21,4 +21,6 @@ public interface ArticleMapper {
     List<Article> selectByTitle(@Param("title") String title);
 
     List<Article> selectArticlesByLabel(@Param("label") String label);
+
+    int addBrowseNum(@Param("aId") Integer aId);
 }

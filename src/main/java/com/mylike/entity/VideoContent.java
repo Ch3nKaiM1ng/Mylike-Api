@@ -25,6 +25,26 @@ public class VideoContent implements Serializable {
 
     private String vLabel;
 
+    private Integer vNum;
+
+    private Integer vBrowse;
+
+    public Integer getvNum() {
+        return vNum;
+    }
+
+    public void setvNum(Integer vNum) {
+        this.vNum = vNum;
+    }
+
+    public Integer getvBrowse() {
+        return vBrowse;
+    }
+
+    public void setvBrowse(Integer vBrowse) {
+        this.vBrowse = vBrowse;
+    }
+
     public String getvLabel() {
         return vLabel;
     }

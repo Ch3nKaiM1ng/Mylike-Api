@@ -69,8 +69,10 @@ public class ArticleApi {
         Map<String, Object> map = new HashMap<>();
         if (aId != null) {
             map = re.SUCCESSOBJ(articleService.selectById(aId));
-            //        查询评价
+            //查询评价
             map.put("discuss", disTo.convert(0, discussService.selectByAId(aId)));
+            //浏览数加一
+            this.articleService.addBrowseNum(aId);
             return map;
         }
         return re.ERROR();

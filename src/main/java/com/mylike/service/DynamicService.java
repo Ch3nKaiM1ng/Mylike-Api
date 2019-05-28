@@ -23,4 +23,6 @@ public interface DynamicService {
     List<Dynamic> showDynamicsByLabel(String label);
 
     List<Dynamic> selectcForHide(String startId, String endId);
+
+    int addBrowseNum(Integer dId);
 }

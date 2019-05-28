@@ -24,5 +24,10 @@ public interface VideoContentMapper {
     /**
      * 根据标签查询视频neiro
      */
-    List<VideoContent> selectVideoContentsByLabel(@Param("label")String label);
+    List<VideoContent> selectVideoContentsByLabel(@Param("label") String label);
+
+    /**
+     * 浏览数加一
+     */
+    int addBrowseNum(@Param("vId") Integer vId);
 }

@@ -27,6 +27,26 @@ public class Article implements Serializable {
 
     private String  aLabel;
 
+    private Integer aNum;
+
+    private Integer aBrowse;
+
+    public Integer getaNum() {
+        return aNum;
+    }
+
+    public void setaNum(Integer aNum) {
+        this.aNum = aNum;
+    }
+
+    public Integer getaBrowse() {
+        return aBrowse;
+    }
+
+    public void setaBrowse(Integer aBrowse) {
+        this.aBrowse = aBrowse;
+    }
+
     public String getaLabel() {
         return aLabel;
     }
