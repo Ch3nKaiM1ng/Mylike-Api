@@ -1,5 +1,7 @@
 package com.mylike.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,6 +12,7 @@ public class SortBranch implements Serializable {
 
     private String sContent;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date sAddtime;
 
     private Integer sUserid;

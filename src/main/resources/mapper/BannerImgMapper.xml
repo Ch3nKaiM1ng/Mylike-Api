@@ -19,7 +19,7 @@
   <insert id="insert" parameterType="com.mylike.entity.BannerImg" >
     insert into banner_img (b_id, b_name, b_url, 
       b_site, b_status, b_belong, 
-      b_addtime)
+      b_addtime, title, intro)
     values (#{bId,jdbcType=INTEGER}, #{bName,jdbcType=VARCHAR}, #{bUrl,jdbcType=VARCHAR}, 
       #{bSite,jdbcType=VARCHAR}, #{bStatus,jdbcType=VARCHAR}, #{bBelong,jdbcType=VARCHAR}, 
       #{bAddtime,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}

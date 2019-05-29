@@ -25,7 +25,7 @@ public class Dynamic implements Serializable {
 
     private String videoUrl;
 
-    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date dAddtime;
 
     private String dHot;
