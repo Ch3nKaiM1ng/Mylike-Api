@@ -66,7 +66,7 @@ public class DiscussServiceImpl implements DiscussService {
     }
 
     /**
-     * 修改评论
+     * 更改评论
      */
     @Override
     public int update(Discuss discuss) {
@@ -77,6 +77,27 @@ public class DiscussServiceImpl implements DiscussService {
     @Override
     public int deleteByRelationId(Discuss discuss) {
         return this.mapper.deleteByRelationId(discuss);
+    }
+
+//    删除评论
+    public int delectById(Discuss discuss){
+//        查找父目录
+        Discuss dis = this.mapper.selectById(discuss.getId());
+        if (dis.getParentId()==0){
+            int num = this.mapper.selectByParentId(discuss.getId());
+            if (num==0){
+                return this.mapper.deleteByPrimaryKey(discuss.getId());
+            }else {
+                return this.mapper.updateByPrimaryKeySelective(discuss);
+            }
+        }else {
+            Discuss dis1 = this.mapper.selectById(dis.getParentId());
+            if (dis1.getContent().equals("此评论已删除")){
+                this.mapper.deleteByPrimaryKey(dis1.getId());
+                return this.mapper.deleteByPrimaryKey(discuss.getId());
+            }
+            return this.mapper.deleteByPrimaryKey(discuss.getId());
+        }
     }
 
 

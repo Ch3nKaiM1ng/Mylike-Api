@@ -30,4 +30,8 @@ public interface DiscussMapper {
     Integer countByAid(Integer aid);
 
     int deleteByRelationId(Discuss discuss);
+
+    Discuss selectById(Integer id);
+
+    int selectByParentId(Integer parentId);
 }

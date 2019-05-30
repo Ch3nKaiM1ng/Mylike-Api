@@ -135,4 +135,12 @@
             d_id = #{dId,jdbcType=INTEGER}
         </if>
     </delete>
+
+    <select id="selectById" resultMap="BaseResultMap">
+    select id, parent_id,content
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectByParentId" resultMap="BaseResultMap">
+    select count(1) from discuss where parent_id=#{parentId}
+  </select>
 </mapper>
