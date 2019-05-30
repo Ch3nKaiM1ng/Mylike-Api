@@ -14,9 +14,9 @@ public interface AnonymityMapper {
 
     List<Anonymity> selectAll();
 
-    int updateByPrimaryKey(Anonymity record);
-
     int seleceCount();
 
     Anonymity selectBywhere(@Param("num") Integer num);
+
+    int updateByPrimaryKeySelective(Anonymity anonymity);
 }

@@ -1,6 +1,7 @@
 package com.mylike.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Anonymity implements Serializable {
     private Integer aId;
@@ -9,7 +10,7 @@ public class Anonymity implements Serializable {
 
     private String aHendpic;
 
-    private String aAddtime;
+    private Date aAddtime;
 
     public Integer getaId() {
         return aId;
@@ -35,11 +36,11 @@ public class Anonymity implements Serializable {
         this.aHendpic = aHendpic == null ? null : aHendpic.trim();
     }
 
-    public String getaAddtime() {
+    public Date getaAddtime() {
         return aAddtime;
     }
 
-    public void setaAddtime(String aAddtime) {
-        this.aAddtime = aAddtime == null ? null : aAddtime.trim();
+    public void setaAddtime(Date aAddtime) {
+        this.aAddtime = aAddtime;
     }
 }

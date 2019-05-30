@@ -5,7 +5,7 @@
     <id column="a_id" property="aId" jdbcType="INTEGER" />
     <result column="a_name" property="aName" jdbcType="VARCHAR" />
     <result column="a_hendpic" property="aHendpic" jdbcType="VARCHAR" />
-    <result column="a_addTime" property="aAddtime" jdbcType="VARCHAR" />
+    <result column="a_addTime" property="aAddtime" jdbcType="TIMESTAMP" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from anonymity
@@ -15,15 +15,25 @@
     insert into anonymity (a_id, a_name, a_hendpic,
       a_addTime)
     values (#{aId,jdbcType=INTEGER}, #{aName,jdbcType=VARCHAR}, #{aHendpic,jdbcType=VARCHAR},
-      #{aAddtime,jdbcType=VARCHAR})
+      #{aAddtime,jdbcType=TIMESTAMP})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Anonymity" >
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.mylike.entity.Anonymity">
     update anonymity
-    set a_name = #{aName,jdbcType=VARCHAR},
-      a_hendpic = #{aHendpic,jdbcType=VARCHAR},
-      a_addTime = #{aAddtime,jdbcType=VARCHAR}
+    <set>
+      <if test="aName != null">
+        a_name = #{aName,jdbcType=VARCHAR},
+      </if>
+      <if test="aHendpic != null">
+        a_hendpic = #{aHendpic,jdbcType=VARCHAR},
+      </if>
+      <if test="aAddtime != null">
+        a_addTime = #{aAddtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
     where a_id = #{aId,jdbcType=INTEGER}
   </update>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select a_id, a_name, a_hendpic, a_addTime
     from anonymity

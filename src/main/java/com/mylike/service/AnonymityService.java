@@ -9,4 +9,10 @@ public interface AnonymityService {
     List<Anonymity> selectAll();
 
     void addName(Anonymity anonymity);
+
+    int update(Anonymity anonymity);
+
+    int delete(Integer aId);
+
+    Anonymity showById(Integer aId);
 }
