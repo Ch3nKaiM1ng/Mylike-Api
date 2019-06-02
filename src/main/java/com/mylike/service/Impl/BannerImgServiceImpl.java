@@ -15,15 +15,20 @@ public class BannerImgServiceImpl implements BannerImgService {
     private BannerImgMapper mapper;
 
     @Override
-    public List<BannerImg> selectAll(String bBelong,String bSite) {
+    public List<BannerImg> selectAll(String bBelong, String bSite) {
 //        System.out.println(bBelong+"-------------"+bSite);
-        return mapper.selectAll(bBelong,bSite);
+        return mapper.selectAll(bBelong, bSite);
     }
 
     @Override
     public void insert(List<BannerImg> banner) {
-        for (BannerImg img:banner){
+        for (BannerImg img : banner) {
             mapper.insert(img);
         }
+    }
+
+    @Override
+    public int deleteBanner(Integer bId) {
+        return this.mapper.deleteByPrimaryKey(bId);
     }
 }

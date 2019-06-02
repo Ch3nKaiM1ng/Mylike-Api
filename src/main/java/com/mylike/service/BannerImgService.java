@@ -9,4 +9,6 @@ public interface BannerImgService {
     List<BannerImg> selectAll(String bBelong,String bSite);
 
     void insert(List<BannerImg> banner);
+
+    int deleteBanner(Integer bId);
 }
