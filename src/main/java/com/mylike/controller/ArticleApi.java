@@ -71,7 +71,7 @@ public class ArticleApi {
             map = re.SUCCESSOBJ(articleService.selectById(aId));
             //查询评价
             map.put("discuss", disTo.convert(0, discussService.selectByAId(aId)));
-            //浏览数加一
+            //浏览数加一   
             this.articleService.addBrowseNum(aId);
             return map;
         }
