@@ -98,7 +98,8 @@
     <select id="selectAll" resultMap="BaseResultMap">
     select v_id, v_name, v_headPic, v_title, v_content, v_videoUrl, v_imgUrl, v_like, 
     v_url, v_hot,v_label,v_num, v_browse
-    from video_content limit #{startId} , #{endId}
+    from video_content ORDER BY v_num desc limit #{startId} , #{endId}
+
   </select>
 
     <select id="selectVideoContentsByTitle" resultMap="BaseResultMap">
