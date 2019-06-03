@@ -112,7 +112,9 @@ public class LoginApi {
      * 记录手机号码
      */
     @RequestMapping("/addPhoneRecord")
-    public Map<String, Object> addPhoneRecord(@RequestBody PhoneRecord phoneRecord) {
+    public Map<String, Object> addPhoneRecord(@RequestParam("phone") String phone) {
+        PhoneRecord phoneRecord = new PhoneRecord();
+        phoneRecord.setPhone(phone);
         this.phoneRecordService.addOrUpdate(phoneRecord);
         return re.SUCCESS();
     }

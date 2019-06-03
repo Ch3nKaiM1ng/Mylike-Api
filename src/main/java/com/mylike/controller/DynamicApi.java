@@ -61,7 +61,7 @@ public class DynamicApi {
 
     //    首页心得/动态主页查询
     @RequestMapping("/showDynamicForHide")
-    public Map<String, Object> showDynamicForHide(@Param("startId") String startId, String endId) {
+    public Map<String, Object> showDynamicForHide(@RequestParam("startId") String startId, @RequestParam("endId")String endId) {
         List<Dynamic> dynamics = dynamicService.selectcForHide(startId, endId);
         List<DynamicDTO> list = new ArrayList<>();
         for (Dynamic dynamic : dynamics) {

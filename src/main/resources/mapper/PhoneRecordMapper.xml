@@ -3,7 +3,7 @@
 <mapper namespace="com.mylike.mapper.PhoneRecordMapper">
     <resultMap id="BaseResultMap" type="com.mylike.entity.PhoneRecord">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="phone" jdbcType="INTEGER" property="phone"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
         <result column="addTime" jdbcType="TIMESTAMP" property="addtime"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
     </resultMap>
@@ -35,7 +35,7 @@
                 #{id,jdbcType=INTEGER},
             </if>
             <if test="phone != null">
-                #{phone,jdbcType=INTEGER},
+                #{phone,jdbcType=VARCHAR},
             </if>
             <if test="addtime != null">
                 #{addtime,jdbcType=TIMESTAMP},
@@ -51,7 +51,7 @@
         update phone_record
         <set>
             <if test="phone != null">
-                phone = #{phone,jdbcType=INTEGER},
+                phone = #{phone,jdbcType=VARCHAR},
             </if>
             <if test="addtime != null">
                 addTime = #{addtime,jdbcType=TIMESTAMP},

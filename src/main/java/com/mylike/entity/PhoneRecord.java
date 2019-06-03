@@ -1,11 +1,12 @@
 package com.mylike.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class PhoneRecord {
+public class PhoneRecord implements Serializable {
     private Integer id;
 
-    private Integer phone;
+    private String phone;
 
     private Date addtime;
 
@@ -19,11 +20,11 @@ public class PhoneRecord {
         this.id = id;
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

@@ -14,6 +14,7 @@
         <result column="imgUrl" property="imgUrl" jdbcType="LONGVARCHAR"/>
         <result column="videoUrl" property="videoUrl" jdbcType="VARCHAR"/>
         <result column="d_label" property="dLabel" jdbcType="VARCHAR"/>
+        <result column="d_num" property="dNum" jdbcType="INTEGER"/>
     </resultMap>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from dynamic
@@ -24,7 +25,7 @@
       d_content, d_site, d_like, 
       d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label)
     values (#{dId,jdbcType=INTEGER}, #{dName,jdbcType=VARCHAR}, #{dHeadpic,jdbcType=VARCHAR}, 
-      #{dContent,jdbcType=LONGVARCHAR}, #{dSite,jdbcType=VARCHAR}, #{dLike,jdbcType=INTEGER},
+      #{dContent,jdbcType=LONGVARCHAR}, #{dSite,jdbcType=VARCHAR}, #{dLike,jdbcType=INTEGER},#{dNum,jdbcType=INTEGER},
       #{dBrowse,jdbcType=INTEGER}, #{dAddtime,jdbcType=TIMESTAMP},#{dHot,jdbcType=VARCHAR},<![CDATA[ #{imgUrl,jdbcType=LONGVARCHAR} ]]>,#{videoUrl,jdbcType=VARCHAR},#{dLabel,jdbcType=VARCHAR})
   </insert>
 <!--    <update id="updateByPrimaryKeySelective" parameterType="com.mylike.entity.Dynamic">-->
@@ -79,6 +80,9 @@
             <if test="imgUrl != null">
                 imgUrl = #{imgUrl,jdbcType=LONGVARCHAR},
             </if>
+            <if test="dNum != null">
+                dNum = #{dNum,jdbcType=INTEGER},
+            </if>
         </set>
         where d_id = #{dId,jdbcType=INTEGER}
     </update>
@@ -91,7 +95,7 @@
     <select id="selectAll" resultMap="BaseResultMap">
     select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label
     from dynamic
-    where d_hot = "hot"
+    where d_hot = "hot" ORDER BY d_num
   </select>
 
     <select id="showAll" resultMap="BaseResultMap">
@@ -121,6 +125,7 @@
     from dynamic
     where d_hot = "hide"
     limit #{startId} , #{endId}
+    ORDER BY d_num DESC
   </select>
 
 

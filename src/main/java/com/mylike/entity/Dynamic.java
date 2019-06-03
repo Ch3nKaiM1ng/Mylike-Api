@@ -32,6 +32,9 @@ public class Dynamic implements Serializable {
 
     private String dLabel;
 
+    private Integer dNum;
+
+
     public String getdLabel() {
         return dLabel;
     }
@@ -127,5 +130,13 @@ public class Dynamic implements Serializable {
 
     public void setdHot(String dHot) {
         this.dHot = dHot;
+    }
+
+    public Integer getdNum() {
+        return dNum;
+    }
+
+    public void setdNum(Integer dNum) {
+        this.dNum = dNum;
     }
 }
