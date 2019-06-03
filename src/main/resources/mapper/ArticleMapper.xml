@@ -42,8 +42,8 @@
       a_sortId = #{aSortId,jdbcType=INTEGER},
       a_sonId = #{aSonId,jdbcType=INTEGER},
       a_label= #{aLabel,jdbcType=VARCHAR},
-      a_num = #{record.aNum,jdbcType=INTEGER},
-      a_browse = #{record.aBrowse,jdbcType=INTEGER}
+      a_num = #{aNum,jdbcType=INTEGER},
+      a_browse = #{aBrowse,jdbcType=INTEGER}
     where a_id = #{aId,jdbcType=INTEGER}
   </update>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -55,7 +55,7 @@
     <select id="selectAll" resultMap="BaseResultMap">
     select a_id, a_title, a_coverImg, a_signature, a_addTime, a_synopsis,
     a_sortId, a_sonId,a_label,a_num,a_browse
-    from article
+    from article ORDER BY a_num
   </select>
     <select id="showArticleSort" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select a_id, a_title, a_content, a_coverImg, a_signature, a_addTime, a_synopsis,

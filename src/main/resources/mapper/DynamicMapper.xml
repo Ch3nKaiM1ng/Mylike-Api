@@ -88,18 +88,18 @@
     </update>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label
+    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label,d_num
     from dynamic
     where d_id = #{dId,jdbcType=INTEGER}
   </select>
     <select id="selectAll" resultMap="BaseResultMap">
-    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label
+    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label,d_num
     from dynamic
     where d_hot = "hot" ORDER BY d_num
   </select>
 
     <select id="showAll" resultMap="BaseResultMap">
-    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label
+    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label,d_num
     from dynamic
   </select>
 
@@ -121,7 +121,7 @@
     </select>
 
     <select id="selectcForHide" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label
+    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label,d_num
     from dynamic
     where d_hot = "hide"
     limit #{startId} , #{endId}
