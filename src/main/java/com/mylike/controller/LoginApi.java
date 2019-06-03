@@ -1,9 +1,12 @@
 package com.mylike.controller;
 
 import com.mylike.entity.ClientUser;
+import com.mylike.entity.PhoneRecord;
 import com.mylike.service.ClientUserService;
+import com.mylike.service.PhoneRecordService;
 import com.mylike.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +36,8 @@ public class LoginApi {
     private SMSUtils sms = new SMSUtils();
     @Autowired
     private ClientUserService clientUserService;
+    @Autowired
+    private PhoneRecordService phoneRecordService;
 
     // 判定session
     @RequestMapping("/register")
@@ -63,7 +68,7 @@ public class LoginApi {
 
     //  验证
     @RequestMapping("/verification")
-    public Map<String, Object> verification(String phone, int verify, HttpServletRequest req,HttpServletResponse response) {
+    public Map<String, Object> verification(String phone, int verify, HttpServletRequest req, HttpServletResponse response) {
 //        Cookie[] cookies = req.getCookies();
 //        for (Cookie cookie : cookies) {
 //            System.out.println(cookie.getName());
@@ -99,9 +104,17 @@ public class LoginApi {
 //        cookie.setPath("/");
 //        cookie.setMaxAge(3600);//设置cookie过期时间为1个小时
 //        response.addCookie(cookie);
-        session.setAttribute("token",token);
+        session.setAttribute("token", token);
         return re.SUCCESS();
     }
 
+    /**
+     * 记录手机号码
+     */
+    @RequestMapping("/addPhoneRecord")
+    public Map<String, Object> addPhoneRecord(@RequestBody PhoneRecord phoneRecord) {
+        this.phoneRecordService.addOrUpdate(phoneRecord);
+        return re.SUCCESS();
+    }
 
 }
