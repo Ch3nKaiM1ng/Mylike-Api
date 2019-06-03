@@ -1,5 +1,6 @@
 package com.mylike.service;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.mylike.entity.Dynamic;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface DynamicService {
     List<Dynamic> selectcForHide(String startId, String endId);
 
     int addBrowseNum(Integer dId);
+
+    Page<Dynamic> pageList(Page<Dynamic> page);
 }

@@ -1,6 +1,7 @@
 package com.mylike.service.Impl;
 
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.mylike.entity.Discuss;
 import com.mylike.entity.Dynamic;
 import com.mylike.entity.Material;
@@ -99,5 +100,10 @@ public class DynamicServiceImpl implements DynamicService {
     @Override
     public int addBrowseNum(Integer dId) {
         return this.dynamicMapper.addBrowseNum(dId);
+    }
+
+    @Override
+    public Page<Dynamic> pageList(Page<Dynamic> page) {
+        return page.setRecords(this.dynamicMapper.selectDynamicList(page));
     }
 }

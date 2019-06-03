@@ -1,6 +1,7 @@
 package com.mylike.mapper;
 
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.mylike.entity.Dynamic;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,9 +22,11 @@ public interface DynamicMapper {
 
     List<Dynamic> showAll();
 
-    List<Dynamic> selectDynamicsByLabel(@Param("label")String label);
+    List<Dynamic> selectDynamicsByLabel(@Param("label") String label);
 
-    List<Dynamic> selectcForHide(@Param("startId") Integer startId, @Param("endId")Integer endId);
+    List<Dynamic> selectcForHide(@Param("startId") Integer startId, @Param("endId") Integer endId);
 
-    int addBrowseNum(@Param("dId")Integer dId);
+    int addBrowseNum(@Param("dId") Integer dId);
+
+    List<Dynamic> selectDynamicList(Page page);
 }

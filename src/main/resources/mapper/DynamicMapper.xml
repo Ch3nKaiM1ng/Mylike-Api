@@ -122,4 +122,9 @@
     where d_hot = "hide"
     limit #{startId} , #{endId}
   </select>
+
+
+    <select id="selectDynamicList" resultMap="BaseResultMap">
+        select * from dynamic
+    </select>
 </mapper>

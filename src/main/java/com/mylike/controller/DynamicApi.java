@@ -1,5 +1,6 @@
 package com.mylike.controller;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.mylike.dto.DynamicDTO;
 import com.mylike.entity.Dynamic;
 import com.mylike.service.DiscussService;
@@ -138,5 +139,16 @@ public class DynamicApi {
         this.dynamicService.updateDynamic(dynamic);
 
         return re.SUCCESS();
+    }
+
+
+    @RequestMapping("/page")
+    public Page<Dynamic> page(@RequestParam("index") Integer index) {
+
+        Page<Dynamic> page = new Page<>(index, 10);
+
+//        page.setCondition(condition);
+
+        return this.dynamicService.pageList(page);
     }
 }
