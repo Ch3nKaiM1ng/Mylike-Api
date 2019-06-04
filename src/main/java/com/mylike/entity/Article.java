@@ -31,6 +31,8 @@ public class Article implements Serializable {
 
     private Integer aBrowse;
 
+    private Integer boutique;
+
     public Integer getaNum() {
         return aNum;
     }
@@ -125,5 +127,13 @@ public class Article implements Serializable {
 
     public void setaSonId(Integer aSonId) {
         this.aSonId = aSonId;
+    }
+
+    public Integer getBoutique() {
+        return boutique;
+    }
+
+    public void setBoutique(Integer boutique) {
+        this.boutique = boutique;
     }
 }

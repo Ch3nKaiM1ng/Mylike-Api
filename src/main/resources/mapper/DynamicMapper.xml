@@ -23,10 +23,10 @@
     <insert id="insert" parameterType="com.mylike.entity.Dynamic" useGeneratedKeys="true" keyProperty="dId">
     insert into dynamic (d_id, d_name, d_headPic, 
       d_content, d_site, d_like, 
-      d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label)
+      d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label,d_num)
     values (#{dId,jdbcType=INTEGER}, #{dName,jdbcType=VARCHAR}, #{dHeadpic,jdbcType=VARCHAR}, 
-      #{dContent,jdbcType=LONGVARCHAR}, #{dSite,jdbcType=VARCHAR}, #{dLike,jdbcType=INTEGER},#{dNum,jdbcType=INTEGER},
-      #{dBrowse,jdbcType=INTEGER}, #{dAddtime,jdbcType=TIMESTAMP},#{dHot,jdbcType=VARCHAR},<![CDATA[ #{imgUrl,jdbcType=LONGVARCHAR} ]]>,#{videoUrl,jdbcType=VARCHAR},#{dLabel,jdbcType=VARCHAR})
+      #{dContent,jdbcType=LONGVARCHAR}, #{dSite,jdbcType=VARCHAR}, #{dLike,jdbcType=INTEGER},
+      #{dBrowse,jdbcType=INTEGER}, #{dAddtime,jdbcType=TIMESTAMP},#{dHot,jdbcType=VARCHAR},<![CDATA[ #{imgUrl,jdbcType=LONGVARCHAR} ]]>,#{videoUrl,jdbcType=VARCHAR},#{dLabel,jdbcType=VARCHAR},#{dNum,jdbcType=INTEGER})
   </insert>
 <!--    <update id="updateByPrimaryKeySelective" parameterType="com.mylike.entity.Dynamic">-->
 <!--    update dynamic-->
@@ -81,7 +81,7 @@
                 imgUrl = #{imgUrl,jdbcType=LONGVARCHAR},
             </if>
             <if test="dNum != null">
-                dNum = #{dNum,jdbcType=INTEGER},
+                d_num = #{dNum,jdbcType=INTEGER},
             </if>
         </set>
         where d_id = #{dId,jdbcType=INTEGER}
@@ -124,8 +124,8 @@
     select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label,d_num
     from dynamic
     where d_hot = "hide"
-    limit #{startId} , #{endId}
     ORDER BY d_num DESC
+    limit #{startId} , #{endId}
   </select>
 
 

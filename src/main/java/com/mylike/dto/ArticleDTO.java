@@ -29,6 +29,37 @@ public class ArticleDTO implements Serializable {
 
     private String  aLabel;
 
+    private Integer aNum;
+
+    private Integer aBrowse;
+
+    private Integer boutique;
+
+    public Integer getaBrowse() {
+        return aBrowse;
+    }
+
+    public void setaBrowse(Integer aBrowse) {
+        this.aBrowse = aBrowse;
+    }
+
+    public Integer getBoutique() {
+        return boutique;
+    }
+
+    public void setBoutique(Integer boutique) {
+        this.boutique = boutique;
+    }
+
+    public Integer getaNum() {
+        return aNum;
+    }
+
+    public void setaNum(Integer aNum) {
+        this.aNum = aNum;
+    }
+
+
     public String getaLabel() {
         return aLabel;
     }
