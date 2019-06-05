@@ -75,7 +75,7 @@ public class DiscussApi {
         discuss.setId(id);
         discuss.setContent("此评论已删除");
         discuss.setIsDelete(1);
-        int count = this.discussService.update(discuss);
+        int count = this.discussService.delectById(discuss);
         if (count > 0) {
             return re.SUCCESS();
         } else {

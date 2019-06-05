@@ -9,7 +9,7 @@
         <result column="u_id" property="uId" jdbcType="INTEGER"/>
         <result column="an_id" property="anId" jdbcType="INTEGER"/>
         <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
-        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
         <result column="addTime" property="addtime" jdbcType="TIMESTAMP"/>
         <result column="is_delete" jdbcType="INTEGER" property="isDelete"/>
 
@@ -30,7 +30,7 @@
       content, addTime,is_delete)
     values (#{id,jdbcType=INTEGER}, #{vId,jdbcType=INTEGER}, #{aId,jdbcType=INTEGER}, 
       #{dId,jdbcType=INTEGER}, #{uId,jdbcType=INTEGER}, #{anId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER},
-      #{content,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER})
+      #{content,jdbcType=LONGVARCHAR}, #{addtime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER})
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Discuss">
     update discuss
@@ -40,7 +40,7 @@
       u_id = #{uId,jdbcType=INTEGER},
       an_id = #{anId,jdbcType=INTEGER},
       parent_id = #{parentId,jdbcType=INTEGER},
-      content = #{content,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR},
       addTime = #{addtime,jdbcType=TIMESTAMP},
       is_delete= #{isDelete,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
@@ -68,7 +68,7 @@
                 parent_id = #{parentId,jdbcType=INTEGER},
             </if>
             <if test="content != null">
-                content = #{content,jdbcType=VARCHAR},
+                content = #{content,jdbcType=LONGVARCHAR},
             </if>
             <if test="addtime != null">
                 addTime = #{addtime,jdbcType=TIMESTAMP},
@@ -137,10 +137,10 @@
     </delete>
 
     <select id="selectById" resultMap="BaseResultMap">
-    select id, parent_id,content
+    select id, parent_id,content from discuss
     where id = #{id,jdbcType=INTEGER}
   </select>
-    <select id="selectByParentId" resultMap="BaseResultMap">
+    <select id="selectByParentId" resultType="int">
     select count(1) from discuss where parent_id=#{parentId}
   </select>
 </mapper>
