@@ -52,10 +52,11 @@ public class DiscussApi {
      * 修改评论
      */
     @RequestMapping("/update")
-    public Map<String, Object> update(@RequestParam("id") Integer id, @RequestParam("content") String content) {
+    public Map<String, Object> update(@RequestParam("id") Integer id, @RequestParam("content") String content,@RequestParam("parentId")Integer parentId) {
         Discuss discuss = new Discuss();
         discuss.setId(id);
         discuss.setContent(content);
+        discuss.setParentId(parentId);
         //修改删除状态
         discuss.setIsDelete(0);
         int count = this.discussService.update(discuss);

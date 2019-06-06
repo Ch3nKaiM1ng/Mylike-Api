@@ -35,8 +35,6 @@ public class DynamicApi {
     //    心得/动态添加
     @RequestMapping("/addDynamic")
     public Map<String, Object> addDynamic(@RequestBody Dynamic dynamic) {
-        dynamic.setdAddtime(new Date());
-        System.out.println(dynamic.toString());
         dynamicService.insert(dynamic);
         if (dynamic.getdId() == null) {
             return re.ERROR();

@@ -79,10 +79,10 @@
                 v_content = #{vContent,jdbcType=LONGVARCHAR},
             </if>
             <if test="vNum != null">
-                #{vNum,jdbcType=INTEGER},
+                v_num = #{vNum,jdbcType=INTEGER},
             </if>
             <if test="vBrowse != null">
-                #{vBrowse,jdbcType=INTEGER},
+                v_browse=#{vBrowse,jdbcType=INTEGER},
             </if>
         </set>
         where v_id = #{vId,jdbcType=INTEGER}

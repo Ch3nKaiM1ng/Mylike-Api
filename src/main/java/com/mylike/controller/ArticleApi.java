@@ -37,7 +37,6 @@ public class ArticleApi {
     //  添加文章
     @RequestMapping("/addArticle")
     public Map<String, Object> addArticle(@RequestBody Article article) {
-        article.setaAddtime(data.NewDate());
         articleService.insert(article);
         if (article.getaId() != null) {
             return re.SUCCESS();

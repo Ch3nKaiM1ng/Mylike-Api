@@ -34,15 +34,35 @@
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Discuss">
     update discuss
-    set v_id = #{vId,jdbcType=INTEGER},
-      a_id = #{aId,jdbcType=INTEGER},
-      d_id = #{dId,jdbcType=INTEGER},
-      u_id = #{uId,jdbcType=INTEGER},
-      an_id = #{anId,jdbcType=INTEGER},
-      parent_id = #{parentId,jdbcType=INTEGER},
-      content = #{content,jdbcType=LONGVARCHAR},
-      addTime = #{addtime,jdbcType=TIMESTAMP},
-      is_delete= #{isDelete,jdbcType=INTEGER}
+        <set>
+            <if test="vId != null">
+                v_id = #{vId,jdbcType=INTEGER},
+            </if>
+            <if test="aId != null">
+                a_id = #{aId,jdbcType=INTEGER},
+            </if>
+            <if test="dId != null">
+                d_id = #{dId,jdbcType=INTEGER},
+            </if>
+            <if test="uId != null">
+                u_id = #{uId,jdbcType=INTEGER},
+            </if>
+            <if test="anId != null">
+                an_id = #{anId,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="addtime != null">
+                addTime = #{addtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=INTEGER},
+            </if>
+        </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
 

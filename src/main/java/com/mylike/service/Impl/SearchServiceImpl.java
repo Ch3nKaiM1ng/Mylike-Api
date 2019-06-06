@@ -27,4 +27,9 @@ public class SearchServiceImpl implements SearchService {
             mapper.insert(se);
         }
     }
+
+    @Override
+    public int delect(Integer sId) {
+        return this.mapper.deleteByPrimaryKey(sId);
+    }
 }

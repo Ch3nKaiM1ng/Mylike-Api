@@ -51,6 +51,18 @@ public class SearchApi {
         service.insert(search);
         return "success";
     }
+//    删除关键词
+    @RequestMapping("/delectSearch")
+    public Map<String,Object> delectSearch(Integer sId){
+        if (sId!=null){
+            int count = this.service.delect(sId);
+            if (count>0){
+                return re.SUCCESS();
+            }
+        }
+        return re.ERROR();
+    }
+
 
     /**
      * 全文检索
