@@ -149,4 +149,19 @@ public class DynamicApi {
 
         return this.dynamicService.pageList(page);
     }
+    @RequestMapping("/HideOrDisplay")
+    public Map<String,Object> HideOrDisplay(Integer dId,String dHot){
+        if (dHot.equals("hot")){
+            int count = this.dynamicService.updateHideOrDisplay(dId,"hide");
+            if (count>0){
+                return re.SUCCESS();
+            }
+        }else if (dHot.equals("hide")){
+            int count = this.dynamicService.updateHideOrDisplay(dId,"hot");
+            if (count>0){
+                return re.SUCCESS();
+            }
+        }
+        return re.ERROR();
+    }
 }

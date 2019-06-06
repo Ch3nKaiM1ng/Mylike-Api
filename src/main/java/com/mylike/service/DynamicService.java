@@ -28,4 +28,6 @@ public interface DynamicService {
     int addBrowseNum(Integer dId);
 
     Page<Dynamic> pageList(Page<Dynamic> page);
+
+    int updateHideOrDisplay(Integer dId, String hide);
 }

@@ -106,4 +106,9 @@ public class DynamicServiceImpl implements DynamicService {
     public Page<Dynamic> pageList(Page<Dynamic> page) {
         return page.setRecords(this.dynamicMapper.selectDynamicList(page));
     }
+
+    @Override
+    public int updateHideOrDisplay(Integer dId, String hide) {
+        return this.dynamicMapper.updateHideOrDisplay(dId,hide);
+    }
 }

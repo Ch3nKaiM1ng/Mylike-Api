@@ -29,4 +29,6 @@ public interface DynamicMapper {
     int addBrowseNum(@Param("dId") Integer dId);
 
     List<Dynamic> selectDynamicList(Page page);
+
+    int updateHideOrDisplay(@Param("dId") Integer dId, @Param("dHot") String hide);
 }
