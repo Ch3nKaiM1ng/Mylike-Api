@@ -1,5 +1,6 @@
 package com.mylike.service.Impl;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.mylike.entity.Article;
 import com.mylike.entity.Discuss;
 import com.mylike.mapper.ArticleMapper;
@@ -70,6 +71,11 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public int addBrowseNum(Integer aId) {
         return this.mapper.addBrowseNum(aId);
+    }
+
+    @Override
+    public Page<Article> selectByDesc(Page<Article> page) {
+        return page.setRecords(this.mapper.selectByDesc(page));
     }
 
 

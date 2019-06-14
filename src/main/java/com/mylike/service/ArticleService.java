@@ -1,5 +1,6 @@
 package com.mylike.service;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.mylike.entity.Article;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface ArticleService {
     List<Article> showArticlesByLabel(String label);
 
     int addBrowseNum(Integer aId);
+
+    Page<Article> selectByDesc(Page<Article> page);
 }

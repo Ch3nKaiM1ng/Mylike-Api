@@ -57,7 +57,7 @@ public class DynamicApi {
         return re.SUCCESSOBJ(list);
     }
 
-    //    首页心得/动态主页查询
+    //    首页心得/动态主页隐藏查询
     @RequestMapping("/showDynamicForHide")
     public Map<String, Object> showDynamicForHide(@RequestParam("startId") String startId, @RequestParam("endId")String endId) {
         List<Dynamic> dynamics = dynamicService.selectcForHide(startId, endId);
@@ -144,11 +144,11 @@ public class DynamicApi {
     public Page<Dynamic> page(@RequestParam("index") Integer index) {
 
         Page<Dynamic> page = new Page<>(index, 10);
-
 //        page.setCondition(condition);
 
         return this.dynamicService.pageList(page);
     }
+//    隐藏或者展示
     @RequestMapping("/HideOrDisplay")
     public Map<String,Object> HideOrDisplay(Integer dId,String dHot){
         if (dHot.equals("hot")){
@@ -160,6 +160,28 @@ public class DynamicApi {
             int count = this.dynamicService.updateHideOrDisplay(dId,"hot");
             if (count>0){
                 return re.SUCCESS();
+            }
+        }
+        return re.ERROR();
+    }
+//      修改性别
+    @RequestMapping("/alterSex")
+    public Map<String,Object>alterSex(@RequestBody Dynamic dynamic){
+        System.out.println(dynamic.toString());
+        if (dynamic.getSex()!=null && dynamic.getdId()!=null){
+            if (dynamic.getSex()==0){
+                dynamic.setSex(1);
+                int count = this.dynamicService.alterSex(dynamic);
+                if (count>0){
+                    return re.SUCCESS();
+                }
+            }
+            else if (dynamic.getSex()==1){
+                dynamic.setSex(0);
+                int count = this.dynamicService.alterSex(dynamic);
+                if (count>0){
+                    return re.SUCCESS();
+                }
             }
         }
         return re.ERROR();

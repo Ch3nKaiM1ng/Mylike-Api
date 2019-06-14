@@ -1,5 +1,6 @@
 package com.mylike.mapper;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.mylike.entity.Article;
 import org.apache.ibatis.annotations.Param;
 
@@ -23,4 +24,6 @@ public interface ArticleMapper {
     List<Article> selectArticlesByLabel(@Param("label") String label);
 
     int addBrowseNum(Integer aId);
+
+    List<Article> selectByDesc(Page<Article> page);
 }

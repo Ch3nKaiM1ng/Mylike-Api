@@ -14,4 +14,6 @@ public interface SurveyMediaMapper {
     int updateByPrimaryKeySelective(SurveyMedia record);
 
     List<SurveyMedia> selectByChannel(@Param("channel") String channel);
+
+    int delectById(Integer id);
 }

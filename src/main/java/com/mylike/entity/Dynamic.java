@@ -34,6 +34,15 @@ public class Dynamic implements Serializable {
 
     private Integer dNum;
 
+    private Integer sex;
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
 
     public String getdLabel() {
         return dLabel;
@@ -138,5 +147,25 @@ public class Dynamic implements Serializable {
 
     public void setdNum(Integer dNum) {
         this.dNum = dNum;
+    }
+
+    @Override
+    public String toString() {
+        return "Dynamic{" +
+                "dId=" + dId +
+                ", dName='" + dName + '\'' +
+                ", dHeadpic='" + dHeadpic + '\'' +
+                ", dContent='" + dContent + '\'' +
+                ", dSite='" + dSite + '\'' +
+                ", dLike=" + dLike +
+                ", dBrowse=" + dBrowse +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
+                ", dAddtime=" + dAddtime +
+                ", dHot='" + dHot + '\'' +
+                ", dLabel='" + dLabel + '\'' +
+                ", dNum=" + dNum +
+                ", sex=" + sex +
+                '}';
     }
 }

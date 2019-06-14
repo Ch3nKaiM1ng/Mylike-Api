@@ -42,4 +42,6 @@ public interface DiscussService {
     int deleteByRelationId(Discuss discuss);
 
     int delectById(Discuss discuss);
+
+    int giveLike(Integer id);
 }

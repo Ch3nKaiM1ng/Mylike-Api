@@ -28,14 +28,14 @@ public class Discuss implements Serializable {
 
     private List<Anonymity> anonymity;
 
-    private Integer isDelete;
+    private Integer giveLike;
 
-    public Integer getIsDelete() {
-        return isDelete;
+    public Integer getgiveLike() {
+        return giveLike;
     }
 
-    public void setIsDelete(Integer isDelete) {
-        this.isDelete = isDelete;
+    public void setgiveLike(Integer giveLike) {
+        this.giveLike = giveLike;
     }
 
     public Integer getId() {

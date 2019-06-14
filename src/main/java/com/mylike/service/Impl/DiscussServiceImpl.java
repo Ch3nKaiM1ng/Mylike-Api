@@ -100,5 +100,11 @@ public class DiscussServiceImpl implements DiscussService {
         }
     }
 
+//    点赞
+    @Override
+    public int giveLike(Integer id) {
+        return this.mapper.giveLike(id);
+    }
+
 
 }

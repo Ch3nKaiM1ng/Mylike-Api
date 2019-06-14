@@ -1,12 +1,15 @@
 package com.mylike.controller;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.mylike.dto.ArticleDTO;
 import com.mylike.entity.Article;
+import com.mylike.entity.Dynamic;
 import com.mylike.service.ArticleService;
 import com.mylike.service.DiscussService;
 import com.mylike.utils.DateUtils;
 import com.mylike.utils.DiscussDTO;
 import com.mylike.utils.ReturnDiscern;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -103,4 +106,15 @@ public class ArticleApi {
         }
         return re.ERROR();
     }
+//    通过添加顺序排序
+    @RequestMapping("/selectByDesc")
+    public Map<String,Object> selectByDesc(Integer index,Integer size){
+        if (index!=null){
+            Page<Article> page = new Page<>(index, size);
+            Page<Article>articles = articleService.selectByDesc(page);
+            return re.SUCCESSOBJ(articles);
+        }
+        return re.ERROR();
+    }
+
 }

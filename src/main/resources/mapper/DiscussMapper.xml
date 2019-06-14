@@ -11,7 +11,7 @@
         <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
         <result column="content" property="content" jdbcType="LONGVARCHAR"/>
         <result column="addTime" property="addtime" jdbcType="TIMESTAMP"/>
-        <result column="is_delete" jdbcType="INTEGER" property="isDelete"/>
+        <result column="giveLike" jdbcType="INTEGER" property="giveLike"/>
 
         <collection property="anonymity" ofType="com.mylike.entity.Anonymity">
             <id column="a_id" property="a_Id" jdbcType="INTEGER"/>
@@ -27,10 +27,10 @@
     <insert id="insert" parameterType="com.mylike.entity.Discuss" useGeneratedKeys="true" keyProperty="id">
     insert into discuss (id, v_id, a_id, 
       d_id, u_id, an_id, parent_id,
-      content, addTime,is_delete)
+      content, addTime,giveLike)
     values (#{id,jdbcType=INTEGER}, #{vId,jdbcType=INTEGER}, #{aId,jdbcType=INTEGER}, 
       #{dId,jdbcType=INTEGER}, #{uId,jdbcType=INTEGER}, #{anId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER},
-      #{content,jdbcType=LONGVARCHAR}, #{addtime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER})
+      #{content,jdbcType=LONGVARCHAR}, #{addtime,jdbcType=TIMESTAMP}, #{giveLike,jdbcType=INTEGER})
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Discuss">
     update discuss
@@ -59,8 +59,8 @@
             <if test="addtime != null">
                 addTime = #{addtime,jdbcType=TIMESTAMP},
             </if>
-            <if test="isDelete != null">
-                is_delete = #{isDelete,jdbcType=INTEGER},
+            <if test="giveLike != null">
+                giveLike = #{giveLike,jdbcType=INTEGER},
             </if>
         </set>
     where id = #{id,jdbcType=INTEGER}
@@ -93,42 +93,42 @@
             <if test="addtime != null">
                 addTime = #{addtime,jdbcType=TIMESTAMP},
             </if>
-            <if test="isDelete != null">
-                is_delete = #{isDelete,jdbcType=INTEGER},
+            <if test="giveLike != null">
+                giveLike = #{giveLike,jdbcType=INTEGER},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap">
-    select di.id, di.d_id, di.u_id, di.an_id, di.parent_id, di.content, di.addTime,an.a_name,an.a_hendpic,is_delete
+    select di.id, di.d_id, di.u_id, di.an_id, di.parent_id, di.content, di.addTime,an.a_name,an.a_hendpic,giveLike
     from discuss AS di
     left join anonymity AS an ON di.an_id = an.a_id
-    where id = #{id,jdbcType=INTEGER} or parent_id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER} or parent_id = #{id,jdbcType=INTEGER} ORDER BY giveLike DESC
   </select>
     <select id="selectAll" resultMap="BaseResultMap">
-    select * from discuss
+    select * from discuss ORDER BY giveLike DESC
   </select>
 
     <select id="selectByDid" resultMap="BaseResultMap">
-    select di.id, di.d_id, di.u_id, di.an_id, di.parent_id, di.content, di.addTime,an.a_name,an.a_hendpic,is_delete
+    select di.id, di.d_id, di.u_id, di.an_id, di.parent_id, di.content, di.addTime,an.a_name,an.a_hendpic,giveLike
     from discuss AS di
     left join anonymity AS an ON di.an_id = an.a_id
-    where di.d_id = #{dId,jdbcType=INTEGER}
+    where di.d_id = #{dId,jdbcType=INTEGER} ORDER BY giveLike DESC
   </select>
 
     <select id="selectByVid" resultMap="BaseResultMap">
-    select di.id, di.v_id, di.u_id, di.an_id, di.parent_id, di.content, di.addTime,an.a_name,an.a_hendpic,is_delete
+    select di.id, di.v_id, di.u_id, di.an_id, di.parent_id, di.content, di.addTime,an.a_name,an.a_hendpic,giveLike
     from discuss AS di
     left join anonymity AS an ON di.an_id = an.a_id
-    where di.v_id = #{vId,jdbcType=INTEGER}
+    where di.v_id = #{vId,jdbcType=INTEGER} ORDER BY giveLike DESC
   </select>
 
     <select id="selectByAid" resultMap="BaseResultMap">
-    select di.id, di.v_id, di.u_id, di.an_id, di.parent_id, di.content, di.addTime,an.a_name,an.a_hendpic,is_delete
+    select di.id, di.v_id, di.u_id, di.an_id, di.parent_id, di.content, di.addTime,an.a_name,an.a_hendpic,giveLike
     from discuss AS di
     left join anonymity AS an ON di.an_id = an.a_id
-    where di.a_id = #{aId,jdbcType=INTEGER}
+    where di.a_id = #{aId,jdbcType=INTEGER} ORDER BY giveLike DESC
   </select>
 
     <select id="countByDid" resultType="java.lang.Integer" parameterType="java.lang.Integer">
@@ -163,4 +163,13 @@
     <select id="selectByParentId" resultType="int">
     select count(1) from discuss where parent_id=#{parentId}
   </select>
+
+    <update id="giveLike" parameterType="int">
+        update discuss
+        <set>
+                giveLike = giveLike+1,
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
 </mapper>

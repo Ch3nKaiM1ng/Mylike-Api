@@ -153,7 +153,16 @@
     select
     <include refid="Base_Column_List"/>
     from survey_media
-    where channel = #{channel}
+    <where>
+      <if test="channel != null">
+        channel = #{channel,jdbcType=VARCHAR}
+      </if>
+    </where>
   </select>
+
+  <delete id="delectById" parameterType="java.lang.Integer">
+    delete from survey_media
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
 
 </mapper>

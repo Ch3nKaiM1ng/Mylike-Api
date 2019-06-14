@@ -34,4 +34,6 @@ public interface DiscussMapper {
     Discuss selectById(Integer id);
 
     int selectByParentId(Integer parentId);
+
+    int giveLike(Integer id);
 }

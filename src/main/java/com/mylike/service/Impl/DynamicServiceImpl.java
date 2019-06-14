@@ -111,4 +111,10 @@ public class DynamicServiceImpl implements DynamicService {
     public int updateHideOrDisplay(Integer dId, String hide) {
         return this.dynamicMapper.updateHideOrDisplay(dId,hide);
     }
+
+//    修改性别
+    @Override
+    public int alterSex(Dynamic dynamic) {
+        return this.dynamicMapper.updateByPrimaryKeySelective(dynamic);
+    }
 }

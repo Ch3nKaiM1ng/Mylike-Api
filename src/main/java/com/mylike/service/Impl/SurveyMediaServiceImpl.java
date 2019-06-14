@@ -37,5 +37,10 @@ public class SurveyMediaServiceImpl implements SurveyMediaService {
         }
     }
 
+    @Override
+    public int delect(Integer id) {
+        return this.surveyMediaMapper.delectById(id);
+    }
+
 
 }

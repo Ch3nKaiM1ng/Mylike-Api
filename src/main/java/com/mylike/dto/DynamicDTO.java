@@ -28,11 +28,20 @@ public class DynamicDTO {
     private Date dAddtime;
 
     private String dHot;
+    private Integer sex;
 
     //评论数
     private Integer discussNum;
 
     private String dLabel;
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
 
     public String getdLabel() {
         return dLabel;

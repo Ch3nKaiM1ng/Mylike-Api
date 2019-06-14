@@ -27,7 +27,7 @@ public class DiscussApi {
     //  添加评论
     @RequestMapping("/addDiscuss")
     public Map<String, Object> addDiscuss(@RequestBody Discuss discuss) {
-        discuss.setIsDelete(0);
+        discuss.setgiveLike(0);
         discussService.insert(discuss);
         if (discuss.getId() != null) {
             return re.SUCCESS();
@@ -58,7 +58,6 @@ public class DiscussApi {
         discuss.setContent(content);
         discuss.setParentId(parentId);
         //修改删除状态
-        discuss.setIsDelete(0);
         int count = this.discussService.update(discuss);
         if (count > 0) {
             return re.SUCCESS();
@@ -75,12 +74,22 @@ public class DiscussApi {
         Discuss discuss = new Discuss();
         discuss.setId(id);
         discuss.setContent("此评论已删除");
-        discuss.setIsDelete(1);
         int count = this.discussService.delectById(discuss);
         if (count > 0) {
             return re.SUCCESS();
         } else {
             return re.ERROR();
         }
+    }
+//    点赞评论
+    @RequestMapping("/giveLike")
+    public Map<String,Object>giveLike(@RequestParam("id")Integer id){
+        if (id!=null){
+            int count = this.discussService.giveLike(id);
+            if (count>0){
+                return re.SUCCESS();
+            }
+        }
+        return re.ERROR();
     }
 }

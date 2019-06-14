@@ -35,12 +35,16 @@ public class SurveyMediaApi {
      */
     @RequestMapping("/showByChannel")
     public Map<String, Object> showByChannel(@RequestParam("channel") String channel) {
+        if (channel.equals("all")){
+            channel=null;
+        }
 
         List<SurveyMedia> surveyMedia = this.surveyMediaService.showByChannel(channel);
 
         return re.SUCCESSOBJ(surveyMedia);
     }
 
+//    添加
     @RequestMapping("/addOrUpdate")
     public Map<String, Object> addOrUpdate(@RequestBody SurveyMedia surveyMedia) {
 
@@ -51,6 +55,19 @@ public class SurveyMediaApi {
         } else {
             return re.SUCCESS();
         }
+    }
+//    删除
+    @RequestMapping("/delectById")
+    public Map<String,Object> delectById(Integer id){
+        if (id!=null){
+            int count = this.surveyMediaService.delect(id);
 
+            if (count <= 0) {
+                return re.ERROR();
+            } else {
+                return re.SUCCESS();
+            }
+        }
+        return re.ERROR();
     }
 }

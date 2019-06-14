@@ -15,6 +15,7 @@
         <result column="videoUrl" property="videoUrl" jdbcType="VARCHAR"/>
         <result column="d_label" property="dLabel" jdbcType="VARCHAR"/>
         <result column="d_num" property="dNum" jdbcType="INTEGER"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
     </resultMap>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from dynamic
@@ -23,26 +24,11 @@
     <insert id="insert" parameterType="com.mylike.entity.Dynamic" useGeneratedKeys="true" keyProperty="dId">
     insert into dynamic (d_id, d_name, d_headPic, 
       d_content, d_site, d_like, 
-      d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label,d_num)
+      d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label,d_num,sex)
     values (#{dId,jdbcType=INTEGER}, #{dName,jdbcType=VARCHAR}, #{dHeadpic,jdbcType=VARCHAR}, 
       #{dContent,jdbcType=LONGVARCHAR}, #{dSite,jdbcType=VARCHAR}, #{dLike,jdbcType=INTEGER},
-      #{dBrowse,jdbcType=INTEGER}, #{dAddtime,jdbcType=TIMESTAMP},#{dHot,jdbcType=VARCHAR},<![CDATA[ #{imgUrl,jdbcType=LONGVARCHAR} ]]>,#{videoUrl,jdbcType=VARCHAR},#{dLabel,jdbcType=VARCHAR},#{dNum,jdbcType=INTEGER})
+      #{dBrowse,jdbcType=INTEGER}, #{dAddtime,jdbcType=TIMESTAMP},#{dHot,jdbcType=VARCHAR},<![CDATA[ #{imgUrl,jdbcType=LONGVARCHAR} ]]>,#{videoUrl,jdbcType=VARCHAR},#{dLabel,jdbcType=VARCHAR},#{dNum,jdbcType=INTEGER},#{sex,jdbcType=INTEGER})
   </insert>
-<!--    <update id="updateByPrimaryKeySelective" parameterType="com.mylike.entity.Dynamic">-->
-<!--    update dynamic-->
-<!--    set d_name = #{dName,jdbcType=VARCHAR},-->
-<!--      d_headPic = #{dHeadpic,jdbcType=VARCHAR},-->
-<!--      d_content = #{dContent,jdbcType=LONGVARCHAR},-->
-<!--      d_site = #{dSite,jdbcType=VARCHAR},-->
-<!--      d_like = #{dLike,jdbcType=INTEGER},-->
-<!--      d_browse = #{dBrowse,jdbcType=INTEGER},-->
-<!--      d_addTime = #{dAddtime,jdbcType=TIMESTAMP}-->
-<!--      ,d_hot = #{dHot,jdbcType=VARCHAR},-->
-<!--      imgUrl = <![CDATA[#{imgUrl,jdbcType=LONGVARCHAR}]]>,-->
-<!--      videoUrl = #{videoUrl,jdbcType=VARCHAR},-->
-<!--      d_label=#{dLabel,jdbcType=VARCHAR}-->
-<!--    where d_id = #{dId,jdbcType=INTEGER}-->
-<!--  </update>-->
 
     <update id="updateByPrimaryKeySelective" parameterType="com.mylike.entity.Dynamic">
         update dynamic
@@ -83,23 +69,26 @@
             <if test="dNum != null">
                 d_num = #{dNum,jdbcType=INTEGER},
             </if>
+            <if test="sex !=null">
+                sex = #{sex,jdbcType=INTEGER}
+            </if>
         </set>
         where d_id = #{dId,jdbcType=INTEGER}
     </update>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label,d_num
+    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label,d_num,sex
     from dynamic
     where d_id = #{dId,jdbcType=INTEGER}
   </select>
     <select id="selectAll" resultMap="BaseResultMap">
-    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label,d_num
+    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label,d_num,sex
     from dynamic
     where d_hot = "hot" ORDER BY d_num
   </select>
 
     <select id="showAll" resultMap="BaseResultMap">
-    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label,d_num
+    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label,d_num,sex
     from dynamic
   </select>
 
@@ -121,7 +110,7 @@
     </select>
 
     <select id="selectcForHide" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label,d_num
+    select d_id, d_name, d_headPic, d_content, d_site, d_like, d_browse, d_addTime,d_hot,imgUrl,videoUrl,d_label,d_num,sex
     from dynamic
     where d_hot = "hide"
     ORDER BY d_num DESC

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mylike.mapper.ComplainMapper" >
+  <resultMap id="BaseResultMap" type="com.mylike.entity.Complain" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="help" property="help" jdbcType="INTEGER" />
+    <result column="addTime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="phone" property="phone" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="advise" property="advise" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from complain
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mylike.entity.Complain" >
+    insert into complain (id, help, addTime, 
+      phone, remark,
+      advise)
+    values (#{id,jdbcType=INTEGER}, #{help,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP},
+      #{phone,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},
+      #{advise,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Complain" >
+    update complain
+    <set>
+      <if test="help != null">
+        help = #{help,jdbcType=INTEGER},
+      </if>
+      <if test="addtime!=null">
+        addTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone!=null">
+        phone = #{phone,jdbcType=INTEGER},
+      </if>
+      <if test="remark!=null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state!=null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="advise!=null">
+        advise = #{advise,jdbcType=LONGVARCHAR}
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, help, addTime, phone, remark, state, advise
+    from complain
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, help, addTime, phone, remark, state, advise
+    from complain ORDER BY id DESC
+  </select>
+  <select id="selectByState" resultMap="BaseResultMap" >
+    select id, help, addTime, phone, remark, state, advise
+    from complain
+    where state = #{state,jdbcType=INTEGER} ORDER BY id DESC
+  </select>
+</mapper>

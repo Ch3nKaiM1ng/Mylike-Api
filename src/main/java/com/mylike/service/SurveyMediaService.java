@@ -15,4 +15,6 @@ public interface SurveyMediaService {
      * 添加/修改小渠道表单信息
      */
     public int addOrUpdate(SurveyMedia surveyMedia);
+
+    int delect(Integer id);
 }

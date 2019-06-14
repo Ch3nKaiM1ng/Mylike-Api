@@ -30,4 +30,6 @@ public interface DynamicService {
     Page<Dynamic> pageList(Page<Dynamic> page);
 
     int updateHideOrDisplay(Integer dId, String hide);
+
+    int alterSex(Dynamic dynamic);
 }
