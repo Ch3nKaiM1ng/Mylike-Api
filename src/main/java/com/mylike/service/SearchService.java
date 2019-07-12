@@ -7,7 +7,7 @@ import java.util.List;
 public interface SearchService {
     List<Search> select(String sBelong);
 
-    void insert(List<Search> search);
+    Integer insert(Search search);
 
     int delect(Integer sId);
 }

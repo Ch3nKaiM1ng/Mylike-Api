@@ -12,7 +12,6 @@ public interface ArticleService {
 
     Object selectById(int aId);
 
-    List<Article> showArticleSort(Integer sId);
 
     void updateArticle(Article article);
 
@@ -25,4 +24,6 @@ public interface ArticleService {
     int addBrowseNum(Integer aId);
 
     Page<Article> selectByDesc(Page<Article> page);
+
+    List<Article> showArticleSort(Integer sId, Integer startId, Integer endId);
 }

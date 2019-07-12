@@ -31,6 +31,16 @@ public class SurveyMedia implements Serializable {
 
     private String inspect;
 
+    private String appointment;
+
+    public String getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(String appointment) {
+        this.appointment = appointment;
+    }
+
     public Integer getId() {
         return id;
     }

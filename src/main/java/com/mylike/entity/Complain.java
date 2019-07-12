@@ -13,7 +13,7 @@ public class Complain implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date addtime;
 
-    private int phone;
+    private String phone;
 
     private String remark;
 
@@ -45,11 +45,11 @@ public class Complain implements Serializable {
         this.addtime = addtime;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

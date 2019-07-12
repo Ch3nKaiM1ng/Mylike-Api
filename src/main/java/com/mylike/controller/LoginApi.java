@@ -17,6 +17,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
@@ -115,6 +116,35 @@ public class LoginApi {
     public Map<String, Object> addPhoneRecord(@RequestBody PhoneRecord phoneRecord) {
         this.phoneRecordService.addOrUpdate(phoneRecord);
         return re.SUCCESS();
+    }
+    /**
+     * 查询手机号
+     */
+    @RequestMapping("/showPhoneRecord")
+    public Map<String,Object> showPhoneRecord(){
+        List<PhoneRecord> phoneRecord = this.phoneRecordService.showPhone();
+        return re.SUCCESSOBJ(phoneRecord);
+    }
+    @RequestMapping("/delectById")
+    public Map<String,Object>delectById(Integer id){
+        if (id!=null){
+            int count = this.phoneRecordService.delect(id);
+            if (count>0){
+                return re.SUCCESS();
+            }
+        }
+        return re.ERROR();
+    }
+    /**
+     * 修改状态
+     */
+    @RequestMapping("/updateState")
+    public Map<String,Object>updateState(Integer id){
+        Integer count = this.phoneRecordService.updateState(id);
+        if (count>0){
+            return re.SUCCESS();
+        }
+        return re.ERROR();
     }
 
 }

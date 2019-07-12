@@ -35,8 +35,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> showArticleSort(Integer sId) {
-        return mapper.showArticleSort(sId);
+    public List<Article> showArticleSort(Integer sId,Integer startId, Integer endId) {
+        return mapper.showArticleSort(sId,startId*endId,endId);
     }
 
     @Override

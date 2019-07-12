@@ -14,10 +14,11 @@
     <result column="attention" jdbcType="VARCHAR" property="attention" />
     <result column="WeChat" jdbcType="VARCHAR" property="wechat" />
     <result column="inspect" jdbcType="VARCHAR" property="inspect" />
+    <result column="appointment" jdbcType="VARCHAR" property="inspect" />
   </resultMap>
 
   <sql id="Base_Column_List">
-    id, `state`, age, `name`, phone, addTime, remark, channel, manner, attention, WeChat, 
+    id, `state`, age, `name`, phone, addTime, remark, channel, manner, attention, WeChat, appointment,
     inspect
   </sql>
 
@@ -67,6 +68,9 @@
       <if test="inspect != null">
         inspect,
       </if>
+      <if test="appointment != null">
+        appointment,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -104,6 +108,9 @@
       </if>
       <if test="inspect != null">
         #{inspect,jdbcType=VARCHAR},
+      </if>
+      <if test="appointment != null">
+        #{appointment,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -145,6 +152,9 @@
       <if test="inspect != null">
         inspect = #{inspect,jdbcType=VARCHAR},
       </if>
+      <if test="appointment != null">
+        appointment = #{appointment,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -155,7 +165,7 @@
     from survey_media
     <where>
       <if test="channel != null">
-        channel = #{channel,jdbcType=VARCHAR}
+        channel = #{channel,jdbcType=VARCHAR} order by id desc
       </if>
     </where>
   </select>

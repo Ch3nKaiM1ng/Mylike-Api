@@ -17,7 +17,7 @@ public interface ArticleMapper {
 
     int updateByPrimaryKey(Article record);
 
-    List<Article> showArticleSort(Integer sId);
+    List<Article> showArticleSort(@Param("sId") Integer sId,@Param("startId") Integer startId, @Param("endId")Integer endId);
 
     List<Article> selectByTitle(@Param("title") String title);
 

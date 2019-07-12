@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="help" property="help" jdbcType="INTEGER" />
     <result column="addTime" property="addtime" jdbcType="TIMESTAMP" />
-    <result column="phone" property="phone" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="INTEGER" />
     <result column="advise" property="advise" jdbcType="LONGVARCHAR" />
@@ -19,7 +19,7 @@
       phone, remark,
       advise)
     values (#{id,jdbcType=INTEGER}, #{help,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP},
-      #{phone,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
       #{advise,jdbcType=LONGVARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mylike.entity.Complain" >
@@ -32,7 +32,7 @@
         addTime = #{addtime,jdbcType=TIMESTAMP},
       </if>
       <if test="phone!=null">
-        phone = #{phone,jdbcType=INTEGER},
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="remark!=null">
         remark = #{remark,jdbcType=VARCHAR},

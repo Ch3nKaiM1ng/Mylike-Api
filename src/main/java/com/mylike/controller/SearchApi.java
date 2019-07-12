@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/search")
@@ -48,7 +45,13 @@ public class SearchApi {
     //    添加关键词
     @RequestMapping("/addSearch")
     public String addSearch(@RequestBody List<Search> search) {
-        service.insert(search);
+        for (Search se:search){
+            if (se.getsAddtime()==null){
+                se.setsAddtime(new Date());
+            }
+            service.insert(se);
+        }
+
         return "success";
     }
 //    删除关键词
@@ -138,5 +141,14 @@ public class SearchApi {
         obj.put("dynamics", dynamics);
 
         return re.SUCCESSOBJ(obj);
+    }
+//    添加排序关键字
+    @RequestMapping("/addRank")
+    public Map<String,Object>addRank(Search search){
+        int count = this.service.insert(search);
+        if (count>0){
+            return re.SUCCESS();
+        }
+        return re.ERROR();
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class PhoneRecordServiceImpl implements PhoneRecordService {
@@ -24,4 +25,23 @@ public class PhoneRecordServiceImpl implements PhoneRecordService {
             return this.phoneRecordMapper.updateByPrimaryKeySelective(phoneRecord);
         }
     }
+
+    @Override
+    public List<PhoneRecord> showPhone() {
+        return this.phoneRecordMapper.selectAll();
+    }
+
+    @Override
+    public int delect(Integer id) {
+        return this.phoneRecordMapper.delect(id);
+    }
+
+    @Override
+    public Integer updateState(Integer id) {
+        PhoneRecord record = new PhoneRecord();
+        record.setState("1");
+        record.setId(id);
+        return this.addOrUpdate(record);
+    }
+
 }

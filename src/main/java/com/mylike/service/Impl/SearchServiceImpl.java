@@ -19,13 +19,8 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public void insert(List<Search> search) {
-        for (Search se:search){
-            if (se.getsAddtime()==null){
-                se.setsAddtime(new Date());
-            }
-            mapper.insert(se);
-        }
+    public Integer insert(Search search) {
+           return mapper.insert(search);
     }
 
     @Override

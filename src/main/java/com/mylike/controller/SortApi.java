@@ -32,11 +32,7 @@ public class SortApi {
 //    通过父分类ID展示子分类
     @RequestMapping("/showSortById")
     public Map<String,Object> showSortById(int sSid){
-        System.out.println("---------"+sSid+"1111111");
         List<Sort> sort = service.showSortById(sSid);
-        for (Sort sort1:sort){
-            System.out.println(sort1.toString());
-        }
         return re.SUCCESSOBJ(dto.convert(sSid,sort));
     }
 //    添加分类

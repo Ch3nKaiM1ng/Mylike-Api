@@ -3,17 +3,16 @@ package com.mylike.controller;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.mylike.dto.ArticleDTO;
 import com.mylike.entity.Article;
-import com.mylike.entity.Dynamic;
 import com.mylike.service.ArticleService;
 import com.mylike.service.DiscussService;
 import com.mylike.utils.DateUtils;
 import com.mylike.utils.DiscussDTO;
 import com.mylike.utils.ReturnDiscern;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -82,8 +81,8 @@ public class ArticleApi {
 
     //    通过分类查文章
     @RequestMapping("/showArticleSort")
-    public Map<String, Object> showArticleSort(int sId) {
-        List<Article> list = articleService.showArticleSort(sId);
+    public Map<String, Object> showArticleSort(@RequestParam("sId") Integer sId,@RequestParam("startId")Integer startId,@RequestParam("endId") Integer endId) {
+        List<Article> list = articleService.showArticleSort(sId,startId,endId);
         return re.SUCCESSOBJ(list);
     }
 

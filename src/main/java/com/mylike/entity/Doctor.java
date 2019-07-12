@@ -32,7 +32,7 @@ public class Doctor implements Serializable {
 
     private Integer dYear;
 
-    private String dAttestation;
+    private String backImg;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date dAddtime;
@@ -135,12 +135,12 @@ public class Doctor implements Serializable {
         this.dWeibo = dWeibo == null ? null : dWeibo.trim();
     }
 
-    public String getdAttestation() {
-        return dAttestation;
+    public String getbackImg() {
+        return backImg;
     }
 
-    public void setdAttestation(String dAttestation) {
-        this.dAttestation = dAttestation == null ? null : dAttestation.trim();
+    public void setbackImg(String backImg) {
+        this.backImg = backImg == null ? null : backImg.trim();
     }
 
     public Date getdAddtime() {

@@ -6,11 +6,13 @@
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
         <result column="addTime" jdbcType="TIMESTAMP" property="addtime"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="sourceUrl" property="sourceurl" jdbcType="LONGVARCHAR" />
+        <result column="state" jdbcType="VARCHAR" property="state"/>
     </resultMap>
 
 
     <sql id="Base_Column_List">
-    id, phone, addTime, remark
+    id, phone, addTime, remark,state
   </sql>
 
 
@@ -29,6 +31,9 @@
             <if test="remark != null">
                 remark,
             </if>
+            <if test="sourceurl != null">
+                sourceUrl,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -42,6 +47,9 @@
             </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceurl != null">
+                #{sourceurl,jdbcType=LONGVARCHAR}
             </if>
         </trim>
     </insert>
@@ -59,8 +67,24 @@
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
+            <if test="sourceurl != null">
+                soureUrl = #{sourceurl,jdbcType=LONGVARCHAR}
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=LONGVARCHAR}
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="selectAll" resultMap="BaseResultMap" >
+        select  id, phone, addTime, remark,sourceUrl,state
+        from phone_record
+    </select>
+
+    <delete id="delect" parameterType="java.lang.Integer" >
+    delete from phone_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
 
 </mapper>
