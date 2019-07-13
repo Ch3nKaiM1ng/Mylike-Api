@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mylike.mapper.FloatWindowMapper" >
+  <resultMap id="BaseResultMap" type="com.mylike.entity.FloatWindow" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="place" property="place" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from floatwindow
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.mylike.entity.FloatWindow" useGeneratedKeys="true" keyProperty="id">
+    insert into floatwindow (id, img, content,
+      ctime, status, place)
+    values (#{id,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
+      now(), 0, #{place,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mylike.entity.FloatWindow" >
+    update floatwindow
+    set id = #{id,jdbcType=INTEGER}
+    <if test="img!= null">
+      ,img = #{img,jdbcType=VARCHAR}
+    </if>
+    <if test="content!= null">
+      ,content = #{content,jdbcType=VARCHAR}
+    </if>
+    <if test="status!= null">
+      ,status = #{status,jdbcType=INTEGER}
+    </if>
+    <if test="place!= null">
+      ,place = #{place,jdbcType=VARCHAR}
+    </if>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.mylike.entity.FloatWindow" >
+    select id, img, content, ctime, status, place
+    from floatwindow
+    where id = #{id,jdbcType=INTEGER}
+    and status!=1
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, img, content, ctime, status, place
+    from floatwindow
+    where status!=1
+  </select>
+</mapper>
