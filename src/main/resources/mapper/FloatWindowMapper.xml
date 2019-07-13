@@ -8,6 +8,7 @@
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="place" property="place" jdbcType="VARCHAR" />
+    <result column="jumpurl" property="jumpurl" jdbcType="VARCHAR" />
   </resultMap>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -17,9 +18,9 @@
 
   <insert id="insert" parameterType="com.mylike.entity.FloatWindow" useGeneratedKeys="true" keyProperty="id">
     insert into floatwindow (id, img, content,
-      ctime, status, place)
+      ctime, status, place,jumpurl)
     values (#{id,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
-      now(), 0, #{place,jdbcType=VARCHAR}
+      now(), 0, #{place,jdbcType=VARCHAR},#{jumpurl,jdbcType=VARCHAR}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mylike.entity.FloatWindow" >
@@ -37,16 +38,19 @@
     <if test="place!= null">
       ,place = #{place,jdbcType=VARCHAR}
     </if>
+    <if test="jumpurl!= null">
+      ,jumpurl = #{jumpurl,jdbcType=VARCHAR}
+    </if>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.mylike.entity.FloatWindow" >
-    select id, img, content, ctime, status, place
+    select id, img, content, ctime, status, place,jumpurl
     from floatwindow
     where id = #{id,jdbcType=INTEGER}
     and status!=1
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, img, content, ctime, status, place
+    select id, img, content, ctime, status, place,jumpurl
     from floatwindow
     where status!=1
   </select>

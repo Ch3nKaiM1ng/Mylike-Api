@@ -18,6 +18,16 @@ public class FloatWindow implements Serializable {
 
     private String place;
 
+    private String jumpurl;
+
+    public String getJumpurl() {
+        return jumpurl;
+    }
+
+    public void setJumpurl(String jumpurl) {
+        this.jumpurl = jumpurl;
+    }
+
     public Integer getId() {
         return id;
     }
