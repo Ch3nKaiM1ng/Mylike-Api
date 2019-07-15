@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mylike.mapper.UserManageMapper" >
+  <resultMap id="BaseResultMap" type="com.mylike.entity.UserManage" >
+    <id column="m_id" property="mId" jdbcType="INTEGER" />
+    <result column="m_name" property="mName" jdbcType="VARCHAR" />
+    <result column="m_age" property="mAge" jdbcType="INTEGER" />
+    <result column="m_phone" property="mPhone" jdbcType="BIGINT" />
+    <result column="m_sex" property="mSex" jdbcType="VARCHAR" />
+    <result column="m_section" property="mSection" jdbcType="VARCHAR" />
+    <result column="m_post" property="mPost" jdbcType="VARCHAR" />
+    <result column="m_pwd" property="mPwd" jdbcType="VARCHAR" />
+    <result column="m_status" property="mStatus" jdbcType="VARCHAR" />
+    <result column="m_AddTime" property="mAddTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from manage_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="updateByPrimaryKey" parameterType="com.mylike.entity.UserManage" >
+    update manage_user
+    set m_id = #{mId,jdbcType=INTEGER}
+    <if test="mName!= null">
+      ,m_name = #{mName,jdbcType=VARCHAR}
+    </if>
+    <if test="mAge!= null">
+      ,m_age = #{mAge,jdbcType=INTEGER}
+    </if>
+    <if test="mPhone!= null">
+      ,m_phone = #{mPhone,jdbcType=BIGINT}
+    </if>
+    <if test="mSex!= null">
+      ,m_sex = #{mSex,jdbcType=VARCHAR}
+    </if>
+    <if test="mSection!= null">
+      ,m_section = #{mSection,jdbcType=VARCHAR}
+    </if>
+    <if test="mPost!= null">
+      ,m_post = #{mPost,jdbcType=VARCHAR}
+    </if>
+    <if test="mPwd!= null">
+      ,m_pwd = #{mPwd,jdbcType=VARCHAR}
+    </if>
+    <if test="mStatus!= null">
+      ,m_status = #{mStatus,jdbcType=VARCHAR}
+    </if>
+    where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.mylike.entity.UserManage" >
+    select m_id, m_name, m_age, m_phone, m_sex, m_section,m_post,m_status,m_AddTime
+    from manage_user
+    where 1=1
+    <if test="mId!= null">
+      and m_id = #{mId,jdbcType=INTEGER}
+    </if>
+    <if test="uID!= null">
+      and m_id != #{uID,jdbcType=INTEGER}
+    </if>
+    <if test="mPhone!= null">
+      and m_phone = #{mPhone,jdbcType=BIGINT}
+    </if>
+    <if test="mPwd!= null">
+      and m_pwd = #{mPwd,jdbcType=VARCHAR}
+    </if>
+
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select m_id, m_name, m_age, m_phone, m_sex, m_section,m_post,m_status,m_AddTime
+    from manage_user
+  </select>
+</mapper>

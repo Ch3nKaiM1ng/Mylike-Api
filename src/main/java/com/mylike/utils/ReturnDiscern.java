@@ -19,6 +19,12 @@ public class ReturnDiscern {
         map.put("content","提交失败！");
         return map;
     }
+    public Map<String,Object> ERRORMSG(String msg){
+        Map<String,Object> map = new HashMap<>();
+        map.put("data","-1");
+        map.put("content",msg);
+        return map;
+    }
     public Map<String,Object> SUCCESSOBJ(Object obj){
         Map<String,Object> map = new HashMap<>();
         map.put("data","0");
