@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
+import java.util.HashMap;
 import java.util.Map;
 
 @RequestMapping("/userManage")
@@ -26,10 +29,11 @@ public class UserManageApi {
 
     //    登陆查询
     @RequestMapping("/userManageLogin")
-    public Map<String, Object> findAllFloatWindow(@RequestBody UserManage userManage) {
+    public Map<String, Object> userManageLogin(@RequestBody UserManage userManage, HttpSession session) {
         if (userManage.getmPhone() != null && userManage.getmPwd() != null ) {
             UserManage userManageObj = userManageService.selectObj(userManage);
             if(userManageObj!=null){
+                session.setAttribute("userManageObj", userManageObj);
                 return  re.SUCCESSOBJ(userManageObj);
             }else{
                 return  re.ERRORMSG("账号或者密码错误");
@@ -62,7 +66,13 @@ public class UserManageApi {
         }
     }
 
+    //    登陆查询
+    @RequestMapping("/userManageCheck")
+    public Map<String, Object> userManageCheck(@RequestBody UserManage userManage, HttpSession session) {
 
+        UserManage obj1= (UserManage) session.getAttribute("userManageObj");
+            return re.SUCCESSOBJ(obj1);
+    }
 
 
 }
