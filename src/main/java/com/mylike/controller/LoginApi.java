@@ -2,8 +2,10 @@ package com.mylike.controller;
 
 import com.mylike.entity.ClientUser;
 import com.mylike.entity.PhoneRecord;
+import com.mylike.entity.UserManage;
 import com.mylike.service.ClientUserService;
 import com.mylike.service.PhoneRecordService;
+import com.mylike.service.UserManageService;
 import com.mylike.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +41,8 @@ public class LoginApi {
     private ClientUserService clientUserService;
     @Autowired
     private PhoneRecordService phoneRecordService;
+    @Autowired
+    private UserManageService userManageService;
 
     // 判定session
     @RequestMapping("/register")
@@ -114,6 +118,15 @@ public class LoginApi {
      */
     @RequestMapping("/addPhoneRecord")
     public Map<String, Object> addPhoneRecord(@RequestBody PhoneRecord phoneRecord) {
+        //查找这个记录的手机号码是否为内部测试人员---START
+        UserManage userManage=new UserManage();
+        long phone=Long.parseLong(phoneRecord.getPhone());
+        userManage.setmPhone(phone);
+        UserManage userObj=userManageService.selectObj(userManage);
+        if(userObj!=null){
+            return re.SUCCESS();
+        }
+        //查找这个记录的手机号码是否为内部测试人员---END
         this.phoneRecordService.addOrUpdate(phoneRecord);
         return re.SUCCESS();
     }
