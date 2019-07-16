@@ -39,6 +39,7 @@ public class UserManageApi {
                 return  re.ERRORMSG("账号或者密码错误");
             }
         }else{
+
             return  re.ERRORMSG("输入完善的账号或者密码信息");
         }
     }
