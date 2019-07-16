@@ -79,7 +79,7 @@
 
     <select id="selectAll" resultMap="BaseResultMap" >
         select  id, phone, addTime, remark,sourceUrl,state
-        from phone_record
+        from phone_record p
     </select>
 
     <delete id="delect" parameterType="java.lang.Integer" >
