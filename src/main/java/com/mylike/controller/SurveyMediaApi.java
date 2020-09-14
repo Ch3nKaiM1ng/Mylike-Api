@@ -39,6 +39,7 @@ public class SurveyMediaApi {
             channel=null;
         }
 
+
         List<SurveyMedia> surveyMedia = this.surveyMediaService.showByChannel(channel);
 
         return re.SUCCESSOBJ(surveyMedia);
